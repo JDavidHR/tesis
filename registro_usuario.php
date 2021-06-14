@@ -174,48 +174,48 @@
                     </fieldset>
                     <fieldset>
                       <center><select class="form-control col-md-6 col-md-offset-3" name="tipousuario" required>
-                        <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($seleccionUsuario)) {
-                        ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_tipo_usuario'] ?>"><?php echo $resultado['nombre'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select></center>
+                          <?php
+                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                          while ($resultado = mysqli_fetch_assoc($seleccionUsuario)) {
+                          ?>
+                            <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                            <option value="<?php echo $resultado['id_tipo_usuario'] ?>"><?php echo $resultado['nombre'] ?></option>
+                          <?php
+                          }
+                          ?>
+                        </select></center>
                     </fieldset>
                     <fieldset>
                       <label>Horario: </label>
                       <center><select name="horario" class="form-control col-md-6 col-md-offset-3">
-                        <option value="0" disabled="">Seleccione:</option>
-                        <?php
-                        //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                        while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                        ?>
-                          <!--se traen los datos a mostrar en el select-->
-                          <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] ?></option>';
-                        <?php
-                        }
-                        ?>
+                          <option value="0" disabled="">Seleccione:</option>
+                          <?php
+                          //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                          while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
+                          ?>
+                            <!--se traen los datos a mostrar en el select-->
+                            <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] ?></option>';
+                          <?php
+                          }
+                          ?>
 
-                      </select></center>
+                        </select></center>
                     </fieldset>
                     <fieldset>
                       <label>Carrera: </label>
                       <center><select name="carrera" class="form-control col-md-6 col-md-offset-3">
-                        <option value="0" disabled="">Seleccione:</option>
-                        <?php
-                        //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                        while ($valores1 = mysqli_fetch_assoc($seleccioncarrera)) {
-                        ?>
-                          <!--se traen los datos a mostrar en el select-->
-                          <option value="<?php echo $valores1['id_carrera'] ?>"><?php echo $valores1['nombre'] ?></option>';
-                        <?php
-                        }
-                        ?>
+                          <option value="0" disabled="">Seleccione:</option>
+                          <?php
+                          //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                          while ($valores1 = mysqli_fetch_assoc($seleccioncarrera)) {
+                          ?>
+                            <!--se traen los datos a mostrar en el select-->
+                            <option value="<?php echo $valores1['id_carrera'] ?>"><?php echo $valores1['nombre'] ?></option>';
+                          <?php
+                          }
+                          ?>
 
-                      </select></center>
+                        </select></center>
                     </fieldset>
                     <fieldset>
                       <label>Jornada: </label><br>
@@ -233,7 +233,7 @@
                     <center><a href="update_estudiante.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Usuario</button></a></center>
                   </fieldset>
                   <fieldset>
-                    <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Usuario</button></a></center>
+                    <center><a href="delete_estudiante.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Usuario</button></a></center>
                   </fieldset>
                 </div>
               </div>
