@@ -1,35 +1,25 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
+if(isset($_POST['submit']) && !empty($_POST['nombre_carrera'])){
 
-if(isset($_POST['submit']) && !empty($_POST['hora']) && !empty($_POST['materia']) && !empty($_POST['aula'])){
-        require_once '../Modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
+        require_once '../modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
-        $fecha=$_POST["hora"];
-        //$fecha = time("H:i:s");
-        
-        $materia = $_POST["materia"];
-        $aula = $_POST["aula"];
-        
-        $ides = $_GET['id'];
+        $carrera=$_POST["nombre_carrera"];
 
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        
-
-
-        $sql=$mysql->efectuarConsulta("UPDATE asistencia.horario SET hora ='".$fecha."', materia_id_materia = '".$materia."', aula_id_aula ='".$aula."'  WHERE id_horario = ".$ides."");
+        $sql=$mysql->efectuarConsulta("insert into asistencia.carrera(nombre) VALUES ('".$carrera."')");
         //condicion donde si la consulta se hace correcto
-        
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
             echo"<script type=\"text/javascript\">alert('Se registro correctamente'); window.location='../index_administrador.php';</script>";
 
         }else{
             //mensaje de salida en caso de que la consulta falle
-            echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_horario.php';</script>";
+            echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_carreras.php';</script>";
         }
         
-        
-    }
+         
+}
 ?>

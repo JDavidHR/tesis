@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    
+
     <title>Registro Materias</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <link href="css/weather-icons.min.css" rel="stylesheet">
 
     <link href="css/registro.css" rel="stylesheet" media="all">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -77,15 +77,14 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ti-more"></i>
                     </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-                
+
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -95,9 +94,9 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <?php
-         //funcion donde se llama al menu superior del usuario
-          include("menu_administrador.html");
-          ?>
+        //funcion donde se llama al menu superior del usuario
+        include("menu_administrador.html");
+        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -108,7 +107,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            
+
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -135,73 +134,72 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                           <div class="card-body">
-                                
-                               <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_materia.php" method="post">
-										    <h3>Registro de la Materia</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-                                              <input placeholder="Nombre de la materia" type="text" tabindex="1"  autofocus name="nombre_materia">
-                                            </fieldset>
-										    <br>
-										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
-                                            </fieldset>
+                            <div class="card-body">
 
-                                        </form>
+                                <div class="container" style="text-align: center">
+                                    <form id="contact" action="Controlador/insertar_materia.php" method="post">
+                                        <h3>Registro de la Materia</h3>
+                                        <h4>Recuerda llenar todos los campos</h4>
                                         <fieldset>
-                                              <center><a href="update_materias.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Materia</button></a></center>
-                                            </fieldset>
-								</div>
-                            </div> 
+                                            <input placeholder="Nombre de la materia" type="text" tabindex="1" autofocus name="nombre_materia">
+                                        </fieldset>
+                                        <br>
+                                        <fieldset>
+                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                        </fieldset>
+
+                                    </form>
+                                    <fieldset>
+                                        <center><a href="update_materias.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Materia</button></a></center>
+                                    </fieldset>
+                                    <fieldset>
+                                        <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Materia</button></a></center>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <footer class="footer text-center">
+                    All Rights Reserved by asistencias COTECNOVA
+                </footer>
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                All Rights Reserved by asistencias COTECNOVA
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
+            <!-- End Page wrapper  -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Wrapper -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/umd/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!--chartis chart-->
-    <script src="js/chartist.min.js"></script>
-    <script src="js/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/dashboard1.js"></script>
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="js/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="js/sparkline.js"></script>
+        <!--Wave Effects -->
+        <script src="js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="js/custom.min.js"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="js/chartist.min.js"></script>
+        <script src="js/chartist-plugin-tooltip.min.js"></script>
+        <script src="js/dashboard1.js"></script>
 </body>
 
 </html>
-
-	
-	
-

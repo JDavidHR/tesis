@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    
+
     <title>Registro Clase</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <link href="css/weather-icons.min.css" rel="stylesheet">
 
     <link href="css/registro.css" rel="stylesheet" media="all">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,20 +32,22 @@
 </head>
 
 <body>
-	  <?php 
+    <?php
     //session_start();
-    if(!isset($_SESSION['tipousuario'])){
-    //llamado del archivo mysql
-    require_once 'Modelo/MySQL.php';
-    //creacion de nueva "consulta"
-    $mysql = new MySQL;
-    //se conecta a la base de datos
-    $mysql->conectar();    
-    //respectiva consulta para la seleccion de usuario  
-     $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");  
-    //se desconecta de la base de datos
-    $mysql->desconectar(); 
-    }   
+    if (!isset($_SESSION['tipousuario'])) {
+        //llamado del archivo mysql
+        require_once 'Modelo/MySQL.php';
+        //creacion de nueva "consulta"
+        $mysql = new MySQL;
+        //se conecta a la base de datos
+        $mysql->conectar();
+        //respectiva consulta para la seleccion de usuario  
+        $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");
+        $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente");
+        $seleccionestudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante");
+        //se desconecta de la base de datos
+        $mysql->desconectar();
+    }
     ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -92,15 +94,14 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ti-more"></i>
                     </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-                
+
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -110,9 +111,9 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <?php
-         //funcion donde se llama al menu superior del usuario
-          include("menu_administrador.html");
-          ?>
+        //funcion donde se llama al menu superior del usuario
+        include("menu_administrador.html");
+        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -123,7 +124,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            
+
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -150,91 +151,124 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                           <div class="card-body">
-                                
-                               <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_clase.php" method="post">
-										    <h3>Registro de la Clase</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-										      <input placeholder="Dia" type="date" tabindex="1"  autofocus name="dia" class="form-control">
-										    </fieldset>
-										    
-                                            <fieldset>
+                            <div class="card-body">
+
+                                <div class="container" style="text-align: center">
+                                    <form id="contact" action="Controlador/insertar_clase.php" method="post">
+                                        <h3>Registro de la Clase</h3>
+                                        <h4>Recuerda llenar todos los campos</h4>
+                                        <fieldset>
+                                            <input placeholder="Dia" type="date" tabindex="1" autofocus name="dia" class="form-control">
+                                        </fieldset>
+
+                                        <fieldset>
                                             <label>Horario: </label>
                                             <select name="horario" class="form-control">
                                                 <option value="0" disabled="">Seleccione:</option>
                                                 <?php
-                                                  //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                  while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                                                    ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario']?>"><?php echo $valores1['id_horario']." - Hora: ".$valores1['hora']?></option>';
-                                                    <?php
-                                                  }
+                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
                                                 ?>
-                                                
-                                            </select>
-                                            </fieldset>
-                                            
-										    <br>
-										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
-                                            </fieldset>
+                                                    <!--se traen los datos a mostrar en el select-->
+                                                    <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] . " - Hora: " . $valores1['hora'] ?></option>';
+                                                <?php
+                                                }
+                                                ?>
 
-                                        </form>
+                                            </select>
+                                        </fieldset>
+
                                         <fieldset>
-                                              <center><a href="update_clase.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Clase</button></a></center>
-                                            </fieldset>
-								</div>
-                            </div> 
+                                            <label>Docente: </label>
+                                            <select name="docente" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                while ($valores1 = mysqli_fetch_assoc($selecciondocente)) {
+                                                ?>
+                                                    <!--se traen los datos a mostrar en el select-->
+                                                    <option value="<?php echo $valores1['id_docente'] ?>"><?php echo $valores1['id_docente'] . " - docente: " . $valores1['nombres'] ?></option>';
+                                                <?php
+                                                }
+                                                ?>
+
+                                            </select>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <label>Estudiante: </label>
+                                            <select name="estudiante" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                while ($valores1 = mysqli_fetch_assoc($seleccionestudiante)) {
+                                                ?>
+                                                    <!--se traen los datos a mostrar en el select-->
+                                                    <option value="<?php echo $valores1['id_estudiante'] ?>"><?php echo $valores1['id_estudiante'] . " - estudiante: " . $valores1['nombres'] ?></option>';
+                                                <?php
+                                                }
+                                                ?>
+
+                                            </select>
+                                        </fieldset>
+
+                                        <br>
+                                        <fieldset>
+                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                        </fieldset>
+
+                                    </form>
+                                    <fieldset>
+                                        <center><a href="update_clase.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Clase</button></a></center>
+                                    </fieldset>
+                                    <fieldset>
+                                        <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Clase</button></a></center>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <footer class="footer text-center">
+                    All Rights Reserved by asistencias COTECNOVA
+                </footer>
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                All Rights Reserved by asistencias COTECNOVA
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
+            <!-- End Page wrapper  -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Wrapper -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/umd/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!--chartis chart-->
-    <script src="js/chartist.min.js"></script>
-    <script src="js/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/dashboard1.js"></script>
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="js/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="js/sparkline.js"></script>
+        <!--Wave Effects -->
+        <script src="js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="js/custom.min.js"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="js/chartist.min.js"></script>
+        <script src="js/chartist-plugin-tooltip.min.js"></script>
+        <script src="js/dashboard1.js"></script>
 </body>
 
 </html>
-
-	
-	
-

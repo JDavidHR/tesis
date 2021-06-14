@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Actualizar Clase</title>
+    <title>Registro Carrera</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,33 +32,6 @@
 </head>
 
 <body>
-    <?php
-    //session_start();
-    if (!isset($_SESSION['tipousuario'])) {
-        //llamado del archivo mysql
-        require_once 'Modelo/MySQL.php';
-        //creacion de nueva "consulta"
-        $mysql = new MySQL; //se crea un nuevo musql
-
-        $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
-
-        //declaracion de variables metodo post
-        $id_clase = $_POST['clase'];
-        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.clase.dia, asistencia.clase.horario_id_horario, asistencia.clase.Docente_id_docente, asistencia.clase.Estudiante_id_estudiante from clase WHERE asistencia.clase.id_clase = " . $id_clase . "");
-        $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");
-        $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente");
-        $seleccionestudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante");
-        //se inicia el recorrido para mostrar los datos de la BD
-        while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
-            //declaracion de variables
-            $dia = $valores1['dia'];
-            $horario = $valores1['horario_id_horario'];
-            $docente = $valores1['Docente_id_docente'];
-            $estudiante = $valores1['Estudiante_id_estudiante'];
-        }
-    }
-    $mysql->desconectar(); //funcion llamada desde mysql.php
-    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -164,76 +137,24 @@
                             <div class="card-body">
 
                                 <div class="container" style="text-align: center">
-                                    <form id="contact" action="Controlador/update_clase.php?id=<?php echo $id_clase; ?>" method="post">
-                                        <h3>Actualizar Clase</h3>
+                                    <form id="contact" action="Controlador/insertar_carreras.php" method="post">
+                                        <h3>Registro de carreras</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
                                         <fieldset>
-                                            <label>ID Clase: </label>
-                                            <input placeholder="ID clase" type="text" tabindex="1" disabled name="id" value="<?php echo $id_clase ?>">
+                                            <input placeholder="Nombre de la carrera" type="text" tabindex="1" autofocus name="nombre_carrera">
                                         </fieldset>
-                                        <fieldset>
-                                            <label>Día:</label>
-                                            <input placeholder="Dia" type="date" tabindex="2" name="dia" class="form-control" value="<?php echo $dia ?>">
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <label>Horario: </label>
-                                            <select name="horario" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                                                ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] . " - Hora: " . $valores1['hora'] ?></option>';
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </select>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <label>Docente: </label>
-                                            <select name="docente" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                while ($valores1 = mysqli_fetch_assoc($selecciondocente)) {
-                                                ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_docente'] ?>"><?php echo $valores1['id_docente'] . " - Docente: " . $valores1['nombres'] ?></option>';
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </select>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <label>Estudiante: </label>
-                                            <select name="estudiante" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                while ($valores1 = mysqli_fetch_assoc($seleccionestudiante)) {
-                                                ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_estudiante'] ?>"><?php echo $valores1['id_estudiante'] . " - Estudiante: " . $valores1['nombres'] ?></option>';
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </select>
-                                        </fieldset>
-
                                         <br>
                                         <fieldset>
-                                            <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
                                         </fieldset>
 
                                     </form>
-
+                                    <fieldset>
+                                        <center><a href="update_carreras.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Materia</button></a></center>
+                                    </fieldset>
+                                    <fieldset>
+                                        <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Materia</button></a></center>
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>

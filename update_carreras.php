@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Update Horario</title>
+    <title>Update carreras</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,7 +32,7 @@
 </head>
 
 <body>
-	  <?php 
+          <?php 
     //session_start();
     if(!isset($_SESSION['tipousuario'])){
     //llamado del archivo mysql
@@ -40,30 +40,12 @@
     //creacion de nueva "consulta"
     $mysql = new MySQL;
     //se conecta a la base de datos
-    $mysql->conectar(); 
-
-    $id_usuario = $_POST['horario'];   
-
-
-    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.horario.hora,asistencia.horario.materia_id_materia,asistencia.horario.aula_id_aula from horario WHERE asistencia.horario.id_horario = ".$id_usuario."");
-
-
-    //respectiva consulta para la seleccion de usuario
-    $seleccionaula =$mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");  
-    $seleccionmateria =$mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia"); 
-    $seleccionhorario =$mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");    
+    $mysql->conectar();    
+    $seleccioncarrera =$mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera,asistencia.carrera.nombre from carrera");  
     //se desconecta de la base de datos
-    while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
-//declaracion de variables
-$hora = $valores1['hora'];
-$materia = $valores1['materia_id_materia'];
-$aula = $valores1['aula_id_aula'];
-
-
-    }
-}
-$mysql->desconectar();//funcion llamada desde mysql.php
-?>
+    $mysql->desconectar(); 
+    }   
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -170,57 +152,29 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/update_horario.php?id=<?php echo $id_usuario; ?>" method="post">
-										    <h3>Actualizar Horario</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-                                            <br>
-                                             <fieldset>
-                                                <label>ID Horario</label>
-                                              <input placeholder="ID horario" type="text" tabindex="1"  disabled="" name="id" value="<?php echo $id_usuario ?>">
-                                            </fieldset>
-                                            <br>
-										    <fieldset>
-                                                <label>Hora Estimada: </label><br>
-                                              <input placeholder="hora" type="time" tabindex="1"  autofocus name="hora" class="form-control" min="07:00:00" max="18:00:00" step="1">
-                                            </fieldset>
+										<form id="contact" action="update_carreras2.php" method="post">
+										    <h3>Actualizar Carrera</h3>
+										    <h4>Seleciona la materia a actualizar</h4>
 										    <br>
                                             <fieldset>
                                               <select class="form-control " name="materia" required>                                                
                                                 <?php 
                                                 //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                  while ($resultado= mysqli_fetch_assoc($seleccionmateria)){                         
+                                                  while ($resultado= mysqli_fetch_assoc($seleccioncarrera)){                         
                                                 ?> 
                                                 <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                    <option value="<?php echo $resultado['id_materia']?>"><?php echo $resultado['nombre']?></option>                                                
+                                                    <option value="<?php echo $resultado['id_carrera']?>"><?php echo $resultado['nombre']?></option>                                                
                                                 <?php
                                                   }
                                                 ?>
                                               </select>
-                                            </fieldset>
-                                                <br>
-										    <fieldset>
-										      <select class="form-control " name="aula" required>                                                
-								                <?php 
-								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-								                  while ($resultado= mysqli_fetch_assoc($seleccionaula)){                         
-								                ?> 
-								                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-								                    <option value="<?php echo $resultado['id_aula']?>"><?php echo $resultado['nombre']?></option>                                                
-								                <?php
-								                  }
-								                ?>
-								              </select>
-										    </fieldset>
 										    <br>
-                                            
-                                            
 										    <fieldset>
-                                              <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
                                             </fieldset>
 
                                         </form>
                                         
-										
 								</div>
                             </div> 
                     </div>
