@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -188,7 +188,10 @@
 
                                         </form>
                                         <fieldset>
-                                              <center><a href="update_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Docente</button></a></center>
+                                            <center>
+                                                <a href="update_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Docente</button></a>
+                                                <a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Docente</button></a>
+                                            </center>
                                             </fieldset>
 								</div>
                             </div> 
