@@ -60,12 +60,12 @@
                         <a href="index.html" class="logo">
                             <!-- Logo icon -->
                             <b class="logo-icon">
-
+                                
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
-
+                            <h4></h4> <!--aqui se puede poner algo arriba de gestionar docentes-->
                             </span>
                         </a>
                     </div>
@@ -115,12 +115,8 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="javascript:void(0)"> Perfil</a>
-                                <a class="dropdown-item" href="javascript:void(0)"> Cerrar Sesion</a>
-                            </div>
+                        <li class="">
+                            <a class="" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="rounded-circle" width="31"></a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -185,8 +181,10 @@
                         <div class="card">
                            <div class="card-body">
                                 
-                                <p>Bienvenido administrador, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                Recuerda llenar todos los campos de los formularios cuando sean necesarios.</p>
+                                <p>En el panel izquierdo de este espacio usted podra encontrar el acceso de toda 
+                                la informacion acedemica que le corresponde, como Administrador puede hacer todas 
+                                las operaciones disponibles, si desea agregar, modificar, eliminar o buscar un dato 
+                                recuerde hacerlo desde el correspondiente modulo.</p>
                                 
                             </div> 
                     </div>
