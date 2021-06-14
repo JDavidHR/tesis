@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2021 a las 00:22:59
--- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.9
+-- Tiempo de generación: 14-06-2021 a las 20:15:33
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.2.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -43,7 +42,8 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `clave`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
-(4, '123', 'Juan', 'Rios', '123', 3, 1);
+(1, '123', 'Juan', 'Hoyos', '123', 3, 1),
+(2, '456', 'Natalia', 'Agudelo', '456', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,13 @@ CREATE TABLE `aula` (
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre del aula'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `aula`
+--
+
+INSERT INTO `aula` (`id_aula`, `nombre`) VALUES
+(6, 'LAB E');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +73,13 @@ CREATE TABLE `carrera` (
   `id_carrera` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `carrera`
+--
+
+INSERT INTO `carrera` (`id_carrera`, `nombre`) VALUES
+(1, 'Ingeniería en Sistemas');
 
 -- --------------------------------------------------------
 
@@ -102,9 +116,8 @@ CREATE TABLE `docente` (
 --
 
 INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `clave`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
-(1, '123', 'Juan', 'Rios', '123', 2, 1),
-(2, '123', 'Juan', 'Rios', '123', 2, 1),
-(3, '321', 'juan', 'david', '321', 2, 1);
+(1, '123', 'Juan', 'David', '123', 2, 1),
+(2, '456', 'Natalia', 'Agudelo', '456', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +139,14 @@ CREATE TABLE `estudiante` (
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `clave`, `horario_id_horario`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
+(1, '123', 'Juan', 'Hoyos', 'Diurna', 'Septimo', '123', 1, 1, 1, 1),
+(2, '456', 'Natalia', 'Agudelo', 'Diurna', 'Septimo', '456', 1, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -139,6 +160,13 @@ CREATE TABLE `horario` (
   `aula_id_aula` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `horario`
+--
+
+INSERT INTO `horario` (`id_horario`, `hora`, `materia_id_materia`, `aula_id_aula`) VALUES
+(1, '11:17:02', 7, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +177,14 @@ CREATE TABLE `materia` (
   `id_materia` int(11) NOT NULL COMMENT 'Id de la materia',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la materia'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`id_materia`, `nombre`) VALUES
+(6, ''),
+(7, 'Proyecto Integrador');
 
 -- --------------------------------------------------------
 
@@ -262,13 +298,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=6;
+  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `clase`
@@ -280,25 +316,25 @@ ALTER TABLE `clase`
 -- AUTO_INCREMENT de la tabla `docente`
 --
 ALTER TABLE `docente`
-  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del docente', AUTO_INCREMENT=4;
+  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del docente', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=2;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del horario';
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del horario', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia', AUTO_INCREMENT=6;
+  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
