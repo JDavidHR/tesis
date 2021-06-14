@@ -17,7 +17,7 @@ if(isset($_POST['enviar']) && !empty($_POST['documento_docente']) && !empty($_PO
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
 
-        $sql=$mysql->efectuarConsulta("UPDATE asistencia.docente SET documento ='".$documento."', nombres = '".$nombre."', apellidos ='".$apellido."',contrasena ='".$pass."', tipo_usuario_id_tipo_usuario ='".$tipo."'  WHERE id_docente = ".$iddoc."");
+        $sql=$mysql->efectuarConsulta("UPDATE asistencia.docente SET documento ='".$documento."', nombres = '".$nombre."', apellidos ='".$apellido."',clave ='".$pass."', tipo_usuario_id_tipo_usuario ='".$tipo."'  WHERE id_docente = ".$iddoc."");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina

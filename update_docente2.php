@@ -43,7 +43,7 @@
     $mysql->conectar();  
     $id_docente = $_POST['docente'];  
 
-    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.docente.documento,asistencia.docente.nombres,asistencia.docente.apellidos,asistencia.docente.contrasena,asistencia.docente.tipo_usuario_id_tipo_usuario from docente WHERE asistencia.docente.id_docente = ".$id_docente."");
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.docente.documento,asistencia.docente.nombres,asistencia.docente.apellidos,asistencia.docente.clave,asistencia.docente.tipo_usuario_id_tipo_usuario from docente WHERE asistencia.docente.id_docente = ".$id_docente."");
 
     $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 2");
 //se inicia el recorrido para mostrar los datos de la BD
@@ -52,7 +52,7 @@
 $doc = $valores1['documento'];
 $nombre = $valores1['nombres'];
 $apellido = $valores1['apellidos'];
-$pass = $valores1['contrasena'];
+$pass = $valores1['clave'];
 $tipo = $valores1['tipo_usuario_id_tipo_usuario'];
 
     }
@@ -166,7 +166,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                 
                                <div class="container" style="text-align: center">  
 										<form id="contact" action="Controlador/update_docente.php?id=<?php echo $id_docente; ?>" method="post">
-										    <h3>Registro del Docente</h3>
+										    <h3>Actualizar Docente</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
                                             <fieldset>
                                                 <label>ID Docente</label>
