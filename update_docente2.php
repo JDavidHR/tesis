@@ -164,29 +164,29 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                         <div class="card">
                            <div class="card-body">
                                 
-                               <div class="container" style="text-align: center">  
+                               <div class="container col-md-8 col-md-offset-3" style="text-align: center">  
 										<form id="contact" action="Controlador/update_docente.php?id=<?php echo $id_docente; ?>" method="post">
 										    <h3>Actualizar Docente</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
-                                            <fieldset>
+                                            <center><fieldset class="col-md-6 col-md-offset-3">
                                                 <label>ID Docente</label>
                                               <input placeholder="ID docente" type="text" tabindex="1"  disabled="" name="id" value="<?php echo $id_docente ?>">
                                             </fieldset>
-										    <fieldset>
+										    <fieldset class="col-md-6 col-md-offset-3">
                                                 <label>Documento</label>
 										      <input placeholder="Documento" type="text" tabindex="1"   name="documento_docente" value="<?php echo $doc ?>">
 										    </fieldset>
-										    <fieldset>
+										    <fieldset class="col-md-6 col-md-offset-3">
 										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_docente" value="<?php echo $nombre ?>">
 										    </fieldset>
-										    <fieldset>
+										    <fieldset class="col-md-6 col-md-offset-3">
 										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente" value="<?php echo $apellido ?>">
 										    </fieldset>				 	
-										 	<fieldset>
+										 	<fieldset class="col-md-6 col-md-offset-3">
                                                 <label>Contraseña</label>
 										      <input placeholder="Contraseña" type="text" tabindex="4" name="contrasena" value="<?php echo $pass ?>">
 										    </fieldset>
-										    <fieldset>
+										    <fieldset class="col-md-6 col-md-offset-3">
 										      <select class="form-control " name="tipousuario" required>
                                               <option value="0" disabled="">Seleccione:</option>                                                
 								                <?php 
@@ -199,7 +199,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
 								                  }
 								                ?>
 								              </select>
-										    </fieldset>
+										    </fieldset></center>
 										    <br>
 										    <fieldset>
                                               <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>

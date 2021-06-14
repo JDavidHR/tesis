@@ -146,30 +146,30 @@
                 <!-- ============================================================== -->
                 <!-- Ravenue - page-view-bounce rate -->
                 <!-- ============================================================== -->
-                <div class="row">
+                <div class="row ">
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
                            <div class="card-body">
-                                
-                               <div class="container" style="text-align: center">  
+ 
+                               <div class="container col-md-8 col-md-offset-3" style="text-align: center">  
 										<form id="contact" action="Controlador/insertar_docente.php" method="post">
 										    <h3>Registro del Docente</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
 										    <fieldset>
-										      <input placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
+										      <input class="col-md-6 col-md-offset-3" placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_docente">
+										      <input class="col-md-6 col-md-offset-3" placeholder="Nombres" type="text" tabindex="2" name="nombre_docente">
 										    </fieldset>
 										    <fieldset>
-										      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente">
+										      <input class="col-md-6 col-md-offset-3" placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente">
 										    </fieldset>				 	
 										 	<fieldset>
-										      <input placeholder="Contraseña" type="text" tabindex="4" name="contrasena">
+										      <input class="col-md-6 col-md-offset-3" placeholder="Contraseña" type="text" tabindex="4" name="contrasena">
 										    </fieldset>
 										    <fieldset>
-										      <select class="form-control " name="tipousuario" required>                                                
+										      <center><select class="form-control col-md-6 col-md-offset-3" name="tipousuario" required>                                                
 								                <?php 
 								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
 								                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
@@ -179,7 +179,7 @@
 								                <?php
 								                  }
 								                ?>
-								              </select>
+								              </select></center>
 										    </fieldset>
 										    <br>
 										    <fieldset>
