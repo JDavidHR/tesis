@@ -8,6 +8,7 @@
         $nombre=$_POST["nombre_usuario"];
         $apellido=$_POST["apellido_usuario"];
         $semestre=$_POST["Semestre"];
+        $clave=$_POST["clave"];
         $tipo=$_POST["tipousuario"];
         $horario=$_POST["horario"];
         $carrera=$_POST["carrera"];
@@ -21,7 +22,7 @@
         //$sql=$mysql->efectuarConsulta("insert into asistencia.estudiante(documento,nombres,apellidos,jornada,semestre,horario_id_horario,Carrera_id_carrera,tipo_usuario_id_tipo_usuario) VALUES ('".$documento."','".$nombre."','".$apellido."','".$jornada."','".$semestre."','".$horario."','".$carrera."','".$tipo."')");
 
 
-        $sql=$mysql->efectuarConsulta("UPDATE asistencia.estudiante SET documento ='".$documento."', nombres = '".$nombre."', apellidos ='".$apellido."',jornada ='".$jornada."',semestre ='".$semestre."',horario_id_horario ='".$horario."',Carrera_id_carrera ='".$carrera."', tipo_usuario_id_tipo_usuario ='".$tipo."'  WHERE id_estudiante = ".$ides."");
+        $sql=$mysql->efectuarConsulta("UPDATE asistencia.estudiante SET documento ='".$documento."', nombres = '".$nombre."', apellidos ='".$apellido."',jornada ='".$jornada."',semestre ='".$semestre."',clave ='".$clave."',horario_id_horario ='".$horario."',Carrera_id_carrera ='".$carrera."', tipo_usuario_id_tipo_usuario ='".$tipo."'  WHERE id_estudiante = ".$ides."");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina

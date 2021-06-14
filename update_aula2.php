@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Aula</title>
+    <title>Actualizar Aula</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -160,7 +160,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                            <div class="card-body">
                                 
                                <div class="container" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_aula.php" method="post">
+										<form id="contact" action="Controlador/update_aula.php" method="post">
 										    <h3>Registro del Aula</h3>
 										    <h4>Recuerda llenar todos los campos</h4>
                                             <br>
