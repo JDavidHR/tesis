@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="es">
+<html dir="ltr" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Registro Docente</title>
+    <title>Delete docente</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -41,8 +41,8 @@
     $mysql = new MySQL;
     //se conecta a la base de datos
     $mysql->conectar();    
-    //respectiva consulta para la seleccion de usuario
-    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 2");     
+    //respectiva consulta para la seleccion de usuario  
+     $selecciondocente =$mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente");  
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -100,7 +100,7 @@
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-               
+                
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -123,7 +123,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-           
+            
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -146,53 +146,39 @@
                 <!-- ============================================================== -->
                 <!-- Ravenue - page-view-bounce rate -->
                 <!-- ============================================================== -->
-                <div class="row ">
+                <div class="row">
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
                            <div class="card-body">
- 
-                               <div class="container col-md-8 col-md-offset-3" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_docente.php" method="post">
-										    <h3>Registro del Docente</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
-										    </fieldset>
-										    <fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Nombres" type="text" tabindex="2" name="nombre_docente">
-										    </fieldset>
-										    <fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente">
-										    </fieldset>				 	
-										 	<fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Contraseña" type="text" tabindex="4" name="contrasena">
-										    </fieldset>
-										    <fieldset>
-										      <center><select class="form-control col-md-6 col-md-offset-3" name="tipousuario" required>                                                
-								                <?php 
-								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-								                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
-								                ?> 
-								                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-								                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
-								                <?php
-								                  }
-								                ?>
-								              </select></center>
-										    </fieldset>
+                                
+                               <div class="container" style="text-align: center">  
+										<form id="contact" action="Controlador/delete_docente.php" method="post">
+										    <h3>Eliminar docente</h3>
+										    <h4>Selecciona el docente a eliminar</h4>                                       
+
+                                            <fieldset>
+                                              <select class="form-control " name="usuario" required>                                                
+                                                <?php 
+                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                  while ($resultado= mysqli_fetch_assoc($selecciondocente)){                         
+                                                ?> 
+                                                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                    <option value="<?php echo $resultado['id_docente']?>"><?php echo $resultado['nombres']?></option>                                                
+                                                <?php
+                                                  }
+                                                ?>
+                                              </select>
+                                            <br>
+                                            <fieldset>
+                                            
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Eliminar</button>
                                             </fieldset>
 
                                         </form>
-                                        <fieldset>
-                                            <center>
-                                                <a href="update_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Docente</button></a>
-                                                <a href="delete_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Docente</button></a>
-                                            </center>
-                                            </fieldset>
+                                        
 								</div>
                             </div> 
                     </div>

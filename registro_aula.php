@@ -153,7 +153,7 @@
                                         <center><a href="update_aula.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Aula</button></a></center>
                                     </fieldset>
                                     <fieldset>
-                                        <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Aula</button></a></center>
+                                        <center><a href="delete_aulas.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Aula</button></a></center>
                                     </fieldset>
                                 </div>
                             </div>
