@@ -87,7 +87,7 @@
 </head>
 <body>
 	<div id="container">
-		<h1>Envio de emails con archivos adjuntos - <a href="http://www.webcamp.es">Webcamp.es</a></h1>
+		<h1>Envio de material</h1>
 		<?php
 			//si se ha enviado el correo
 			if(isset($_REQUEST['s'])){
@@ -102,7 +102,7 @@
 		?>
 		<form action="send.php" method="post" enctype="multipart/form-data">
 			<fieldset>
-				<legend>rellena el formulario</legend>
+				
 				<ul>
 					<li>
 						<label for="nombre">Nombre:</label>
@@ -112,12 +112,12 @@
 					<li>
 						<label for="mail">E-mail:</label>
 						<br>
-						<input type="email" id="mail" name="email" placeholder="E-mail del emisor" required>
+						<input type="email" id="mail" name="email" placeholder="E-mail Docente" required>
 					</li>
 					<li>
 						<label for="mailr">E-mail del receptor:</label>
 						<br>
-						<input type="email" id="mailr" name="emailr" placeholder="E-mail del receptor" required>
+						<input type="email" id="mailr" name="emailr" placeholder="E-mail Estudiante" required>
 					</li>
 					<li>
 						<label for="adjunto">Archivo adjunto</label>
@@ -136,7 +136,9 @@
 					</li>
 					<li>
 						<input type="submit" value="Enviar">
+						
 					</li>
+
 				</ul>
 			</fieldset>
 		</form>
