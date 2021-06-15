@@ -153,7 +153,7 @@
                                         <center><a href="update_materias.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Materia</button></a></center>
                                     </fieldset>
                                     <fieldset>
-                                        <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Materia</button></a></center>
+                                        <center><a href="delete_materias.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Materia</button></a></center>
                                     </fieldset>
                                 </div>
                             </div>
