@@ -185,9 +185,9 @@
                         <div class="card">
                            <div class="card-body">
                                 
-                                <p>Bienvenido Docente, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
-                                un administrador.</p>
+                                <p>En el panel izquierdo de este espacio usted podra encontrar
+                                    el acceso a toda la informacion academica que le corresponde.
+                                </p>
                                 
                             </div> 
                     </div>

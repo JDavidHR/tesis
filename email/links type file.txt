@@ -1,0 +1,11 @@
+https://norfipc.com/inf/como-subir-fotos-imagenes-servidor-web.php
+
+https://www.htmlquick.com/es/reference/tags/input-file.html
+
+https://tutorialehtml.com/es/tutoriales-html-formulario-de-upload/
+
+https://www.youtube.com/watch?v=miOz8AhLDnc
+
+https://github.com/tutsplus/how-to-upload-a-file-in-php-with-example
+
+https://code.tutsplus.com/es/tutorials/how-to-upload-a-file-in-php-with-example--cms-31763
