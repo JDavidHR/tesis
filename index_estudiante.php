@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    
+
     <title>Home</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link href="css/weather-icons.min.css" rel="stylesheet">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,6 +30,28 @@
 </head>
 
 <body>
+<?php 
+    session_start();
+    if(!isset($_SESSION['tipousuario'])){
+    //llamado del archivo mysql
+    require_once 'Modelo/MySQL.php';
+    //creacion de nueva "consulta"
+    $mysql = new MySQL;
+    //se conecta a la base de datos
+    $mysql->conectar();    
+    $id_estudiante = $_POST['idEstudiante']; 
+    //respectiva consulta para la seleccion de usuario
+    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.Carrera_id_carrera, asistencia.estudiante.semestre from estudiante where asistencia.estudiante.id_estudiante = $id_estudiante");     
+    while ($valores1 = mysqli_fetch_assoc($mostrardatos)){      
+        $documento = $valores1['documento'];
+        $nombres = $valores1['nombres'];
+        $carrera = $valores1['Carrera_id_carrera'];
+        $semestre = $valores1['semestre'];
+    }
+    //se desconecta de la base de datos
+    $mysql->desconectar(); 
+    }   
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -75,8 +97,7 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ti-more"></i>
                     </a>
                 </div>
@@ -117,10 +138,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"> Perfil</a>
-                                <a class="dropdown-item" href="javascript:void(0)"> Cerrar Sesion</a>
-                            </div>
+
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -136,9 +154,9 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <?php
-         //funcion donde se llama al menu superior del usuario
-          include("menu_estudiante.html");
-          ?>
+        //funcion donde se llama al menu superior del usuario
+        include("menu_estudiante.html");
+        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -153,8 +171,10 @@
                 <div class="row">
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Bienvenido</h4>
+                        <?php echo "ID Estudiante ".$_SESSION['idEstudiante']; ?>
+                        <?php echo $id_estudiante ?>
                     </div>
-                    
+
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -183,56 +203,81 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                           <div class="card-body">
-                                
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Documento</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Carrera</th>
+                                            <th scope="col">Semestre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><?php echo $documento ?></th>
+                                            <td><?php echo $nombres ?></td>
+                                            <td><?php echo $carrera ?></td>
+                                            <td><?php echo $semestre ?></td>
+                                        </tr>
+                                        
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br><br>
+                            <div class="card-body">
+
                                 <p>Bienvenido estudiante, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
-                                un administrador.</p>
-                                
-                            </div> 
+                                    Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
+                                    un administrador.</p>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <footer class="footer text-center">
+                    All Rights Reserved by asistencias COTECNOVA
+                </footer>
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                All Rights Reserved by asistencias COTECNOVA
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
+            <!-- End Page wrapper  -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Wrapper -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/umd/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!--chartis chart-->
-    <script src="js/chartist.min.js"></script>
-    <script src="js/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/dashboard1.js"></script>
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="js/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="js/sparkline.js"></script>
+        <!--Wave Effects -->
+        <script src="js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="js/custom.min.js"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="js/chartist.min.js"></script>
+        <script src="js/chartist-plugin-tooltip.min.js"></script>
+        <script src="js/dashboard1.js"></script>
 </body>
 
 </html>

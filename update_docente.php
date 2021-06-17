@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Ipdate Docente</title>
+    <title>Update Docente</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
