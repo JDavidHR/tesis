@@ -240,26 +240,20 @@
 											<th scope="col">Hora</th>
 											<th scope="col">Materia</th>
 											<th scope="col">Fecha</th>
-											<th scope="col">Miercoles</th>
-											<th scope="col">Jueves</th>
-											<th scope="col">Viernes</th>
-											<th scope="col">Sabado</th>
-											<th scope="col">Domingo</th>
+											<th scope="col">Dia</th>
 										</tr>
 									</thead>
 									<tbody>
-										<?php
+										<?php				 
 										while ($valores2 = mysqli_fetch_assoc($dhorario)) {
+											$dias = array('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
+											$dia = $dias[(date('N', strtotime($valores2['dia']))) - 1];
 										?>
 											<tr>
 												<th scope="row"><?php echo $valores2['hora'] ?></th>
 												<td><?php echo $valores2['nombre'] ?></td>
 												<td><?php echo $valores2['dia'] ?></td>
-												<td><?php  ?></td>
-												<td><?php  ?></td>
-												<td><?php  ?></td>
-												<td><?php  ?></td>
-												<td><?php  ?></td>
+												<td><?php echo $dia ?></td>
 											</tr>
 										<?php
 										}
