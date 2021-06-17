@@ -51,7 +51,7 @@
 
 
 	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
-	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia, aula.nombre as nombreaula from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia join aula on aula.id_aula = horario.aula_id_aula where estudiante.id_estudiante = " . $id_estudiante . "");
+	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia, aula.nombre as nombreaula, docente.nombres as nombredocente from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia join aula on aula.id_aula = horario.aula_id_aula join docente on docente.id_docente = clase.Docente_id_docente where estudiante.id_estudiante = " . $id_estudiante . "");
 
 	//se desconecta de la base de datos
 	$mysql->desconectar();
@@ -293,7 +293,7 @@
 										?>
 											<th scope="row"><?php echo $valores3['id_materia'] ?></th>
 											<td><?php echo $valores3['nombre'] ?></td>
-											<td><?php  ?></td>
+											<td><?php echo $valores3['nombredocente'] ?></td>
 											<td><?php echo $valores3['nombreaula'] ?></td>
 											<td><?php echo $valores3['dia'] ?></td>
 											<td><?php echo $valores3['hora'] ?></td>
