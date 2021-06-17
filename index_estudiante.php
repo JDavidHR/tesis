@@ -137,7 +137,7 @@
         <!-- ============================================================== -->
         <?php
          //funcion donde se llama al menu superior del usuario
-          include("menu_docente.html");
+          include("menu_estudiante.html");
           ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
@@ -185,7 +185,7 @@
                         <div class="card">
                            <div class="card-body">
                                 
-                                <p>Bienvenido Docente, aqui podras realizar las diferentes gestiones de tu interes.<br>
+                                <p>Bienvenido estudiante, aqui podras realizar las diferentes gestiones de tu interes.<br>
                                 Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
                                 un administrador.</p>
                                 
