@@ -30,27 +30,26 @@
 </head>
 
 <body>
-<?php 
+    <?php
     session_start();
-    if(!isset($_SESSION['tipousuario'])){
-    //llamado del archivo mysql
-    require_once 'Modelo/MySQL.php';
-    //creacion de nueva "consulta"
-    $mysql = new MySQL;
-    //se conecta a la base de datos
-    $mysql->conectar();    
-    $id_estudiante = $_POST['idEstudiante']; 
-    //respectiva consulta para la seleccion de usuario
-    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.Carrera_id_carrera, asistencia.estudiante.semestre from estudiante where asistencia.estudiante.id_estudiante = $id_estudiante");     
-    while ($valores1 = mysqli_fetch_assoc($mostrardatos)){      
-        $documento = $valores1['documento'];
-        $nombres = $valores1['nombres'];
-        $carrera = $valores1['Carrera_id_carrera'];
-        $semestre = $valores1['semestre'];
-    }
-    //se desconecta de la base de datos
-    $mysql->desconectar(); 
-    }   
+        //llamado del archivo mysql
+        require_once 'Modelo/MySQL.php';
+        //creacion de nueva "consulta"
+        $mysql = new MySQL;
+        //se conecta a la base de datos
+        $mysql->conectar();
+        $id_estudiante = $_SESSION['idEstudiante'];
+        //$id_estudiante = $_POST['idEstudiante']; 
+        //respectiva consulta para la seleccion de usuario
+        $datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.Carrera_id_carrera, estudiante.semestre from estudiante where estudiante.id_estudiante = " . $id_estudiante . "");
+        while ($valores1 = mysqli_fetch_assoc($datosestudiante)) {
+            $documento = $valores1['documento'];
+            $nombres = $valores1['nombres'];
+            $carrera = $valores1['Carrera_id_carrera'];
+            $semestre = $valores1['semestre'];
+        }
+        //se desconecta de la base de datos
+        $mysql->desconectar(); 
     ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -171,7 +170,7 @@
                 <div class="row">
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Bienvenido</h4>
-                        <?php echo "ID Estudiante ".$_SESSION['idEstudiante']; ?>
+                        <?php echo "ID Estudiante: " . $_SESSION['idEstudiante']; ?>
                     </div>
 
                 </div>
@@ -219,11 +218,9 @@
                                             <td><?php echo $carrera ?></td>
                                             <td><?php echo $semestre ?></td>
                                         </tr>
-                                        
-                                        </tr>
                                     </tbody>
                                 </table>
-                                    </tbody>
+                                </tbody>
                                 </table>
                             </div>
                             <br><br>
