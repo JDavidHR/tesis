@@ -41,11 +41,11 @@
         $id_estudiante = $_SESSION['idEstudiante'];
         //$id_estudiante = $_POST['idEstudiante']; 
         //respectiva consulta para la seleccion de usuario
-        $datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.Carrera_id_carrera, estudiante.semestre from estudiante where estudiante.id_estudiante = " . $id_estudiante . "");
+        $datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.Carrera_id_carrera, estudiante.semestre, carrera.id_carrera, carrera.nombre from estudiante join carrera on estudiante.Carrera_id_carrera = carrera.id_carrera where estudiante.id_estudiante = " . $id_estudiante . "");
         while ($valores1 = mysqli_fetch_assoc($datosestudiante)) {
             $documento = $valores1['documento'];
             $nombres = $valores1['nombres'];
-            $carrera = $valores1['Carrera_id_carrera'];
+            $carrera = $valores1['nombre'];
             $semestre = $valores1['semestre'];
         }
         //se desconecta de la base de datos
