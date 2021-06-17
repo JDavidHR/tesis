@@ -172,7 +172,6 @@
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Bienvenido</h4>
                         <?php echo "ID Estudiante ".$_SESSION['idEstudiante']; ?>
-                        <?php echo $id_estudiante ?>
                     </div>
 
                 </div>
