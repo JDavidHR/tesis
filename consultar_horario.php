@@ -48,6 +48,11 @@
 		$carrera = $valores1['nombre'];
 		$semestre = $valores1['semestre'];
 	}
+
+
+	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
+	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia, aula.nombre as nombreaula from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia join aula on aula.id_aula = horario.aula_id_aula where estudiante.id_estudiante = " . $id_estudiante . "");
+
 	//se desconecta de la base de datos
 	$mysql->desconectar();
 	?>
@@ -226,13 +231,15 @@
 							<br><br>
 							<div class="card-body">
 
-								<p>Distribucion Horaria</p>
+								<center>
+									<p>Distribucion Horaria</p>
+								</center>
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">Hora</th>
-											<th scope="col">Lunes</th>
-											<th scope="col">Martes</th>
+											<th scope="col">Materia</th>
+											<th scope="col">Fecha</th>
 											<th scope="col">Miercoles</th>
 											<th scope="col">Jueves</th>
 											<th scope="col">Viernes</th>
@@ -241,16 +248,22 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row"><?php ?></th>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-										</tr>
+										<?php
+										while ($valores2 = mysqli_fetch_assoc($dhorario)) {
+										?>
+											<tr>
+												<th scope="row"><?php echo $valores2['hora'] ?></th>
+												<td><?php echo $valores2['nombre'] ?></td>
+												<td><?php echo $valores2['dia'] ?></td>
+												<td><?php  ?></td>
+												<td><?php  ?></td>
+												<td><?php  ?></td>
+												<td><?php  ?></td>
+												<td><?php  ?></td>
+											</tr>
+										<?php
+										}
+										?>
 									</tbody>
 								</table>
 								</tbody>
@@ -259,12 +272,13 @@
 							<br><br>
 							<div class="card-body">
 
-								<p>Asignaturas matriculadas</p>
+								<center>
+									<p>Asignaturas Matriculadas</p>
+								</center>
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">Codigo</th>
-											<th scope="col">Jornada</th>
 											<th scope="col">Asignatura</th>
 											<th scope="col">Docente</th>
 											<th scope="col">Aula</th>
@@ -274,14 +288,19 @@
 									</thead>
 									<tbody>
 										<tr>
-										<th scope="row"><?php ?></th>
+										<?php
+										while ($valores3 = mysqli_fetch_assoc($Amaterias)) {
+										?>
+											<th scope="row"><?php echo $valores3['id_materia'] ?></th>
+											<td><?php echo $valores3['nombre'] ?></td>
 											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
-											<td><?php  ?></td>
+											<td><?php echo $valores3['nombreaula'] ?></td>
+											<td><?php echo $valores3['dia'] ?></td>
+											<td><?php echo $valores3['hora'] ?></td>
 										</tr>
+										<?php
+										}
+										?>
 									</tbody>
 								</table>
 								</tbody>
