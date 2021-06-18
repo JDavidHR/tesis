@@ -9,7 +9,7 @@ if(isset($_POST['documento']) && !empty($_POST['documento'])){
     $mysql->conectar();//funcion llamada desde mysql.php
     
     //consulta donde hace la comparacion de lo que el usuario ingresa con lo almacenado en la base de datos
-    $usuarios = $mysql->efectuarConsulta("SELECT integrador.administrador.documento FROM integrador.administrador WHERE integrador.administrador.documento='".$documento."'");
+    $usuarios = $mysql->efectuarConsulta("SELECT asistencia.administrador.documento FROM asistencia.administrador WHERE asistencia.administrador.documento='".$documento."'");
     
     $mysql->desconectar();//funcion llamada desde mysql.php
 }
@@ -19,7 +19,7 @@ if(isset($_POST['documento']) && !empty($_POST['documento'])){
 //condicion donde si la consulta encuentra el valor ingresado, es decir si no encuentra nada el valor sera 0 y si encuentra algo sera 1
  if (mysqli_num_rows($usuarios) > 0){
      
-     require_once '../modelo/usuarios.php';//se llama la pagina donde se estan almacenando los usuarios ingresados
+     require_once '../Modelo/usuarios.php';//se llama la pagina donde se estan almacenando los usuarios ingresados
        $mysql->conectar();//funcion llamada desde mysql.php
         session_start();//inicio de sesion
 
@@ -38,13 +38,13 @@ if(isset($_POST['documento']) && !empty($_POST['documento'])){
         $_SESSION['usuario'] = $usuario;
         $_SESSION['acceso'] = true; //variable logica
          
-        header("Location: ../index_administrador.html");//ubicacion si el usuario ingresado existe
+        header("Location: ../index_administrador.php");//ubicacion si el usuario ingresado existe
        
 
         
     }
     else{
-     header("Location: ../login_administrador.php"); //ubicacion si el usuario ingresado no existe
+     header("Location: ../login.php"); //ubicacion si el usuario ingresado no existe
 
     }
 

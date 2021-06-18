@@ -227,7 +227,7 @@
                             <div class="card-body">
 
                                 <p>Bienvenido estudiante, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                    Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con<br>
+                                    Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con 
                                     un administrador.</p>
 
                             </div>
