@@ -140,9 +140,11 @@
                                     <form id="contact" action="Controlador/insertar_aula.php" method="post">
                                         <h3>Registro del Aula</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
-                                        <fieldset>
-                                            <input placeholder="Nombre del Aula" type="text" tabindex="1" autofocus name="nombre_aula">
-                                        </fieldset>
+                                        <center>
+                                            <fieldset class="col-md-6 col-md-offset-3">
+                                                <input placeholder="Nombre del Aula" type="text" tabindex="1" autofocus name="nombre_aula">
+                                            </fieldset>
+                                        </center>
                                         <br>
                                         <fieldset>
                                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>

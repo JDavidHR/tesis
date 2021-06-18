@@ -140,9 +140,11 @@
                                     <form id="contact" action="Controlador/insertar_carreras.php" method="post">
                                         <h3>Registro de carreras</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
-                                        <fieldset>
-                                            <input placeholder="Nombre de la carrera" type="text" tabindex="1" autofocus name="nombre_carrera">
-                                        </fieldset>
+                                        <center>
+                                            <fieldset class="col-md-6 col-md-offset-3">
+                                                <input placeholder="Nombre de la carrera" type="text" tabindex="1" autofocus name="nombre_carrera">
+                                            </fieldset>
+                                        </center>
                                         <br>
                                         <fieldset>
                                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>

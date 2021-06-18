@@ -42,7 +42,7 @@
     //se conecta a la base de datos
     $mysql->conectar();    
     //respectiva consulta para la seleccion de usuario
-    $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente");     
+    $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente where asistencia.docente.estado = 1");     
     //se desconecta de la base de datos
     $mysql->desconectar(); 
     }   
@@ -152,7 +152,7 @@
                         <div class="card">
                            <div class="card-body">
                                 
-                               <div class="container" style="text-align: center">  
+                               <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
 										<form id="contact" action="update_docente2.php" method="post">
 										    <h3>Actualizar Docente</h3>
 										    <h4>Selecciona el docente a modificar</h4>
@@ -172,7 +172,7 @@
                                             <fieldset>
 										    <br>
 										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
                                             </fieldset>
 
                                         </form>

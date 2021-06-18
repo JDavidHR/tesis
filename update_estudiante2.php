@@ -169,7 +169,7 @@
             <div class="card">
               <div class="card-body">
 
-                <div class="container" style="text-align: center">
+                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="Controlador/update_estudiante.php?id=<?php echo $id_usuario; ?>" method="post">
                     <h3>Update del Usuario</h3>
                     <h4>Recuerda llenar todos los campos</h4>
@@ -251,7 +251,7 @@
                     </fieldset>
                     <br>
                     <fieldset>
-                      <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+                      <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
                     </fieldset>
 
                   </form>

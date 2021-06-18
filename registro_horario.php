@@ -153,7 +153,7 @@
             <div class="card">
               <div class="card-body">
 
-                <div class="container" style="text-align: center">
+                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="Controlador/insertar_horario.php" method="post">
                     <h3>Registro del Horario</h3>
                     <h4>Recuerda llenar todos los campos</h4>
@@ -208,15 +208,15 @@
                     </fieldset>
                     <br>
                     <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
                     </fieldset>
 
                   </form>
                   <fieldset>
-                    <center><a href="update_horario.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Horario</button></a></center>
+                    <center><a href="update_horario.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-3" style="background-color: #037537;color: white">Modificar Horario</button></a></center>
                   </fieldset>
                   <fieldset>
-                    <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Horario</button></a></center>
+                    <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-3" style="background-color: #037537;color: white">Eliminar Horario</button></a></center>
                   </fieldset>
 
                 </div>

@@ -159,7 +159,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                         <div class="card">
                            <div class="card-body">
                                 
-                               <div class="container" style="text-align: center">  
+                               <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
 										<form id="contact" action="Controlador/update_materia.php" method="post">
 										    <h3>Actualizar Materia</h3>
 										    <h4>Seleciona la materia a actualizar</h4>
@@ -173,7 +173,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                             </fieldset>
 
                                             <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
+                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
                                             </fieldset>
 
                                         </form>

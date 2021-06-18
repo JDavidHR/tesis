@@ -140,9 +140,11 @@
                                     <form id="contact" action="Controlador/insertar_materia.php" method="post">
                                         <h3>Registro de la Materia</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
-                                        <fieldset>
-                                            <input placeholder="Nombre de la materia" type="text" tabindex="1" autofocus name="nombre_materia">
-                                        </fieldset>
+                                        <center>
+                                            <fieldset class="col-md-6 col-md-offset-3">
+                                                <input placeholder="Nombre de la materia" type="text" tabindex="1" autofocus name="nombre_materia">
+                                            </fieldset>
+                                        </center>
                                         <br>
                                         <fieldset>
                                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
