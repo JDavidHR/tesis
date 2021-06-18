@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2021 a las 20:15:33
+-- Tiempo de generación: 18-06-2021 a las 19:03:04
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -53,15 +53,18 @@ INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apelli
 
 CREATE TABLE `aula` (
   `id_aula` int(11) NOT NULL COMMENT 'Id del aula',
-  `nombre` varchar(45) NOT NULL COMMENT 'Nombre del aula'
+  `nombre` varchar(45) NOT NULL COMMENT 'Nombre del aula',
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `aula`
 --
 
-INSERT INTO `aula` (`id_aula`, `nombre`) VALUES
-(6, 'LAB E');
+INSERT INTO `aula` (`id_aula`, `nombre`, `estado`) VALUES
+(6, 'LAB E', 1),
+(7, 'LAB C', 1),
+(8, 'LAB D', 0);
 
 -- --------------------------------------------------------
 
@@ -71,15 +74,17 @@ INSERT INTO `aula` (`id_aula`, `nombre`) VALUES
 
 CREATE TABLE `carrera` (
   `id_carrera` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
+  `nombre` varchar(45) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `carrera`
 --
 
-INSERT INTO `carrera` (`id_carrera`, `nombre`) VALUES
-(1, 'Ingeniería en Sistemas');
+INSERT INTO `carrera` (`id_carrera`, `nombre`, `estado`) VALUES
+(1, 'Ingeniería en Sistemas', 1),
+(2, 'Ecologia', 0);
 
 -- --------------------------------------------------------
 
@@ -94,6 +99,15 @@ CREATE TABLE `clase` (
   `Docente_id_docente` int(11) NOT NULL,
   `Estudiante_id_estudiante` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `clase`
+--
+
+INSERT INTO `clase` (`id_clase`, `dia`, `horario_id_horario`, `Docente_id_docente`, `Estudiante_id_estudiante`) VALUES
+(5, '2021-06-14', 1, 2, 4),
+(6, '2021-06-17', 4, 1, 4),
+(7, '2021-06-18', 4, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -145,7 +159,8 @@ CREATE TABLE `estudiante` (
 
 INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `clave`, `horario_id_horario`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
 (1, '123', 'Juan', 'Hoyos', 'Diurna', 'Septimo', '123', 1, 1, 1, 1),
-(2, '456', 'Natalia', 'Agudelo', 'Diurna', 'Septimo', '456', 1, 1, 1, 1);
+(2, '456', 'Natalia', 'Agudelo', 'Nocturna', 'Septimo', '456', 1, 1, 1, 1),
+(4, '159', 'Test', 'Test', 'Diurna', 'Septimo', '159', 4, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -157,15 +172,20 @@ CREATE TABLE `horario` (
   `id_horario` int(11) NOT NULL COMMENT 'Id del horario',
   `hora` time NOT NULL COMMENT 'Fecha del horario',
   `materia_id_materia` int(11) NOT NULL,
-  `aula_id_aula` int(11) NOT NULL
+  `aula_id_aula` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `horario`
 --
 
-INSERT INTO `horario` (`id_horario`, `hora`, `materia_id_materia`, `aula_id_aula`) VALUES
-(1, '11:17:02', 7, 6);
+INSERT INTO `horario` (`id_horario`, `hora`, `materia_id_materia`, `aula_id_aula`, `estado`) VALUES
+(1, '11:17:02', 7, 6, 1),
+(1, '07:45:00', 8, 8, 1),
+(1, '07:45:00', 10, 6, 1),
+(4, '17:27:18', 9, 7, 1),
+(4, '17:16:34', 10, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -175,16 +195,19 @@ INSERT INTO `horario` (`id_horario`, `hora`, `materia_id_materia`, `aula_id_aula
 
 CREATE TABLE `materia` (
   `id_materia` int(11) NOT NULL COMMENT 'Id de la materia',
-  `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la materia'
+  `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la materia',
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`id_materia`, `nombre`) VALUES
-(6, ''),
-(7, 'Proyecto Integrador');
+INSERT INTO `materia` (`id_materia`, `nombre`, `estado`) VALUES
+(7, 'Proyecto Integrador', 1),
+(8, 'Metodologia Tecnologia', 1),
+(9, 'Ingles', 0),
+(10, 'Gestion Contable', 1);
 
 -- --------------------------------------------------------
 
@@ -298,19 +321,19 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=7;
+  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=3;
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `docente`
@@ -322,19 +345,19 @@ ALTER TABLE `docente`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=4;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del horario', AUTO_INCREMENT=2;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del horario', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia', AUTO_INCREMENT=8;
+  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
