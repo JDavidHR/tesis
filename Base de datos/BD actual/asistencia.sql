@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `asistencia`.`Administrador` (
   `nombres` VARCHAR(45) NOT NULL COMMENT 'Nombres del administrador',
   `apellidos` VARCHAR(45) NOT NULL COMMENT 'Apellidos del administrador',
   `clave` VARCHAR(45) NOT NULL,
+  `estado` INT(11) NOT NULL,
   `tipo_usuario_id_tipo_usuario` INT(11) NOT NULL,
-  `estado` INT NOT NULL,
   PRIMARY KEY (`id_administrador`, `tipo_usuario_id_tipo_usuario`),
   UNIQUE INDEX `documento_UNIQUE` (`documento` ASC) ,
   UNIQUE INDEX `id_UNIQUE` (`id_administrador` ASC) ,
@@ -58,6 +58,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `asistencia`.`Aula` (
   `id_aula` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula',
   `nombre` VARCHAR(45) NOT NULL COMMENT 'Nombre del aula',
+  `estado` INT(11) NOT NULL,
   PRIMARY KEY (`id_aula`),
   UNIQUE INDEX `id_UNIQUE` (`id_aula` ASC) )
 ENGINE = InnoDB
@@ -89,61 +90,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `asistencia`.`Clase`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `asistencia`.`Clase` (
-  `id_clase` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase',
-  `dia` DATE NOT NULL COMMENT 'Dia de la clase',
-  `codigo` VARCHAR(45) NOT NULL,
-  `Docente_id_docente` INT(11) NOT NULL,
-  PRIMARY KEY (`id_clase`, `Docente_id_docente`),
-  UNIQUE INDEX `id_UNIQUE` (`id_clase` ASC) ,
-  INDEX `fk_Clase_Docente1_idx` (`Docente_id_docente` ASC) ,
-  CONSTRAINT `fk_Clase_Docente1`
-    FOREIGN KEY (`Docente_id_docente`)
-    REFERENCES `asistencia`.`Docente` (`id_docente`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `asistencia`.`Materia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `asistencia`.`Materia` (
   `id_materia` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la materia',
   `nombre` VARCHAR(45) NOT NULL COMMENT 'Nombre de la materia',
+  `estado` INT(11) NOT NULL,
   PRIMARY KEY (`id_materia`),
   UNIQUE INDEX `id_UNIQUE` (`id_materia` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `asistencia`.`Horario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `asistencia`.`Horario` (
-  `id_horario` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del horario',
-  `hora` TIME NOT NULL COMMENT 'Fecha del horario',
-  `materia_id_materia` INT(11) NOT NULL,
-  `aula_id_aula` INT(11) NOT NULL,
-  PRIMARY KEY (`id_horario`, `materia_id_materia`, `aula_id_aula`),
-  INDEX `fk_horario_materia1_idx` (`materia_id_materia` ASC) ,
-  INDEX `fk_horario_aula1_idx` (`aula_id_aula` ASC) ,
-  CONSTRAINT `fk_horario_materia1`
-    FOREIGN KEY (`materia_id_materia`)
-    REFERENCES `asistencia`.`Materia` (`id_materia`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_horario_aula1`
-    FOREIGN KEY (`aula_id_aula`)
-    REFERENCES `asistencia`.`Aula` (`id_aula`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -153,6 +109,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `asistencia`.`Carrera` (
   `id_carrera` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
+  `estado` INT(11) NOT NULL,
   PRIMARY KEY (`id_carrera`),
   UNIQUE INDEX `id_carrera_UNIQUE` (`id_carrera` ASC) )
 ENGINE = InnoDB;
@@ -169,9 +126,9 @@ CREATE TABLE IF NOT EXISTS `asistencia`.`Estudiante` (
   `jornada` VARCHAR(45) NOT NULL COMMENT 'Jornada del estudiante',
   `semestre` VARCHAR(45) NOT NULL,
   `clave` VARCHAR(45) NOT NULL,
+  `estado` INT(11) NOT NULL,
   `Carrera_id_carrera` INT NOT NULL,
   `tipo_usuario_id_tipo_usuario` INT(11) NOT NULL,
-  `estado` INT NOT NULL,
   PRIMARY KEY (`id_estudiante`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`),
   UNIQUE INDEX `documento_UNIQUE` (`documento` ASC) ,
   UNIQUE INDEX `id_UNIQUE` (`id_estudiante` ASC) ,
@@ -198,29 +155,76 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `asistencia`.`Grupo` (
   `id_grupo` INT(11) NOT NULL AUTO_INCREMENT,
   `Estudiante_id_estudiante` INT(11) NOT NULL,
-  `Horario_id_horario` INT(11) NOT NULL,
-  `Clase_id_clase` INT(11) NOT NULL,
   `estado` INT(11) NOT NULL,
-  PRIMARY KEY (`id_grupo`, `Estudiante_id_estudiante`, `Horario_id_horario`, `Clase_id_clase`),
+  PRIMARY KEY (`id_grupo`, `Estudiante_id_estudiante`),
   INDEX `fk_Grupo_Estudiante1_idx` (`Estudiante_id_estudiante` ASC) ,
-  INDEX `fk_Grupo_Horario1_idx` (`Horario_id_horario` ASC) ,
-  INDEX `fk_Grupo_Clase1_idx` (`Clase_id_clase` ASC) ,
   CONSTRAINT `fk_Grupo_Estudiante1`
     FOREIGN KEY (`Estudiante_id_estudiante`)
     REFERENCES `asistencia`.`Estudiante` (`id_estudiante`)
     ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Grupo_Horario1`
-    FOREIGN KEY (`Horario_id_horario`)
-    REFERENCES `asistencia`.`Horario` (`id_horario`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Grupo_Clase1`
-    FOREIGN KEY (`Clase_id_clase`)
-    REFERENCES `asistencia`.`Clase` (`id_clase`)
-    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `asistencia`.`Dias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asistencia`.`Dias` (
+  `id_dia` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_dia`),
+  UNIQUE INDEX `id_dia_UNIQUE` (`id_dia` ASC) ,
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `asistencia`.`Clase`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asistencia`.`Clase` (
+  `id_clase` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase',
+  `Dias_id_dia` INT(11) NOT NULL,
+  `hora` TIME NOT NULL,
+  `codigo` VARCHAR(45) NOT NULL,
+  `Docente_id_docente` INT(11) NOT NULL,
+  `Aula_id_aula` INT(11) NOT NULL,
+  `Materia_id_materia` INT(11) NOT NULL,
+  `Grupo_id_grupo` INT(11) NOT NULL,
+  PRIMARY KEY (`id_clase`, `Dias_id_dia`, `Docente_id_docente`, `Aula_id_aula`, `Materia_id_materia`, `Grupo_id_grupo`),
+  UNIQUE INDEX `id_UNIQUE` (`id_clase` ASC) ,
+  INDEX `fk_Clase_Docente1_idx` (`Docente_id_docente` ASC) ,
+  INDEX `fk_Clase_Aula1_idx` (`Aula_id_aula` ASC) ,
+  INDEX `fk_Clase_Materia1_idx` (`Materia_id_materia` ASC) ,
+  INDEX `fk_Clase_Grupo1_idx` (`Grupo_id_grupo` ASC) ,
+  INDEX `fk_Clase_Dias1_idx` (`Dias_id_dia` ASC) ,
+  CONSTRAINT `fk_Clase_Docente1`
+    FOREIGN KEY (`Docente_id_docente`)
+    REFERENCES `asistencia`.`Docente` (`id_docente`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Clase_Aula1`
+    FOREIGN KEY (`Aula_id_aula`)
+    REFERENCES `asistencia`.`Aula` (`id_aula`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Clase_Materia1`
+    FOREIGN KEY (`Materia_id_materia`)
+    REFERENCES `asistencia`.`Materia` (`id_materia`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Clase_Grupo1`
+    FOREIGN KEY (`Grupo_id_grupo`)
+    REFERENCES `asistencia`.`Grupo` (`id_grupo`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Clase_Dias1`
+    FOREIGN KEY (`Dias_id_dia`)
+    REFERENCES `asistencia`.`Dias` (`id_dia`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
