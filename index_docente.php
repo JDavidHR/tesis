@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    
+
     <title>Home</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link href="css/weather-icons.min.css" rel="stylesheet">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,6 +30,26 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    //llamado del archivo mysql
+    require_once 'Modelo/MySQL.php';
+    //creacion de nueva "consulta"
+    $mysql = new MySQL;
+    //se conecta a la base de datos
+    $mysql->conectar();
+    $id_docente = $_SESSION['idDocente'];
+    //$id_estudiante = $_POST['idEstudiante']; 
+    //respectiva consulta para la seleccion de usuario
+    $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
+    while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
+        $documento = $valores1['documento'];
+        $nombres = $valores1['nombres'];
+        $tipo_usuario = $valores1['nombre'];
+    }
+    //se desconecta de la base de datos
+    $mysql->desconectar();
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -75,8 +95,7 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ti-more"></i>
                     </a>
                 </div>
@@ -136,9 +155,9 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <?php
-         //funcion donde se llama al menu superior del usuario
-          include("menu_docente.html");
-          ?>
+        //funcion donde se llama al menu superior del usuario
+        include("menu_docente.html");
+        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -153,8 +172,9 @@
                 <div class="row">
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Bienvenido</h4>
+                        <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
                     </div>
-                    
+
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -183,56 +203,78 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                           <div class="card-body">
-                                
-                                <p>En el panel izquierdo de este espacio usted podra encontrar
-                                    el acceso a toda la informacion academica que le corresponde.
-                                </p>
-                                
-                            </div> 
+                            <center>
+                                <div class="card-body col-md-6 col-md-offset-3">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Tipo de usuario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><?php echo $documento ?></th>
+                                                <td><?php echo $nombres ?></td>
+                                                <td><?php echo $tipo_usuario ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </center>
+                            <center>
+                                <div class="card-body">
+                                    <p>En el panel izquierdo de este espacio usted podra encontrar
+                                        el acceso a toda la informacion academica que le corresponde.
+                                    </p>
+                                </div>
+                            </center>
+                        </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <footer class="footer text-center">
+                    All Rights Reserved by asistencias COTECNOVA
+                </footer>
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                All Rights Reserved by asistencias COTECNOVA
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
+            <!-- End Page wrapper  -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Wrapper -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/umd/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!--chartis chart-->
-    <script src="js/chartist.min.js"></script>
-    <script src="js/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/dashboard1.js"></script>
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="js/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="js/sparkline.js"></script>
+        <!--Wave Effects -->
+        <script src="js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="js/custom.min.js"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="js/chartist.min.js"></script>
+        <script src="js/chartist-plugin-tooltip.min.js"></script>
+        <script src="js/dashboard1.js"></script>
 </body>
 
 </html>

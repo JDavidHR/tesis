@@ -32,24 +32,24 @@
 <body>
     <?php
     session_start();
-        //llamado del archivo mysql
-        require_once 'Modelo/MySQL.php';
-        //creacion de nueva "consulta"
-        $mysql = new MySQL;
-        //se conecta a la base de datos
-        $mysql->conectar();
-        $id_estudiante = $_SESSION['idEstudiante'];
-        //$id_estudiante = $_POST['idEstudiante']; 
-        //respectiva consulta para la seleccion de usuario
-        $datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.Carrera_id_carrera, estudiante.semestre, carrera.id_carrera, carrera.nombre from estudiante join carrera on estudiante.Carrera_id_carrera = carrera.id_carrera where estudiante.id_estudiante = " . $id_estudiante . "");
-        while ($valores1 = mysqli_fetch_assoc($datosestudiante)) {
-            $documento = $valores1['documento'];
-            $nombres = $valores1['nombres'];
-            $carrera = $valores1['nombre'];
-            $semestre = $valores1['semestre'];
-        }
-        //se desconecta de la base de datos
-        $mysql->desconectar(); 
+    //llamado del archivo mysql
+    require_once 'Modelo/MySQL.php';
+    //creacion de nueva "consulta"
+    $mysql = new MySQL;
+    //se conecta a la base de datos
+    $mysql->conectar();
+    $id_estudiante = $_SESSION['idEstudiante'];
+    //$id_estudiante = $_POST['idEstudiante']; 
+    //respectiva consulta para la seleccion de usuario
+    $datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.Carrera_id_carrera, estudiante.semestre, carrera.id_carrera, carrera.nombre from estudiante join carrera on estudiante.Carrera_id_carrera = carrera.id_carrera where estudiante.id_estudiante = " . $id_estudiante . "");
+    while ($valores1 = mysqli_fetch_assoc($datosestudiante)) {
+        $documento = $valores1['documento'];
+        $nombres = $valores1['nombres'];
+        $carrera = $valores1['nombre'];
+        $semestre = $valores1['semestre'];
+    }
+    //se desconecta de la base de datos
+    $mysql->desconectar();
     ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -201,36 +201,38 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Documento</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Carrera</th>
-                                            <th scope="col">Semestre</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><?php echo $documento ?></th>
-                                            <td><?php echo $nombres ?></td>
-                                            <td><?php echo $carrera ?></td>
-                                            <td><?php echo $semestre ?></td>
-                                        </tr>
+                            <center>
+                                <div class="card-body col-md-6 col-md-offset-3">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Carrera</th>
+                                                <th scope="col">Semestre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><?php echo $documento ?></th>
+                                                <td><?php echo $nombres ?></td>
+                                                <td><?php echo $carrera ?></td>
+                                                <td><?php echo $semestre ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     </tbody>
-                                </table>
-                                </tbody>
-                                </table>
-                            </div>
+                                    </table>
+                                </div>
+                            </center>
                             <br><br>
-                            <div class="card-body">
-
-                                <p>Bienvenido estudiante, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                    Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con 
-                                    un administrador.</p>
-
-                            </div>
+                            <center>
+                                <div class="card-body">
+                                    <p>Bienvenido estudiante, aqui podras realizar las diferentes gestiones de tu interes.<br>
+                                        Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con
+                                        un administrador.</p>
+                                </div>
+                            </center>
                         </div>
                     </div>
                 </div>

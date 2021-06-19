@@ -21,12 +21,6 @@
 	<link href="css/materialdesignicons.min.css" rel="stylesheet">
 	<link href="css/weather-icons.min.css" rel="stylesheet">
 
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
@@ -125,6 +119,7 @@
                                     </div>
                                 </div>
                             </a>-->
+							
 							<form class="app-search position-absolute">
 								<input type="text" class="form-control" placeholder="Search &amp; enter">
 								<a class="srh-btn">
@@ -142,7 +137,7 @@
 						<!-- ============================================================== -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-
+							
 						</li>
 						<!-- ============================================================== -->
 						<!-- User profile and search -->
@@ -206,100 +201,105 @@
 					<!-- column -->
 					<div class="col-12">
 						<div class="card">
-							<div class="card-body">
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">Documento</th>
-											<th scope="col">Nombre</th>
-											<th scope="col">Carrera</th>
-											<th scope="col">Semestre</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row"><?php echo $documento ?></th>
-											<td><?php echo $nombres ?></td>
-											<td><?php echo $carrera ?></td>
-											<td><?php echo $semestre ?></td>
-										</tr>
-									</tbody>
-								</table>
-								</tbody>
-								</table>
-							</div>
-							<br><br>
-							<div class="card-body">
-
-								<center>
-									<p>Distribucion Horaria</p>
-								</center>
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">Hora</th>
-											<th scope="col">Materia</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Dia</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php				 
-										while ($valores2 = mysqli_fetch_assoc($dhorario)) {
-											$dias = array('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
-											$dia = $dias[(date('N', strtotime($valores2['dia']))) - 1];
-										?>
+							<center>
+								<div class="card-body col-md-6 col-md-offset-3">
+									<table class="table">
+										<thead class="thead-dark">
 											<tr>
-												<th scope="row"><?php echo $valores2['hora'] ?></th>
-												<td><?php echo $valores2['nombre'] ?></td>
-												<td><?php echo $valores2['dia'] ?></td>
-												<td><?php echo $dia ?></td>
+												<th scope="col">Documento</th>
+												<th scope="col">Nombre</th>
+												<th scope="col">Carrera</th>
+												<th scope="col">Semestre</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row"><?php echo $documento ?></th>
+												<td><?php echo $nombres ?></td>
+												<td><?php echo $carrera ?></td>
+												<td><?php echo $semestre ?></td>
+											</tr>
+										</tbody>
+									</table>
+									</tbody>
+									</table>
+								</div>
+							</center>
+							
+							<center>
+								<div class="card-body col-md-6 col-md-offset-3">
+									<center>
+										<p>Distribucion Horaria</p>
+									</center>
+									<table class="table">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Hora</th>
+												<th scope="col">Materia</th>
+												<th scope="col">Fecha</th>
+												<th scope="col">Dia</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											while ($valores2 = mysqli_fetch_assoc($dhorario)) {
+												$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+												$dia = $dias[(date('N', strtotime($valores2['dia']))) - 1];
+											?>
+												<tr>
+													<th scope="row"><?php echo $valores2['hora'] ?></th>
+													<td><?php echo $valores2['nombre'] ?></td>
+													<td><?php echo $valores2['dia'] ?></td>
+													<td><?php echo $dia ?></td>
+												</tr>
+											<?php
+											}
+											?>
+										</tbody>
+									</table>
+									</tbody>
+									</table>
+								</div>
+							</center>
+							
+							<center>
+								<div class="card-body col-md-7 col-md-offset-3">
+
+									<center>
+										<p>Asignaturas Matriculadas</p>
+									</center>
+									<table class="table">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Codigo</th>
+												<th scope="col">Asignatura</th>
+												<th scope="col">Docente</th>
+												<th scope="col">Aula</th>
+												<th scope="col">Fecha</th>
+												<th scope="col">Hora</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<?php
+												while ($valores3 = mysqli_fetch_assoc($Amaterias)) {
+												?>
+													<th scope="row"><?php echo $valores3['id_materia'] ?></th>
+													<td><?php echo $valores3['nombremateria'] ?></td>
+													<td><?php echo $valores3['nombres'] ?></td>
+													<td><?php echo $valores3['nombreaula'] ?></td>
+													<td><?php echo $valores3['dia'] ?></td>
+													<td><?php echo $valores3['hora'] ?></td>
 											</tr>
 										<?php
-										}
+												}
 										?>
+										</tbody>
+									</table>
 									</tbody>
-								</table>
-								</tbody>
-								</table>
-							</div>
-							<br><br>
-							<div class="card-body">
-
-								<center>
-									<p>Asignaturas Matriculadas</p>
-								</center>
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">Codigo</th>
-											<th scope="col">Asignatura</th>
-											<th scope="col">Docente</th>
-											<th scope="col">Aula</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Hora</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-										<?php
-										while ($valores3 = mysqli_fetch_assoc($Amaterias)) {
-										?>
-											<th scope="row"><?php echo $valores3['id_materia'] ?></th>
-											<td><?php echo $valores3['nombremateria'] ?></td>
-											<td><?php echo $valores3['nombres'] ?></td>
-											<td><?php echo $valores3['nombreaula'] ?></td>
-											<td><?php echo $valores3['dia'] ?></td>
-											<td><?php echo $valores3['hora'] ?></td>
-										</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-								</tbody>
-								</table>
-							</div>
+									</table>
+								</div>
+							</center>
 						</div>
 					</div>
 				</div>
