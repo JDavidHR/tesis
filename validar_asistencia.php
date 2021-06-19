@@ -43,7 +43,7 @@
         $mysql->conectar();
         $id_estudiante = $_SESSION['idEstudiante'];
        // $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");
-        $seleccionmateria = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, materia.nombre, materia.id_materia from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
+        $seleccionmateria = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre from estudiante join grupo on grupo.Estudiante_id_estudiante = estudiante.id_estudiante join horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
         //se desconecta de la base de datos
         $mysql->desconectar();
     
