@@ -8,12 +8,13 @@ if( isset($_POST['submit']) && isset($_POST['codigo_clase'])){
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
-    $sql = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante from estudiante join grupo on grupo.Estudiante_id_estudiante =  estudiante.id_estudiante join clase on clase.id_clase = grupo.Clase_id_clase where clase.codigo = ".$codigo."");
+    $sql = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante from estudiante join grupo on grupo.Estudiante_id_estudiante =  estudiante.id_estudiante join clase on clase.id_clase = grupo.Clase_id_clase where clase.codigo = '.$codigo.'");
+    //$sql = $mysql->efectuarConsulta("SELECT clase.codigo from clase where clase.codigo = ".$codigo."");
+    //echo "la codigo es: ".$codigo;
     //Se valida si la consulta arrojo algun valor
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
-        echo $sql;
-        //echo"<script type=\"text/javascript\">alert('Codigo Correcto'); window.location='../index_estudiante.php';</script>";
+        echo"<script type=\"text/javascript\">alert('Codigo Correcto'); window.location='../index_estudiante.php';</script>";
         //echo $estudiante;
     }else{
         //mensaje de salida en caso de que la consulta falle
