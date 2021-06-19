@@ -42,9 +42,9 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");
-    $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia");
-    $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");
+    $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula where estado = 1");
+    $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
+    $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario where estado = 1");
     //se desconecta de la base de datos
     $mysql->desconectar();
   }
@@ -216,7 +216,7 @@
                     <center><a href="update_horario.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-3" style="background-color: #037537;color: white">Modificar Horario</button></a></center>
                   </fieldset>
                   <fieldset>
-                    <center><a href="#"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-3" style="background-color: #037537;color: white">Eliminar Horario</button></a></center>
+                    <center><a href="delete_horario.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-3" style="background-color: #037537;color: white">Eliminar Horario</button></a></center>
                   </fieldset>
 
                 </div>

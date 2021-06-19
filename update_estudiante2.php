@@ -44,11 +44,11 @@
     $id_usuario = $_POST['usuario'];
     //respectiva consulta para la seleccion de usuario
 
-    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.clave,asistencia.estudiante.horario_id_horario,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = " . $id_usuario . "");
+    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.clave,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = " . $id_usuario . "");
 
 
     $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");
-    $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");
+    //$seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");
     $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera, asistencia.carrera.nombre from carrera");
     while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
       //declaracion de variables
@@ -58,7 +58,7 @@
       $jornada = $valores1['jornada'];
       $semestre = $valores1['semestre'];
       $clave = $valores1['clave'];
-      $horario = $valores1['horario_id_horario'];
+      
       $carrera = $valores1['Carrera_id_carrera'];
       $tipo = $valores1['tipo_usuario_id_tipo_usuario'];
     }
@@ -211,22 +211,7 @@
                         ?>
                       </select>
                     </fieldset>
-                    <fieldset>
-                      <label>Horario: </label>
-                      <select name="horario" class="form-control">
-                        <option value="0" disabled="">Seleccione:</option>
-                        <?php
-                        //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                        while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                        ?>
-                          <!--se traen los datos a mostrar en el select-->
-                          <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] ?></option>';
-                        <?php
-                        }
-                        ?>
-
-                      </select>
-                    </fieldset>
+                   
                     <fieldset>
                       <label>Carrera: </label>
                       <select name="carrera" class="form-control">

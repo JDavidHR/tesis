@@ -50,8 +50,8 @@
 	}
 
 
-	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
-	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.horario_id_horario, horario.id_horario, horario.hora, clase.id_clase, clase.dia, clase.horario_id_horario, materia.nombre, materia.id_materia, aula.nombre as nombreaula, docente.nombres as nombredocente from estudiante join horario on estudiante.horario_id_horario = horario.id_horario join clase on clase.horario_id_horario = horario.id_horario join materia on  materia.id_materia = horario.materia_id_materia join aula on aula.id_aula = horario.aula_id_aula join docente on docente.id_docente = clase.Docente_id_docente where estudiante.id_estudiante = " . $id_estudiante . "");
+	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, horario.hora, materia.nombre, clase.dia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante JOIN horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia JOIN clase on clase.id_clase = grupo.Clase_id_clase where estudiante.id_estudiante = " . $id_estudiante . "");
+	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, clase.Docente_id_docente, docente.nombres, horario.hora, aula.nombre as nombreaula, materia.id_materia, clase.dia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante JOIN horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia join clase on clase.id_clase = grupo.Clase_id_clase join docente on docente.id_docente = clase.Docente_id_docente join aula on aula.id_aula = horario.aula_id_aula where estudiante.id_estudiante = " . $id_estudiante . "");
 
 	//se desconecta de la base de datos
 	$mysql->desconectar();
@@ -276,7 +276,7 @@
 											<th scope="col">Asignatura</th>
 											<th scope="col">Docente</th>
 											<th scope="col">Aula</th>
-											<th scope="col">Dia</th>
+											<th scope="col">Fecha</th>
 											<th scope="col">Hora</th>
 										</tr>
 									</thead>
@@ -286,8 +286,8 @@
 										while ($valores3 = mysqli_fetch_assoc($Amaterias)) {
 										?>
 											<th scope="row"><?php echo $valores3['id_materia'] ?></th>
-											<td><?php echo $valores3['nombre'] ?></td>
-											<td><?php echo $valores3['nombredocente'] ?></td>
+											<td><?php echo $valores3['nombremateria'] ?></td>
+											<td><?php echo $valores3['nombres'] ?></td>
 											<td><?php echo $valores3['nombreaula'] ?></td>
 											<td><?php echo $valores3['dia'] ?></td>
 											<td><?php echo $valores3['hora'] ?></td>

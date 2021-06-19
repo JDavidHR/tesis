@@ -1,6 +1,6 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-if(isset($_POST['submit']) && !empty($_POST['radiobutton']) && !empty($_POST['documento_usuario']) && !empty($_POST['nombre_usuario']) && !empty($_POST['apellido_usuario']) && !empty($_POST['tipousuario']) && !empty($_POST['horario']) && !empty($_POST['Semestre']) && !empty($_POST['clave']) && !empty($_POST['carrera']) ){
+if(isset($_POST['submit']) && !empty($_POST['radiobutton']) && !empty($_POST['documento_usuario']) && !empty($_POST['nombre_usuario']) && !empty($_POST['apellido_usuario']) && !empty($_POST['tipousuario']) && !empty($_POST['Semestre']) && !empty($_POST['clave']) && !empty($_POST['carrera']) ){
 
         require_once '../modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
@@ -10,7 +10,6 @@ if(isset($_POST['submit']) && !empty($_POST['radiobutton']) && !empty($_POST['do
         $semestre=$_POST["Semestre"];
         $clave=$_POST["clave"];
         $tipo=$_POST["tipousuario"];
-        $horario=$_POST["horario"];
         $carrera=$_POST["carrera"];
         $jornada=$_POST["radiobutton"];
         
@@ -19,7 +18,7 @@ if(isset($_POST['submit']) && !empty($_POST['radiobutton']) && !empty($_POST['do
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        $sql=$mysql->efectuarConsulta("insert into asistencia.estudiante(documento,nombres,apellidos,jornada,semestre,clave,horario_id_horario,Carrera_id_carrera,tipo_usuario_id_tipo_usuario) VALUES ('".$documento."','".$nombre."','".$apellido."','".$jornada."','".$semestre."','".$clave."','".$horario."','".$carrera."','".$tipo."')");
+        $sql=$mysql->efectuarConsulta("insert into asistencia.estudiante(documento,nombres,apellidos,jornada,semestre,clave,Carrera_id_carrera,tipo_usuario_id_tipo_usuario,estado) VALUES ('".$documento."','".$nombre."','".$apellido."','".$jornada."','".$semestre."','".$clave."','".$carrera."','".$tipo."',1)");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina

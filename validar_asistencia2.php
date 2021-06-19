@@ -43,8 +43,8 @@
         $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
         //declaracion de variables metodo post
-        $id = $_POST['vasistencia'];
-        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.materia.nombre from materia WHERE asistencia.materia.id_materia = " . $id . "");
+        $id = $_POST['selecmateria'];
+        $mostrardatos = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre from estudiante join grupo on grupo.Estudiante_id_estudiante = estudiante.id_estudiante join clase on clase.id_clase = grupo.Clase_id_clase join horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia where asistencia.materia.id_materia = " . $id . "");
         //se inicia el recorrido para mostrar los datos de la BD
         while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
             //declaracion de variables
@@ -56,6 +56,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -158,7 +159,7 @@
                             <div class="card-body">
 
                                 <div class="container" style="text-align: center">
-                                    <form id="contact" action="#" method="post">
+                                    <form id="contact" action="controlador/validar_asistencia.php" method="post">
                                         <h3>Registro de Asistencia</h3>
                                         <h4>Materia Seleccionada: <?php echo $materia ?></h4>
                                         <br>

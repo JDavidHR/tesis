@@ -43,8 +43,8 @@
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
     $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");
-    $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario");
-    $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera, asistencia.carrera.nombre from carrera");
+    //$seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario where estado = 1");
+    $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera, asistencia.carrera.nombre from carrera where estado = 1");
     //se desconecta de la base de datos
     $mysql->desconectar();
   }
@@ -185,22 +185,7 @@
                           ?>
                         </select></center>
                     </fieldset>
-                    <fieldset>
-                      <label>Horario: </label>
-                      <center><select name="horario" class="form-control col-md-6 col-md-offset-3">
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                          while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                          ?>
-                            <!--se traen los datos a mostrar en el select-->
-                            <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] ?></option>';
-                          <?php
-                          }
-                          ?>
-
-                        </select></center>
-                    </fieldset>
+                    
                     <fieldset>
                       <label>Carrera: </label>
                       <center><select name="carrera" class="form-control col-md-6 col-md-offset-3">

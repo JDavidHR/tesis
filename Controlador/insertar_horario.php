@@ -14,7 +14,7 @@ if(isset($_POST['submit']) && !empty($_POST['hora']) && !empty($_POST['aula']) &
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        $sql = $mysql->efectuarConsulta("insert into asistencia.horario(id_horario,hora,materia_id_materia,aula_id_aula) VALUES ('".$horario."','".$fecha."','".$materia."','".$aula."')");
+        $sql = $mysql->efectuarConsulta("insert into asistencia.horario(id_horario,hora,materia_id_materia,aula_id_aula,estado) VALUES ('".$horario."','".$fecha."','".$materia."','".$aula."',1)");
         //condicion donde si la consulta se hace correcto
         
         if($sql){

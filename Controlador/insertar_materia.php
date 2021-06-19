@@ -9,7 +9,7 @@ if(isset($_POST['submit']) && !empty($_POST['nombre_materia'])){
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        $sql=$mysql->efectuarConsulta("insert into asistencia.materia(nombre) VALUES ('".$materia."')");
+        $sql=$mysql->efectuarConsulta("insert into asistencia.materia(nombre,estado) VALUES ('".$materia."',1)");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
