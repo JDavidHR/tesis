@@ -44,7 +44,7 @@
     //respectiva consulta para la seleccion de usuario
     $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula where estado = 1");
     $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
-    $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario where estado = 1");
+    $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.horario.hora from horario where estado = 1");
     //se desconecta de la base de datos
     $mysql->desconectar();
   }

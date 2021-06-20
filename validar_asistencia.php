@@ -43,7 +43,7 @@
         $mysql->conectar();
         $id_estudiante = $_SESSION['idEstudiante'];
        // $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");
-        $seleccionmateria = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre, materia.id_materia from estudiante join grupo on grupo.Estudiante_id_estudiante = estudiante.id_estudiante join horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
+        $seleccionmateria = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
         //se desconecta de la base de datos
         $mysql->desconectar();
     
@@ -164,7 +164,7 @@
                                                     while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
+                                                        <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombremateria'] ?></option>
                                                     <?php
                                                     }
                                                     ?>

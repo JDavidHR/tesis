@@ -8,7 +8,7 @@ if( isset($_POST['submit']) && isset($_POST['codigo_clase'])){
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
-    $sql = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante from estudiante join grupo on grupo.Estudiante_id_estudiante =  estudiante.id_estudiante join clase on clase.id_clase = grupo.Clase_id_clase where clase.codigo = '.$codigo.'");
+    $sql = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre from estudiante join grupo on grupo.Estudiante_id_estudiante =  estudiante.id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.codigo = '.$codigo.'");
     //$sql = $mysql->efectuarConsulta("SELECT clase.codigo from clase where clase.codigo = ".$codigo."");
     //echo "la codigo es: ".$codigo;
     //Se valida si la consulta arrojo algun valor

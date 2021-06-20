@@ -44,8 +44,8 @@
 	}
 
 
-	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, horario.hora, materia.nombre, clase.dia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante JOIN horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia JOIN clase on clase.id_clase = grupo.Clase_id_clase where estudiante.id_estudiante = " . $id_estudiante . "");
-	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, clase.Docente_id_docente, docente.nombres, horario.hora, aula.nombre as nombreaula, materia.id_materia, clase.dia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante JOIN horario on horario.id_horario = grupo.Horario_id_horario join materia on materia.id_materia = horario.materia_id_materia join clase on clase.id_clase = grupo.Clase_id_clase join docente on docente.id_docente = clase.Docente_id_docente join aula on aula.id_aula = horario.aula_id_aula where estudiante.id_estudiante = " . $id_estudiante . "");
+	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, clase.hora, materia.nombre, dias.nombre as nombredia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
+	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia, docente.nombres, aula.nombre as nombreaula, dias.nombre as nombredia, clase.hora FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join docente on docente.id_docente = clase.Docente_id_docente join aula on aula.id_aula = clase.Aula_id_aula join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
 
 	//se desconecta de la base de datos
 	$mysql->desconectar();
@@ -236,21 +236,19 @@
 											<tr>
 												<th scope="col">Hora</th>
 												<th scope="col">Materia</th>
-												<th scope="col">Fecha</th>
 												<th scope="col">Dia</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
 											while ($valores2 = mysqli_fetch_assoc($dhorario)) {
-												$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
-												$dia = $dias[(date('N', strtotime($valores2['dia']))) - 1];
+												//$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+												//$dia = $dias[(date('N', strtotime($valores2['dia']))) - 1];
 											?>
 												<tr>
 													<th scope="row"><?php echo $valores2['hora'] ?></th>
 													<td><?php echo $valores2['nombre'] ?></td>
-													<td><?php echo $valores2['dia'] ?></td>
-													<td><?php echo $dia ?></td>
+													<td><?php echo $valores2['nombredia'] ?></td>
 												</tr>
 											<?php
 											}
@@ -275,7 +273,7 @@
 												<th scope="col">Asignatura</th>
 												<th scope="col">Docente</th>
 												<th scope="col">Aula</th>
-												<th scope="col">Fecha</th>
+												<th scope="col">Dia</th>
 												<th scope="col">Hora</th>
 											</tr>
 										</thead>
@@ -288,7 +286,7 @@
 													<td><?php echo $valores3['nombremateria'] ?></td>
 													<td><?php echo $valores3['nombres'] ?></td>
 													<td><?php echo $valores3['nombreaula'] ?></td>
-													<td><?php echo $valores3['dia'] ?></td>
+													<td><?php echo $valores3['nombredia'] ?></td>
 													<td><?php echo $valores3['hora'] ?></td>
 											</tr>
 										<?php
