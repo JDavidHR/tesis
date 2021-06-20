@@ -4,11 +4,11 @@ if( isset($_POST['submit']) && isset($_POST['usuario'])){
     require_once '../modelo/MySQL.php';
     
     
-    $horario=$_POST['usuario'];//Encriptada
+    $clase=$_POST['usuario'];//Encriptada
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
-    $sql = $mysql->efectuarConsulta("UPDATE asistencia.horario SET estado = 0 WHERE id_horario = ".$horario."");
+    $sql = $mysql->efectuarConsulta("UPDATE asistencia.clase SET estado = 0 WHERE id_clase = ".$clase."");
     //Se valida si la consulta arrojo algun valor
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina

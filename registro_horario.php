@@ -43,8 +43,10 @@
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
     $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula where estado = 1");
+    $selecciondia = $mysql->efectuarConsulta("SELECT asistencia.dias.id_dia, asistencia.dias.nombre as nombredia from dias");
     $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
-    $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.horario.hora from horario where estado = 1");
+    $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.estado from grupo where estado = 1");
+    $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres as nombredocente from docente where estado = 1");
     //se desconecta de la base de datos
     $mysql->desconectar();
   }
@@ -158,18 +160,37 @@
                     <h3>Registro del Horario</h3>
                     <h4>Recuerda llenar todos los campos</h4>
                     <fieldset>
+                      <label>Selecciona el dia: </label><br>
+                      <select class="form-control " name="dia" required>
+                        <?php
+                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                        while ($resultado = mysqli_fetch_assoc($selecciondia)) {
+                        ?>
+                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                          <option value="<?php echo $resultado['id_dia'] ?>"><?php echo $resultado['nombredia'] ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
+                    </fieldset>
+                    <fieldset>
                       <label>Hora Estimada: </label><br>
                       <input placeholder="hora" type="time" tabindex="1" autofocus name="hora" class="form-control" min="07:00:00" max="18:00:00" step="1">
                     </fieldset>
                     <br>
                     <fieldset>
-                      <select class="form-control " name="materia" required>
+                    <input  placeholder="Codigo de la clase" type="text" tabindex="2" name="codigo">
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                      <label>Selecciona el docente: </label><br>
+                      <select class="form-control " name="nombre_docente" required>
                         <?php
                         //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
+                        while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
                         ?>
                           <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
+                          <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente'] ?></option>
                         <?php
                         }
                         ?>
@@ -191,15 +212,30 @@
                     </fieldset>
                     <br>
                     <fieldset>
-                      <label>Horario: </label>
-                      <select name="horario" class="form-control">
+                      <select class="form-control " name="materia" required>
+                        <?php
+                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                        while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
+                        ?>
+                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                          <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
+                    </fieldset>
+                    <br>
+                    
+                    <fieldset>
+                      <label>Grupo: </label>
+                      <select name="grupo" class="form-control">
                         <option value="0" disabled="">Seleccione:</option>
                         <?php
                         //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                        while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
+                        while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
                         ?>
                           <!--se traen los datos a mostrar en el select-->
-                          <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] . " - Hora: " . $valores1['hora'] ?></option>';
+                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['estado'] ?></option>
                         <?php
                         }
                         ?>

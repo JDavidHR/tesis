@@ -42,7 +42,7 @@
         //se conecta a la base de datos
         $mysql->conectar();
         //respectiva consulta para la seleccion de usuario
-        $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario where asistencia.horario.estado = 1");
+        $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora from clase where asistencia.clase.estado = 1");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -164,7 +164,7 @@
                                                     while ($resultado = mysqli_fetch_assoc($seleccionhorario)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_horario'] ?>"><?php echo $resultado['id_horario'] . " - Hora: " . $resultado['hora'] ?></option>
+                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['id_clase'] . " - Hora: " . $resultado['hora'] ?></option>
                                                     <?php
                                                     }
                                                     ?>
