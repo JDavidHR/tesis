@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-06-2021 a las 06:05:47
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.2.32
+-- Tiempo de generación: 21-06-2021 a las 00:05:21
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -194,6 +194,7 @@ INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, 
 
 CREATE TABLE `grupo` (
   `id_grupo` int(11) NOT NULL,
+  `nombre` varchar(45) CHARACTER SET utf8 NOT NULL,
   `Estudiante_id_estudiante` int(11) NOT NULL,
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -202,8 +203,9 @@ CREATE TABLE `grupo` (
 -- Volcado de datos para la tabla `grupo`
 --
 
-INSERT INTO `grupo` (`id_grupo`, `Estudiante_id_estudiante`, `estado`) VALUES
-(1, 1, 1);
+INSERT INTO `grupo` (`id_grupo`, `nombre`, `Estudiante_id_estudiante`, `estado`) VALUES
+(1, 'grupo 1 dia', 1, 0),
+(1, 'grupo 1 dia', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -378,12 +380,6 @@ ALTER TABLE `docente`
 --
 ALTER TABLE `estudiante`
   MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
