@@ -43,7 +43,7 @@
     $mysql->conectar();
     $id_docente = $_SESSION['idDocente'];
     //respectiva consulta para la seleccion de usuario
-    $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = $id_docente");  
+    $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre as nombremateria, materia.id_materia from docente join clase on clase.Docente_id_docente = docente.id_docente join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . "");  
     //se desconecta de la base de datos
     $mysql->desconectar();
   
@@ -166,13 +166,13 @@
                     <h4>Registrar asistencia a la clase de:</h4>
                     <br>
                     <fieldset>
-                      <select class="form-control " name="materia" required>
+                      <select class="form-control " name="materiaselect" required>
                         <?php
                         //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                         while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
                         ?>
                           <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
+                          <option value="<?php echo $resultado['id_materia']?>"><?php echo $resultado['nombremateria'] ?></option>
                         <?php
                         }
                         ?>

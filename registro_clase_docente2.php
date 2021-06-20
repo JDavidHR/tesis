@@ -42,10 +42,17 @@
   //se conecta a la base de datos
   $mysql->conectar();
   $id_docente = $_SESSION['idDocente'];
-  $smateria = $_POST['materia'];
+  $id = $_POST['materiaselect'];
   //respectiva consulta para la seleccion de usuario
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, grupo.id_grupo, materia.id_materia, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = $smateria");
+  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $id . "");
   //se inicia el recorrido para mostrar los datos de la BD
+
+  while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
+    //declaracion de variables
+    $smateria = $valores1['nombre'];
+  }
+
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = ". $id ."");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -176,7 +183,7 @@
                         while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
                         ?>
                           <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['id_grupo'] ?></option>
+                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['nombre'] ?></option>
                         <?php
                         }
                         ?>
