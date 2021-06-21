@@ -51,12 +51,12 @@
     $tipo_usuario = $valores1['nombre'];
   }
   //respectiva consulta para la seleccion de usuario
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $id . "");
+  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.materia.nombre as nombremateria, asistencia.materia.id_materia from docente join clase on asistencia.clase.Docente_id_docente = asistencia.docente.id_docente join grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo join materia on materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.Materia_id_materia = ". $id ." GROUP BY asistencia.materia.id_materia");
   //se inicia el recorrido para mostrar los datos de la BD
 
   while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
     //declaracion de variables
-    $smateria = $valores1['nombre'];
+    $smateria = $valores1['nombremateria'];
   }
 
   $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . " GROUP BY asistencia.grupo.id_grupo");
@@ -214,8 +214,10 @@
                   <form id="contact" action="registro_clase_docente3.php" method="post">
                     <?php echo "Materia seleccionada: "?>
                     <br>
-                    <select class="form-control " id="materianombre" name="materianombre" required >
-                      <option value="<?php echo $id ?>"><?php echo $smateria?></option>
+                    <select class="form-control " id="materianombre" name="materianombre" required>
+                      <option value="<?php echo $id ?>"><?php echo $smateria ?></option>
+                      
+                      <!--<option value="<?//php echo $id ?>"><?//php echo $smateria?></option>-->
                     </select>
                     <br>
                     <?php echo "Grupos disponibles: "?>

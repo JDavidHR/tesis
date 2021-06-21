@@ -50,12 +50,12 @@
   }
 
 
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $id . "");
+  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . "");
   //se inicia el recorrido para mostrar los datos de la BD
 
   while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
     //declaracion de variables
-    $smateria3 = $valores1['nombre'];
+    $nombremateria = $valores1['nombre'];
   }
   
 
@@ -66,7 +66,7 @@
     $grupo = $valores1['nombregrupo'];
   }
 
-  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.id_clase = " . $id . " ");
+  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . " ");
   while ($valores1 = mysqli_fetch_assoc($codigoclase)) {
     //declaracion de variables
     $codigo = $valores1['codigo'];
@@ -157,7 +157,7 @@
             <h4 class="page-title">Bienvenido</h4>
             <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
-            <?php echo " Materia: "  . $smateria3 ?>
+            <?php echo " Materia: "  . $nombremateria ?>
             <br>
             <?php echo " grupo: "  . $grupo ?>
             <br>
@@ -224,9 +224,9 @@
                   </div>
                 </div>
               
-                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
+                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="#" method="post">
-                    <h3><?php echo "Clase: " . $smateria3 . "<br>Codigo generado: " . $codigo ?></h3>
+                    <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
                     <!--<input name="materianombre" disabled class="form-control" value="<?//php echo $smateria ?>">
 
                     <input disabled class="form-control" value="<?//php echo $smateria ?>">-->
