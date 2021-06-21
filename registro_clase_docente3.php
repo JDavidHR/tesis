@@ -38,7 +38,7 @@
 
   
   $id_docente = $_SESSION['idDocente'];
-  echo $smateria3 = $_POST['materianombre'];
+  $smateria3 = $_POST['materianombre'];
   $id = $_POST['selectgrupo'];
 
 
@@ -48,19 +48,28 @@
     $nombres = $valores1['nombres'];
     $tipo_usuario = $valores1['nombre'];
   }
-  //respectiva consulta para la seleccion de usuario
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where materia.nombre = " . $smateria3 . "");
+
+
+  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $id . "");
   //se inicia el recorrido para mostrar los datos de la BD
 
   while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
     //declaracion de variables
     $smateria3 = $valores1['nombre'];
   }
+  
 
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Grupo_id_grupo = " . $id . "");
+
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Grupo_id_grupo = " . $id . " GROUP BY asistencia.clase.Grupo_id_grupo");
   while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
     //declaracion de variables
     $grupo = $valores1['nombregrupo'];
+  }
+
+  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.id_clase = " . $id . " ");
+  while ($valores1 = mysqli_fetch_assoc($codigoclase)) {
+    //declaracion de variables
+    $codigo = $valores1['codigo'];
   }
 
   //se desconecta de la base de datos
@@ -185,9 +194,8 @@
             <div class="card">
               <div class="card-body">
 
-
+                
                 <div class="row">
-                  <!-- column -->
                   <div class="col-12">
                     <div class="card">
                       <center>
@@ -215,19 +223,20 @@
                     </div>
                   </div>
                 </div>
-
+              
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="#" method="post">
-                    <h4>Codigo generado clase de:</h4>
-                    <!--<label><?php echo "codigo:" . $codigo ?></label>-->
-                    <input disabled class="form-control" value="<?php echo $smateria ?>">
+                    <h3><?php echo "Clase: " . $smateria3 . "<br>Codigo generado: " . $codigo ?></h3>
+                    <!--<input name="materianombre" disabled class="form-control" value="<?//php echo $smateria ?>">
+
+                    <input disabled class="form-control" value="<?//php echo $smateria ?>">-->
                     <br>
                     <fieldset>
                       <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
                     </fieldset>
                     <br>
                     <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Generar nuevo</button>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Generar nuevo</button>
                     </fieldset>
                   </form>
                 </div>

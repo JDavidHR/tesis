@@ -59,7 +59,7 @@
     $smateria = $valores1['nombre'];
   }
 
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . "");
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . " GROUP BY asistencia.grupo.id_grupo");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -212,8 +212,13 @@
 
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="registro_clase_docente3.php" method="post">
-                    <h4>Grupos disponibles en la materia:</h4>
-                    <input name="materianombre" disabled class="form-control" value="<?php echo $smateria ?>">
+                    <?php echo "Materia seleccionada: "?>
+                    <br>
+                    <select class="form-control " id="materianombre" name="materianombre" required >
+                      <option value="<?php echo $id ?>"><?php echo $smateria?></option>
+                    </select>
+                    <br>
+                    <?php echo "Grupos disponibles: "?>
                     <br>
                     <fieldset>
                       <select class="form-control " name="selectgrupo" required>
@@ -222,7 +227,7 @@
                         while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
                         ?>
                           <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['nombregrupo'] ?></option>
+                          <option value="<?php echo $resultado['Grupo_id_grupo'] ?>"><?php echo $resultado['nombregrupo'] ?></option>
                         <?php
                         }
                         ?>
