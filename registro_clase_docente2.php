@@ -43,6 +43,13 @@
   $mysql->conectar();
   $id_docente = $_SESSION['idDocente'];
   $id = $_POST['materiaselect'];
+
+  $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
+  while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
+    $documento = $valores1['documento'];
+    $nombres = $valores1['nombres'];
+    $tipo_usuario = $valores1['nombre'];
+  }
   //respectiva consulta para la seleccion de usuario
   $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $id . "");
   //se inicia el recorrido para mostrar los datos de la BD
@@ -52,7 +59,7 @@
     $smateria = $valores1['nombre'];
   }
 
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = ". $id ."");
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . "");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -172,9 +179,41 @@
             <div class="card">
               <div class="card-body">
 
+
+                <div class="row">
+                  <!-- column -->
+                  <div class="col-12">
+                    <div class="card">
+                      <center>
+                        <div class="card-body col-md-6 col-md-offset-3">
+                          <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Documento</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Tipo de usuario</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row"><?php echo $documento ?></th>
+                                <td><?php echo $nombres ?></td>
+                                <td><?php echo $tipo_usuario ?></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          </tbody>
+                          </table>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="#" method="post">
-                    <h4>Grupos disponibles en la materia: <?php $smateria ?></h4>
+                  <form id="contact" action="registro_clase_docente3.php" method="post">
+                    <h4>Grupos disponibles en la materia:</h4>
+                    <input name="materianombre" disabled class="form-control" value="<?php echo $smateria ?>">
                     <br>
                     <fieldset>
                       <select class="form-control " name="grupo" required>
@@ -183,7 +222,7 @@
                         while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
                         ?>
                           <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['nombre'] ?></option>
+                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['nombregrupo'] ?></option>
                         <?php
                         }
                         ?>

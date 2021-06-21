@@ -23,12 +23,6 @@
 
   <link href="css/registro.css" rel="stylesheet" media="all">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
@@ -41,7 +35,12 @@
   $mysql = new MySQL;
   //se conecta a la base de datos
   $mysql->conectar();
+
+  
   $id_docente = $_SESSION['idDocente'];
+  $smateria3 = $_POST['materianombre'];
+  $id = $_POST['grupo'];
+
 
   $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
   while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
@@ -50,7 +49,20 @@
     $tipo_usuario = $valores1['nombre'];
   }
   //respectiva consulta para la seleccion de usuario
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre as nombremateria, materia.id_materia from docente join clase on clase.Docente_id_docente = docente.id_docente join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . "");
+  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where materia.nombre = " . $smateria3 . "");
+  //se inicia el recorrido para mostrar los datos de la BD
+
+  while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
+    //declaracion de variables
+    $smateria3 = $valores1['nombre'];
+  }
+
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . "");
+  while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
+    //declaracion de variables
+    $grupo = $valores1['nombregrupo'];
+  }
+
   //se desconecta de la base de datos
   $mysql->desconectar();
 
@@ -135,6 +147,10 @@
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
             <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <br>
+            <?php echo " Materia: "  . $smateria3 ?>
+            <br>
+            <?php echo " grupo: "  . $grupo ?>
           </div>
 
         </div>
@@ -167,6 +183,7 @@
             <div class="card">
               <div class="card-body">
 
+
                 <div class="row">
                   <!-- column -->
                   <div class="col-12">
@@ -196,27 +213,19 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="registro_clase_docente2.php" method="post">
-                    <h4>Registrar asistencia a la clase de:</h4>
+                  <form id="contact" action="#" method="post">
+                    <h4>Codigo generado clase de:</h4>
+                    <!--<label><?php echo "codigo:" . $codigo ?></label>-->
+                    <input disabled class="form-control" value="<?php echo $smateria ?>">
                     <br>
                     <fieldset>
-                      <select class="form-control " name="materiaselect" required>
-                        <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
-                        ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombremateria'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select>
+                      <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
                     </fieldset>
                     <br>
                     <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Generar nuevo</button>
                     </fieldset>
                   </form>
                 </div>
