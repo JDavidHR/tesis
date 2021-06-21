@@ -216,7 +216,7 @@
                     <input name="materianombre" disabled class="form-control" value="<?php echo $smateria ?>">
                     <br>
                     <fieldset>
-                      <select class="form-control " name="grupo" required>
+                      <select class="form-control " name="selectgrupo" required>
                         <?php
                         //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                         while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {

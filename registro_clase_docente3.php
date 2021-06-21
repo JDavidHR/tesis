@@ -38,8 +38,8 @@
 
   
   $id_docente = $_SESSION['idDocente'];
-  $smateria3 = $_POST['materianombre'];
-  $id = $_POST['grupo'];
+  echo $smateria3 = $_POST['materianombre'];
+  $id = $_POST['selectgrupo'];
 
 
   $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
@@ -57,7 +57,7 @@
     $smateria3 = $valores1['nombre'];
   }
 
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . "");
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Grupo_id_grupo = " . $id . "");
   while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
     //declaracion de variables
     $grupo = $valores1['nombregrupo'];
@@ -151,6 +151,8 @@
             <?php echo " Materia: "  . $smateria3 ?>
             <br>
             <?php echo " grupo: "  . $grupo ?>
+            <br>
+            <?php echo " ID grupo: "  . $id ?>
           </div>
 
         </div>
