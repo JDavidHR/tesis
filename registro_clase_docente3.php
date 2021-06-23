@@ -50,12 +50,13 @@
   }
 
 
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . "");
+  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre, materia.id_materia from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . "");
   //se inicia el recorrido para mostrar los datos de la BD
 
   while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
     //declaracion de variables
     $nombremateria = $valores1['nombre'];
+    $idMateria = $valores1['id_materia'];
   }
   
 
@@ -159,6 +160,8 @@
             <br>
             <?php echo " Materia: "  . $nombremateria ?>
             <br>
+            <?php echo " ID Materia: "  . $idMateria ?>
+            <br>
             <?php echo " grupo: "  . $grupo ?>
             <br>
             <?php echo " ID grupo: "  . $id ?>
@@ -225,8 +228,14 @@
                 </div>
               
                 <div class="container col-md-7 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="#" method="post">
+                  <form id="contact" action="Controlador/newcode.php" method="post">
                     <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
+                    <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
+                      <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
+                      
+                      <!--<option value="<?//php echo $id ?>"><?//php echo $smateria?></option>-->
+                    </select>
+                    <br>
                     <!--<input name="materianombre" disabled class="form-control" value="<?//php echo $smateria ?>">
 
                     <input disabled class="form-control" value="<?//php echo $smateria ?>">-->
