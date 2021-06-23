@@ -48,12 +48,13 @@
     $tipo_usuario = $valores1['nombre'];
   }
 
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo, clase.hora FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Docente_id_docente = " . $idgrupo . " GROUP BY asistencia.clase.hora");
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo, clase.hora FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Docente_id_docente = " . $idgrupo . "");
   //se inicia el recorrido para mostrar los datos de la BD
 
   while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
     //declaracion de variables
     $nombregrupo = $valores1['nombregrupo'];
+    //$clasehora = $valores1['hora'];
   }
   //respectiva consulta para la seleccion de usuario
   //$seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.materia.nombre as nombremateria, asistencia.materia.id_materia from docente join clase on asistencia.clase.Docente_id_docente = asistencia.docente.id_docente join grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo join materia on materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.Materia_id_materia = ". $id ." GROUP BY asistencia.materia.id_materia");
