@@ -16,7 +16,7 @@ if(isset($_POST['submit']) && !empty($_POST['newcode'])){
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
-            echo"<script type=\"text/javascript\">alert('Se actualizo correctamente'); window.location='../index_administrador.php';</script>";
+            echo"<script type=\"text/javascript\">alert('Se actualizo correctamente'); window.location='../index_docente.php';</script>";
 
         }else{
             //mensaje de salida en caso de que la consulta falle
