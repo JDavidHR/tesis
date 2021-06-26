@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registro Horario</title>
+  <title>Clases Vistas</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -22,6 +22,7 @@
   <link href="css/weather-icons.min.css" rel="stylesheet">
 
   <link href="css/registro.css" rel="stylesheet" media="all">
+
 
 </head>
 
@@ -35,12 +36,8 @@
   $mysql = new MySQL;
   //se conecta a la base de datos
   $mysql->conectar();
-
-  
   $id_docente = $_SESSION['idDocente'];
-  $smateria3 = $_POST['materianombre'];
-  $id = $_POST['selectgrupo'];
-
+  //$id = $_POST['materiaselect'];
 
   $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
   while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
@@ -48,30 +45,16 @@
     $nombres = $valores1['nombres'];
     $tipo_usuario = $valores1['nombre'];
   }
-
-
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre, materia.id_materia from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . "");
+  //respectiva consulta para la seleccion de usuario
+  //$seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.materia.nombre as nombremateria, asistencia.materia.id_materia from docente join clase on asistencia.clase.Docente_id_docente = asistencia.docente.id_docente join grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo join materia on materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.Materia_id_materia = ". $id ." GROUP BY asistencia.materia.id_materia");
   //se inicia el recorrido para mostrar los datos de la BD
 
-  while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
+  //while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
     //declaracion de variables
-    $nombremateria = $valores1['nombre'];
-    $idMateria = $valores1['id_materia'];
-  }
-  
+    //$smateria = $valores1['nombremateria'];
+  //}
 
-
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Grupo_id_grupo = " . $id . " GROUP BY asistencia.clase.Grupo_id_grupo");
-  while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
-    //declaracion de variables
-    $grupo = $valores1['nombregrupo'];
-  }
-
-  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . " ");
-  while ($valores1 = mysqli_fetch_assoc($codigoclase)) {
-    //declaracion de variables
-    $codigo = $valores1['codigo'];
-  }
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo, clase.hora FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Docente_id_docente = " . $id_docente . " GROUP BY asistencia.clase.hora");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -157,14 +140,6 @@
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
             <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
-            <br>
-            <?php echo " Materia: "  . $nombremateria ?>
-            <br>
-            <?php echo " ID Materia: "  . $idMateria ?>
-            <br>
-            <?php echo " grupo: "  . $grupo ?>
-            <br>
-            <?php echo " ID grupo: "  . $id ?>
           </div>
 
         </div>
@@ -197,8 +172,9 @@
             <div class="card">
               <div class="card-body">
 
-                
+
                 <div class="row">
+                  <!-- column -->
                   <div class="col-12">
                     <div class="card">
                       <center>
@@ -226,26 +202,27 @@
                     </div>
                   </div>
                 </div>
-              
-                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="Controlador/newcode.php" method="post">
-                    <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
-                    <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
-                      <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
-                      
-                      <!--<option value="<?//php echo $id ?>"><?//php echo $smateria?></option>-->
-                    </select>
-                    <br>
-                    <!--<input name="materianombre" disabled class="form-control" value="<?//php echo $smateria ?>">
 
-                    <input disabled class="form-control" value="<?//php echo $smateria ?>">-->
+                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
+                  <form id="contact" action="clases_vistas2.php" method="post">
+                    <?php echo "Grupos disponibles: "?>
                     <br>
                     <fieldset>
-                      <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
+                      <select class="form-control " name="selectgrupo" required>
+                        <?php
+                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                        while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
+                        ?>
+                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                          <option value="<?php echo $resultado['Grupo_id_grupo'] ?>"><?php echo $resultado['nombregrupo'] ?><?php echo " - " . $resultado['hora'] ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
                     </fieldset>
                     <br>
                     <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Generar nuevo</button>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
                     </fieldset>
                   </form>
                 </div>

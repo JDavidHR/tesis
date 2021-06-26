@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registro Horario</title>
+  <title>Clases Vistas</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -22,6 +22,7 @@
   <link href="css/weather-icons.min.css" rel="stylesheet">
 
   <link href="css/registro.css" rel="stylesheet" media="all">
+
 
 </head>
 
@@ -35,12 +36,10 @@
   $mysql = new MySQL;
   //se conecta a la base de datos
   $mysql->conectar();
-
-  
   $id_docente = $_SESSION['idDocente'];
-  $smateria3 = $_POST['materianombre'];
-  $id = $_POST['selectgrupo'];
-
+  $idgrupo = $_POST['selectgrupo'];
+  
+  //$id = $_POST['materiaselect'];
 
   $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
   while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
@@ -49,29 +48,24 @@
     $tipo_usuario = $valores1['nombre'];
   }
 
-
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, materia.nombre, materia.id_materia from docente join clase on clase.Docente_id_docente = docente.id_docente join grupo on grupo.id_grupo = clase.Grupo_id_grupo join materia on materia.id_materia = clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . "");
+  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo, clase.hora FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Docente_id_docente = " . $idgrupo . "");
   //se inicia el recorrido para mostrar los datos de la BD
 
-  while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
-    //declaracion de variables
-    $nombremateria = $valores1['nombre'];
-    $idMateria = $valores1['id_materia'];
-  }
-  
-
-
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Grupo_id_grupo = " . $id . " GROUP BY asistencia.clase.Grupo_id_grupo");
   while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
     //declaracion de variables
-    $grupo = $valores1['nombregrupo'];
+    $nombregrupo = $valores1['nombregrupo'];
+    //$clasehora = $valores1['hora'];
   }
+  //respectiva consulta para la seleccion de usuario
+  //$seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.materia.nombre as nombremateria, asistencia.materia.id_materia from docente join clase on asistencia.clase.Docente_id_docente = asistencia.docente.id_docente join grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo join materia on materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.Materia_id_materia = ". $id ." GROUP BY asistencia.materia.id_materia");
+  //se inicia el recorrido para mostrar los datos de la BD
 
-  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . " ");
-  while ($valores1 = mysqli_fetch_assoc($codigoclase)) {
-    //declaracion de variables
-    $codigo = $valores1['codigo'];
-  }
+  //while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
+  //declaracion de variables
+  //$smateria = $valores1['nombremateria'];
+  //}
+
+  //$selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo, clase.hora FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Docente_id_docente = " . $id_docente . " GROUP BY asistencia.clase.hora");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -158,13 +152,9 @@
             <h4 class="page-title">Bienvenido</h4>
             <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
-            <?php echo " Materia: "  . $nombremateria ?>
+            <?php echo "Nombre grupo: " . $nombregrupo ?>
             <br>
-            <?php echo " ID Materia: "  . $idMateria ?>
-            <br>
-            <?php echo " grupo: "  . $grupo ?>
-            <br>
-            <?php echo " ID grupo: "  . $id ?>
+            <?php echo "ID grupo: " . $idgrupo  ?>
           </div>
 
         </div>
@@ -197,8 +187,9 @@
             <div class="card">
               <div class="card-body">
 
-                
+
                 <div class="row">
+                  <!-- column -->
                   <div class="col-12">
                     <div class="card">
                       <center>
@@ -226,73 +217,84 @@
                     </div>
                   </div>
                 </div>
-              
-                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="Controlador/newcode.php" method="post">
-                    <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
-                    <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
-                      <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
-                      
-                      <!--<option value="<?//php echo $id ?>"><?//php echo $smateria?></option>-->
-                    </select>
-                    <br>
-                    <!--<input name="materianombre" disabled class="form-control" value="<?//php echo $smateria ?>">
 
-                    <input disabled class="form-control" value="<?//php echo $smateria ?>">-->
-                    <br>
-                    <fieldset>
-                      <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Generar nuevo</button>
-                    </fieldset>
-                  </form>
+                <center><h3>Clase vista el dia de: <?php echo $nombregrupo ?></h3>
+                <label>Estudiantes asistidos a la clase:</label></center>
+
+                <div class="col-12">
+                  <div class="card">
+                    <center>
+                      <div class="card-body col-md-6 col-md-offset-3">
+                        <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Hora</th>
+                              <th scope="col">Documento</th>
+                              <th scope="col">Nombre</th>
+                              <th scope="col">Estatus</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><?php   ?></th>
+                              <td><?php   ?></td>
+                              <td><?php  ?></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        </tbody>
+                        </table>
+                      </div>
+                    </center>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <footer class="footer text-center">
-          All Rights Reserved by asistencias COTECNOVA
-        </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
       </div>
-      <!-- ============================================================== -->
-      <!-- End Page wrapper  -->
-      <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
-    <!-- End Wrapper -->
+    <!-- End Container fluid  -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
-    <!-- All Jquery -->
+    <!-- footer -->
     <!-- ============================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/umd/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!--chartis chart-->
-    <script src="js/chartist.min.js"></script>
-    <script src="js/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/dashboard1.js"></script>
+    <footer class="footer text-center">
+      All Rights Reserved by asistencias COTECNOVA
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Page wrapper  -->
+  <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Wrapper -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- All Jquery -->
+  <!-- ============================================================== -->
+  <script src="js/jquery.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="js/umd/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- slimscrollbar scrollbar JavaScript -->
+  <script src="js/sparkline.js"></script>
+  <!--Wave Effects -->
+  <script src="js/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="js/sidebarmenu.js"></script>
+  <!--Custom JavaScript -->
+  <script src="js/custom.min.js"></script>
+  <!--This page JavaScript -->
+  <!--chartis chart-->
+  <script src="js/chartist.min.js"></script>
+  <script src="js/chartist-plugin-tooltip.min.js"></script>
+  <script src="js/dashboard1.js"></script>
 </body>
 
 </html>
