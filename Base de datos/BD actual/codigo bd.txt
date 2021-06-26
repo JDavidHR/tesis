@@ -190,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `asistencia`.`Clase` (
   `Aula_id_aula` INT(11) NOT NULL,
   `Materia_id_materia` INT(11) NOT NULL,
   `Grupo_id_grupo` INT(11) NOT NULL,
+  `estado` INT(11) NOT NULL,
   PRIMARY KEY (`id_clase`, `Dias_id_dia`, `Docente_id_docente`, `Aula_id_aula`, `Materia_id_materia`, `Grupo_id_grupo`),
   UNIQUE INDEX `id_UNIQUE` (`id_clase` ASC) ,
   INDEX `fk_Clase_Docente1_idx` (`Docente_id_docente` ASC) ,
