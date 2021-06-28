@@ -153,27 +153,50 @@
             <div class="card">
               <div class="card-body">
 
-                <div class="container col-md-8 col-md-offset-3" style="text-align: center">
+                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="Controlador/insertar_usuario.php" method="post">
-                    <h3>Registro del Usuario</h3>
+                    <h3>Registro del Estudiante</h3>
                     <h4>Recuerda llenar todos los campos</h4>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Documento</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Documento" class="form-control" type="text" name="documento_usuario" id="inputText">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Nombres</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Nombres" class="form-control" type="text" name="nombre_usuario" id="inputText">
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Apellidos</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Apellidos" class="form-control" type="text" name="apellido_usuario" id="inputText">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Semestre</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Semestre" class="form-control" type="text" name="Semestre" id="inputText">
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Clave</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Clave" class="form-control" type="text" name="clave" id="inputText">
+                      </div>
+                    </div>
+
                     <fieldset>
-                      <input class="col-md-6 col-md-offset-3" placeholder="Documento" type="text" tabindex="1" autofocus name="documento_usuario">
-                    </fieldset>
-                    <fieldset>
-                      <input class="col-md-6 col-md-offset-3" placeholder="Nombres" type="text" tabindex="2" name="nombre_usuario">
-                    </fieldset>
-                    <fieldset>
-                      <input class="col-md-6 col-md-offset-3" placeholder="Apellidos" type="text" tabindex="3" name="apellido_usuario">
-                    </fieldset>
-                    <fieldset>
-                      <input class="col-md-6 col-md-offset-3" placeholder="Semestre" type="text" tabindex="4" name="Semestre">
-                    </fieldset>
-                    <fieldset>
-                      <input class="col-md-6 col-md-offset-3" placeholder="Clave" type="text" tabindex="5" name="clave">
-                    </fieldset>
-                    <fieldset>
-                      <center><select class="form-control col-md-6 col-md-offset-3" name="tipousuario" required>
+                      <label>Tipo de usuario: </label>
+                      <center>
+                        <select class="form-control col-md-8 col-md-offset-1" name="tipousuario" required>
                           <?php
                           //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                           while ($resultado = mysqli_fetch_assoc($seleccionUsuario)) {
@@ -183,12 +206,15 @@
                           <?php
                           }
                           ?>
-                        </select></center>
+                        </select>
+                      </center>
                     </fieldset>
                     
+                    <br>
                     <fieldset>
                       <label>Carrera: </label>
-                      <center><select name="carrera" class="form-control col-md-6 col-md-offset-3">
+                      <center>
+                        <select name="carrera" class="form-control col-md-8 col-md-offset-1">
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
                           //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
@@ -200,26 +226,39 @@
                           }
                           ?>
 
-                        </select></center>
-                    </fieldset>
-                    <fieldset>
-                      <label>Jornada: </label><br>
-                      <input type="radio" name="radiobutton" placeholder="diurna" value="Diurna" id="diurna">Diurna
-                      <input type="radio" name="radiobutton" placeholder="nocturna" value="Nocturna" id="nocturna">Nocturna
-                      <input type="radio" name="radiobutton" placeholder="sabatina" value="Sabatina" id="sabatina">Sabatina
+                        </select>
+                      </center>
                     </fieldset>
                     <br>
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
-                    </fieldset>
 
+                    <fieldset>
+                      <label>Jornada: </label><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna">
+                        <label class="form-check-label" for="inlineRadio1">Diurna</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Nocturna">
+                        <label class="form-check-label" for="inlineRadio2">Nocturna</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Sabatina">
+                        <label class="form-check-label" for="inlineRadio3">Sabatina</label>
+                      </div>
+                    </fieldset>
+                    <br>
+
+                    <fieldset>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
+                    </fieldset>
+                    <br>
+
+                    <div class="text-center"> 
+                      <a class="btn" style="background-color: #037537;color: white" href="update_estudiante.php" role="button">Modificar Estudiante</a>
+                      <a class="btn" style="background-color: #037537;color: white" href="delete_estudiante.php" role="button">Eliminar Estudiante</a>
+                    </div>
                   </form>
-                  <fieldset>
-                    <center><a href="update_estudiante.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Usuario</button></a></center>
-                  </fieldset>
-                  <fieldset>
-                    <center><a href="delete_estudiante.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Usuario</button></a></center>
-                  </fieldset>
+
                 </div>
               </div>
             </div>

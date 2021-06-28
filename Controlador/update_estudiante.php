@@ -12,7 +12,7 @@
         $tipo=$_POST["tipousuario"];
       
         $carrera=$_POST["carrera"];
-        $jornada=$_POST["radiobutton"];
+        $jornada=$_POST["inlineRadioOptions"];
         $ides = $_GET['id']; 
         
 

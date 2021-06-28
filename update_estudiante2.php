@@ -171,32 +171,51 @@
 
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="Controlador/update_estudiante.php?id=<?php echo $id_usuario; ?>" method="post">
-                    <h3>Update del Usuario</h3>
+                    <h3>Update del Estudiante</h3>
                     <h4>Recuerda llenar todos los campos</h4>
-                    <fieldset>
-                      <label>ID Usuario</label>
-                      <input placeholder="ID usuario" type="text" tabindex="1" disabled="" name="id" value="<?php echo $id_usuario ?>">
-                    </fieldset>
-                    <fieldset>
-                      <label>Documento</label>
-                      <input placeholder="Documento" type="text" tabindex="1" name="documento_usuario" value="<?php echo $doc ?>">
-                    </fieldset>
-                    <fieldset>
-                      <label>Nombres</label>
-                      <input placeholder="Nombres" type="text" tabindex="2" name="nombre_usuario" value="<?php echo $nombre ?>">
-                    </fieldset>
-                    <fieldset>
-                      <label>Apellidos</label>
-                      <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_usuario" value="<?php echo $apellido ?>">
-                    </fieldset>
-                    <fieldset>
-                      <label>Semestre</label>
-                      <input placeholder="Semestre" type="text" tabindex="4" name="Semestre" value="<?php echo $semestre ?>">
-                    </fieldset>
-                    <fieldset>
-                      <label>Clave</label>
-                      <input placeholder="Clave" type="text" tabindex="5" name="clave" value="<?php echo $clave ?>">
-                    </fieldset>
+                    
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">ID del Estudiante</label>
+                      <div class="col-sm-9">
+                        <input placeholder="ID del estudiante" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_usuario ?>">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Documento</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Documento" class="form-control" type="text" name="documento_usuario" id="inputText" value="<?php echo $doc ?>">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Nombres</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Nombres" class="form-control" type="text" name="nombre_usuario" id="inputText" value="<?php echo $nombre ?>">
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Apellidos</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Apellidos" class="form-control" type="text" name="apellido_usuario" id="inputText" value="<?php echo $apellido ?>">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Semestre</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Semestre" class="form-control" type="text" name="Semestre" id="inputText" value="<?php echo $semestre ?>">
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Clave</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Clave" class="form-control" type="text" name="clave" id="inputText" value="<?php echo $clave ?>">
+                      </div>
+                    </div>
+
                     <fieldset>
                       <label>Tipo de usuario</label>
                       <select class="form-control " name="tipousuario" required>
@@ -211,6 +230,7 @@
                         ?>
                       </select>
                     </fieldset>
+                    <br>
                    
                     <fieldset>
                       <label>Carrera: </label>
@@ -228,13 +248,25 @@
 
                       </select>
                     </fieldset>
+                    <br>
+
                     <fieldset>
                       <label>Jornada: </label><br>
-                      <input type="radio" name="radiobutton" placeholder="diurna" value="Diurna" id="diurna">Diurna
-                      <input type="radio" name="radiobutton" placeholder="nocturna" value="Nocturna" id="nocturna">Nocturna
-                      <input type="radio" name="radiobutton" placeholder="sabatina" value="Sabatina" id="sabatina">Sabatina
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna">
+                        <label class="form-check-label" for="inlineRadio1">Diurna</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Nocturna">
+                        <label class="form-check-label" for="inlineRadio2">Nocturna</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Sabatina">
+                        <label class="form-check-label" for="inlineRadio3">Sabatina</label>
+                      </div>
                     </fieldset>
                     <br>
+                    
                     <fieldset>
                       <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
                     </fieldset>

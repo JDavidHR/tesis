@@ -1,6 +1,6 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-if(isset($_POST['submit']) && !empty($_POST['radiobutton']) && !empty($_POST['documento_usuario']) && !empty($_POST['nombre_usuario']) && !empty($_POST['apellido_usuario']) && !empty($_POST['tipousuario']) && !empty($_POST['Semestre']) && !empty($_POST['clave']) && !empty($_POST['carrera']) ){
+if(isset($_POST['submit']) && !empty($_POST['inlineRadioOptions']) && !empty($_POST['documento_usuario']) && !empty($_POST['nombre_usuario']) && !empty($_POST['apellido_usuario']) && !empty($_POST['tipousuario']) && !empty($_POST['Semestre']) && !empty($_POST['clave']) && !empty($_POST['carrera']) ){
 
         require_once '../modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
@@ -11,7 +11,7 @@ if(isset($_POST['submit']) && !empty($_POST['radiobutton']) && !empty($_POST['do
         $clave=$_POST["clave"];
         $tipo=$_POST["tipousuario"];
         $carrera=$_POST["carrera"];
-        $jornada=$_POST["radiobutton"];
+        $jornada=$_POST["inlineRadioOptions"];
         
         
 
