@@ -161,35 +161,35 @@
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Documento</label>
                       <div class="col-sm-9">
-                        <input placeholder="Documento" class="form-control" type="text" name="documento_usuario" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="documento_usuario" id="inputText">
                       </div>
                     </div>
                     
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Nombres</label>
                       <div class="col-sm-9">
-                        <input placeholder="Nombres" class="form-control" type="text" name="nombre_usuario" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="nombre_usuario" id="inputText">
                       </div>
                     </div>
 
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Apellidos</label>
                       <div class="col-sm-9">
-                        <input placeholder="Apellidos" class="form-control" type="text" name="apellido_usuario" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="apellido_usuario" id="inputText">
                       </div>
                     </div>
                     
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Semestre</label>
                       <div class="col-sm-9">
-                        <input placeholder="Semestre" class="form-control" type="text" name="Semestre" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="Semestre" id="inputText">
                       </div>
                     </div>
 
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Clave</label>
                       <div class="col-sm-9">
-                        <input placeholder="Clave" class="form-control" type="text" name="clave" id="inputText">
+                        <input placeholder="***" class="form-control" type="text" name="clave" id="inputText">
                       </div>
                     </div>
 
