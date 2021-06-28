@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Actualizar Clase</title>
+    <title>Update Horario</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -38,23 +38,31 @@
         //llamado del archivo mysql
         require_once 'Modelo/MySQL.php';
         //creacion de nueva "consulta"
-        $mysql = new MySQL; //se crea un nuevo musql
+        $mysql = new MySQL;
+        //se conecta a la base de datos
+        $mysql->conectar();
 
-        $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
+        $id_usuario = $_POST['horario'];
 
-        //declaracion de variables metodo post
-        $id_clase = $_POST['clase'];
-        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.clase.dia, asistencia.clase.horario_id_horario, asistencia.clase.Docente_id_docente, asistencia.clase.Estudiante_id_estudiante from clase WHERE asistencia.clase.id_clase = " . $id_clase . "");
-        $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario, asistencia.horario.hora from horario");
-        $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente");
-        $seleccionestudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante");
-        //se inicia el recorrido para mostrar los datos de la BD
+
+        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.clase.hora,asistencia.clase.Materia_id_materia,asistencia.clase.Aula_id_aula, clase.codigo, dias.nombre as nombredia, dias.id_dia, docente.nombres from clase join dias on dias.id_dia = clase.Dias_id_dia join docente on docente.id_docente = clase.Docente_id_docente WHERE asistencia.clase.id_clase = " . $id_usuario . "");
+
+
+        //respectiva consulta para la seleccion de usuario
+        $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula where estado = 1");
+        $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
+        $selecciondia = $mysql->efectuarConsulta("SELECT asistencia.dias.id_dia, asistencia.dias.nombre as nombredia from dias");
+        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.estado from grupo where estado = 1");
+        $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres as nombredocente from docente where estado = 1");
+        //se desconecta de la base de datos
         while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
             //declaracion de variables
-            $dia = $valores1['dia'];
-            $horario = $valores1['horario_id_horario'];
-            $docente = $valores1['Docente_id_docente'];
-            $estudiante = $valores1['Estudiante_id_estudiante'];
+            $hora = $valores1['hora'];
+            $materia = $valores1['Materia_id_materia'];
+            $aula = $valores1['Aula_id_aula'];
+            $codigo = $valores1['codigo'];
+            $dia = $valores1['nombredia'];
+            $docente = $valores1['nombres'];
         }
     }
     $mysql->desconectar(); //funcion llamada desde mysql.php
@@ -163,76 +171,110 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <div class="container" style="text-align: center">
-                                    <form id="contact" action="Controlador/update_clase.php?id=<?php echo $id_clase; ?>" method="post">
-                                        <h3>Actualizar Clase</h3>
+                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
+                                    <form id="contact" action="Controlador/update_horario.php?id=<?php echo $id_usuario; ?>" method="post">
+                                        <h3>Actualizar Horario</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
-                                        <fieldset>
-                                            <label>ID Clase: </label>
-                                            <input placeholder="ID clase" type="text" tabindex="1" disabled name="id" value="<?php echo $id_clase ?>">
-                                        </fieldset>
-                                        <fieldset>
-                                            <label>Día:</label>
-                                            <input placeholder="Dia" type="date" tabindex="2" name="dia" class="form-control" value="<?php echo $dia ?>">
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <label>Horario: </label>
-                                            <select name="horario" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                while ($valores1 = mysqli_fetch_assoc($seleccionhorario)) {
-                                                ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_horario'] ?>"><?php echo $valores1['id_horario'] . " - Hora: " . $valores1['hora'] ?></option>';
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </select>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <label>Docente: </label>
-                                            <select name="docente" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                while ($valores1 = mysqli_fetch_assoc($selecciondocente)) {
-                                                ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_docente'] ?>"><?php echo $valores1['id_docente'] . " - Docente: " . $valores1['nombres'] ?></option>';
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </select>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <label>Estudiante: </label>
-                                            <select name="estudiante" class="form-control">
-                                                <option value="0" disabled="">Seleccione:</option>
-                                                <?php
-                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                                                while ($valores1 = mysqli_fetch_assoc($seleccionestudiante)) {
-                                                ?>
-                                                    <!--se traen los datos a mostrar en el select-->
-                                                    <option value="<?php echo $valores1['id_estudiante'] ?>"><?php echo $valores1['id_estudiante'] . " - Estudiante: " . $valores1['nombres'] ?></option>';
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </select>
-                                        </fieldset>
-
                                         <br>
                                         <fieldset>
-                                            <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+                                            <label>ID Horario</label>
+                                            <input placeholder="ID horario" type="text" tabindex="1" disabled="" name="id" value="<?php echo $id_usuario ?>">
                                         </fieldset>
+                                        <br>
+                                        <fieldset>
+                                            <label>Selecciona el dia: </label><br>
+                                            <select class="form-control " name="dia" required>
+                                                <?php
+                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                while ($resultado = mysqli_fetch_assoc($selecciondia)) {
+                                                ?>
+                                                    <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                    <option value="<?php echo $resultado['id_dia'] ?>"><?php echo $resultado['nombredia'] ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </fieldset>
+                                        <br>
+                                        <fieldset>
+                                            <label>Hora Estimada: </label><br>
+                                            <input placeholder="hora" type="time" tabindex="1" autofocus name="hora" class="form-control" min="07:00:00" max="18:00:00" step="1">
+                                        </fieldset>
+                                        <br>
+                                        <fieldset>
+                                            <br>
+                                            <fieldset>
+                                                <label>Codigo de la clase</label>
+                                                <input placeholder="Codigo de la clase" type="text" tabindex="2" name="codigo" value="<?php echo $codigo ?>">
+                                            </fieldset>
+                                            <br>
+                                            <fieldset>
+                                                <label>Selecciona el docente: </label><br>
+                                                <select class="form-control " name="nombre_docente" required>
+                                                    <?php
+                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                    while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
+                                                    ?>
+                                                        <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                        <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente'] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </fieldset>
+                                            <br>
+                                            <fieldset>
+                                                <select class="form-control " name="aula" required>
+                                                    <?php
+                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                    while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
+                                                    ?>
+                                                        <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                        <option value="<?php echo $resultado['id_aula'] ?>"><?php echo $resultado['nombre'] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </fieldset>
+                                            <br>
+                                            <fieldset>
+                                                <select class="form-control " name="materia" required>
+                                                    <?php
+                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                    while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
+                                                    ?>
+                                                        <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                        <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </fieldset>
+                                            <br>
+                                            <fieldset>
+                                                <label>Grupo: </label>
+                                                <select name="grupo" class="form-control">
+                                                    <option value="0" disabled="">Seleccione:</option>
+                                                    <?php
+                                                    //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                    while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
+                                                    ?>
+                                                        <!--se traen los datos a mostrar en el select-->
+                                                        <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['estado'] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </select>
+                                            </fieldset>
+                                            <br>
+
+                                            <fieldset>
+                                                <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
+                                            </fieldset>
 
                                     </form>
+
 
                                 </div>
                             </div>

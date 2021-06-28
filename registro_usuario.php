@@ -152,7 +152,6 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="Controlador/insertar_usuario.php" method="post">
                     <h3>Registrar Estudiante</h3>
@@ -258,7 +257,6 @@
                       <a class="btn" style="background-color: #037537;color: white" href="delete_estudiante.php" role="button">Eliminar Estudiante</a>
                     </div>
                   </form>
-
                 </div>
               </div>
             </div>
