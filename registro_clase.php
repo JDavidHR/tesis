@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registro Horario</title>
+  <title>Registro Clase</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -45,7 +45,7 @@
     $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula where estado = 1");
     $selecciondia = $mysql->efectuarConsulta("SELECT asistencia.dias.id_dia, asistencia.dias.nombre as nombredia from dias");
     $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
-    $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.estado from grupo where estado = 1");
+    $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1");
     $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres as nombredocente from docente where estado = 1");
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -189,67 +189,74 @@
                       </div>
                     </div>
 
-                    <br>
-                    <fieldset>
-                      <label>Selecciona el docente: </label><br>
-                      <select class="form-control " name="nombre_docente" required>
-                        <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
-                        ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                      <select class="form-control " name="aula" required>
-                        <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
-                        ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_aula'] ?>"><?php echo $resultado['nombre'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                      <select class="form-control " name="materia" required>
-                        <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
-                        ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </fieldset>
-                    <br>
-                    
-                    <fieldset>
-                      <label>Grupo: </label>
-                      <select name="grupo" class="form-control">
-                        <option value="0" disabled="">Seleccione:</option>
-                        <?php
-                        //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                        while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
-                        ?>
-                          <!--se traen los datos a mostrar en el select-->
-                          <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['estado'] ?></option>
-                        <?php
-                        }
-                        ?>
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-4 col-form-label">Docente:</label>
+                      <div class="col-sm-8">
+                        <select class="form-control " name="nombre_docente" required>
+                            <?php
+                            //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                            while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
+                            ?>
+                              <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                              <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                      </div>
+                    </div>
 
-                      </select>
-                    </fieldset>
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-4 col-form-label">Aula:</label>
+                      <div class="col-sm-8">
+                        <select class="form-control " name="aula" required>
+                            <?php
+                            //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                            while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
+                            ?>
+                              <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                              <option value="<?php echo $resultado['id_aula'] ?>"><?php echo $resultado['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-4 col-form-label">Materia:</label>
+                      <div class="col-sm-8">
+                        <select class="form-control " name="materia" required>
+                            <?php
+                            //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                            while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
+                            ?>
+                              <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                              <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-4 col-form-label">Grupo:</label>
+                      <div class="col-sm-8">
+                        <select name="grupo" class="form-control">
+                            <option value="0" disabled="">Seleccione:</option>
+                            <?php
+                            //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                            while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
+                            ?>
+                              <!--se traen los datos a mostrar en el select-->
+                              <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                      </div>
+                    </div>
 
                     <fieldset>
                       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>

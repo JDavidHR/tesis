@@ -42,7 +42,8 @@
         //se conecta a la base de datos
         $mysql->conectar();
         //respectiva consulta para la seleccion de usuario  
-        $seleccionclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora from clase where asistencia.clase.estado = 1");
+
+        $seleccionclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.materia.nombre from clase join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia where asistencia.clase.estado = 1");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -164,7 +165,7 @@
                                                     while ($resultado = mysqli_fetch_assoc($seleccionclase)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['hora'] ?></option>
+                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['id_clase'] . " - Hora: " . $resultado['hora'] . " - Materia: " . $resultado['nombre'] ?></option>
                                                     <?php
                                                     }
                                                     ?>

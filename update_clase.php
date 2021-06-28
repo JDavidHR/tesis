@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Update Horario</title>
+    <title>Update Clase</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -42,7 +42,7 @@
         //se conecta a la base de datos
         $mysql->conectar();
         //respectiva consulta para la seleccion de usuario
-        $seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora from clase where asistencia.clase.estado = 1");
+        $seleccionclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.materia.nombre from clase join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia where asistencia.clase.estado = 1");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -152,19 +152,19 @@
                             <div class="card-body">
 
                                 <div class="container" style="text-align: center">
-                                    <form id="contact" action="update_horario2.php" method="post">
-                                        <h3>Update Horario</h3>
-                                        <h4>Seleciona el horario a editar</h4>
+                                    <form id="contact" action="update_clase2.php" method="post">
+                                        <h3>Update Clase</h3>
+                                        <h4>Seleciona la clase a editar</h4>
                                         <br>
                                         <center>
                                             <fieldset>
                                                 <select class="form-control col-md-6 col-md-offset-3" name="horario" required>
                                                     <?php
                                                     //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                    while ($resultado = mysqli_fetch_assoc($seleccionhorario)) {
+                                                    while ($resultado = mysqli_fetch_assoc($seleccionclase)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['id_clase'] . " - Hora: " . $resultado['hora'] ?></option>
+                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['id_clase'] . " - Hora: " . $resultado['hora'] . " - Materia: " . $resultado['nombre'] ?></option>
                                                     <?php
                                                     }
                                                     ?>

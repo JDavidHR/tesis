@@ -145,7 +145,6 @@
                                             <input placeholder="..." class="form-control" type="text" name="nombre_materia" id="inputText">
                                           </div>
                                         </div>
-                                        <br>
 
                                         <fieldset>
                                           <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
