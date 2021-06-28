@@ -61,7 +61,7 @@
           <div class="banner-text">
               <h2 style="color: white;">Bienvenido</h2>
               <p style="color: white;">Recuerda digilenciar todos los campos</p>
-              <a style="color: white;" href="recuperar_password.php">¿Olvidaste tu contrasen&aacute;?</a>
+              <a style="color: white;" href="recuperar_password.php">¿Olvidaste tu contraseña?</a>
           </div>  
         </div>
       </div>

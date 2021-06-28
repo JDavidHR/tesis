@@ -36,7 +36,7 @@
   //se conecta a la base de datos
   $mysql->conectar();
 
-  
+
   $id_docente = $_SESSION['idDocente'];
   $smateria3 = $_POST['materianombre'];
   $id = $_POST['selectgrupo'];
@@ -58,7 +58,7 @@
     $nombremateria = $valores1['nombre'];
     $idMateria = $valores1['id_materia'];
   }
-  
+
 
 
   $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Grupo_id_grupo = " . $id . " GROUP BY asistencia.clase.Grupo_id_grupo");
@@ -156,7 +156,7 @@
         <div class="row">
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
-            <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
             <?php echo " Materia: "  . $nombremateria ?>
             <br>
@@ -164,7 +164,7 @@
             <br>
             <?php echo " grupo: "  . $grupo ?>
             <br>
-            <?php echo " ID grupo: "  . $id ?>
+            <?php echo " ID grupo: "  . $id ?>-->
           </div>
 
         </div>
@@ -197,7 +197,25 @@
             <div class="card">
               <div class="card-body">
 
-                
+                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                  <form id="contact" action="Controlador/newcode.php" method="post">
+                    <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
+                    <br>
+                    <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
+                      <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
+                    </select>
+                    <br>
+                    <fieldset>
+                      <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Generar nuevo</button>
+                    </fieldset>
+                  </form>
+                </div>
+
+
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
@@ -226,29 +244,20 @@
                     </div>
                   </div>
                 </div>
-              
-                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="Controlador/newcode.php" method="post">
-                    <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
-                    <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
-                      <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
-                      
-                      <!--<option value="<?//php echo $id ?>"><?//php echo $smateria?></option>-->
-                    </select>
-                    <br>
-                    <!--<input name="materianombre" disabled class="form-control" value="<?//php echo $smateria ?>">
 
-                    <input disabled class="form-control" value="<?//php echo $smateria ?>">-->
-                    <br>
-                    <fieldset>
-                      <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Generar nuevo</button>
-                    </fieldset>
-                  </form>
+                <form id="contact" action="index_docente.php" method="post">
+                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                  <br>
+                  <fieldset>
+                    <textarea name="comentarios" rows="5" cols="70">Escribe aquí tus comentarios de la clase o enlaces de la misma</textarea>
+                  </fieldset>
+                  <br>
+                  <fieldset>
+                    <button name="submit_text" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Guardar</button>
+                  </fieldset>
                 </div>
+                </form>
+
               </div>
             </div>
           </div>
