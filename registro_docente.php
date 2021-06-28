@@ -151,53 +151,71 @@
                     <div class="col-12">
                         <div class="card">
                            <div class="card-body">
- 
-                               <div class="container col-md-8 col-md-offset-3" style="text-align: center">  
-										<form id="contact" action="Controlador/insertar_docente.php" method="post">
-										    <h3>Registro del Docente</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-										    <fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Documento" type="text" tabindex="1"  autofocus name="documento_docente">
-										    </fieldset>
-										    <fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Nombres" type="text" tabindex="2" name="nombre_docente">
-										    </fieldset>
-										    <fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente">
-										    </fieldset>				 	
-										 	<fieldset>
-										      <input class="col-md-6 col-md-offset-3" placeholder="Contraseña" type="text" tabindex="4" name="contrasena">
-										    </fieldset>
-										    <fieldset>
-										      <center><select class="form-control col-md-6 col-md-offset-3" name="tipousuario" required>                                                
-								                <?php 
-								                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-								                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
-								                ?> 
-								                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-								                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
-								                <?php
-								                  }
-								                ?>
-								              </select></center>
-										    </fieldset>
-										    <br>
-										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
-                                            </fieldset>
+                               <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
+									<form id="contact" action="Controlador/insertar_docente.php" method="post">
+									    <h3>Registro del Docente</h3>
+									    <h4>Recuerda llenar todos los campos</h4>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Documento</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="..." class="form-control" type="text" name="documento_docente" id="inputText">
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombres</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_docente" id="inputText">
+                                          </div>
+                                        </div>
 
-                                        </form>
-                                        <fieldset>
-                                            <center>
-                                                <a href="update_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Docente</button></a>
-                                                <a href="delete_docente.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Docente</button></a>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Apellidos</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="..." class="form-control" type="text" name="apellido_docente" id="inputText">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Clave</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="***" class="form-control" type="text" name="contrasena" id="inputText">
+                                          </div>
+                                        </div>
+
+									    <fieldset>
+                                            <label>Tipo de usuario: </label>
+									        <center>
+                                                <select class="form-control col-md-8 col-md-offset-1" name="tipousuario" required>
+        							                <?php 
+        							                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+        							                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
+        							                ?> 
+        							                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+        							                    <option value="<?php echo $resultado['id_tipo_usuario']?>"><?php echo $resultado['nombre']?></option>                                                
+        							                <?php
+        							                  }
+        							                ?>
+        							              </select>
                                             </center>
-                                            </fieldset>
-								</div>
+									    </fieldset>
+                                        <br>
+									    
+                                        <fieldset>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
+                                        </fieldset>
+                                        <br>
+
+                                        <div class="text-center"> 
+                                          <a class="btn" style="background-color: #037537;color: white" href="update_docente.php" role="button">Modificar Docente</a>
+                                          <a class="btn" style="background-color: #037537;color: white" href="delete_docente.php" role="button">Eliminar Docente</a>
+                                        </div>
+                                    </form>
+							    </div>
                             </div> 
+                        </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

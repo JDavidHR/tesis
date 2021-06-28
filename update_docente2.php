@@ -162,30 +162,48 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <div class="container col-md-8 col-md-offset-3" style="text-align: center">
+                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                                     <form id="contact" action="Controlador/update_docente.php?id=<?php echo $id_docente; ?>" method="post">
-                                        <h3>Actualizar Docente</h3>
+                                        <h3>Update Docente</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
                                         <center>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <label>ID Docente</label>
-                                                <input placeholder="ID docente" type="text" tabindex="1" disabled="" name="id" value="<?php echo $id_docente ?>">
-                                            </fieldset>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <label>Documento</label>
-                                                <input placeholder="Documento" type="text" tabindex="1" name="documento_docente" value="<?php echo $doc ?>">
-                                            </fieldset>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <input placeholder="Nombres" type="text" tabindex="2" name="nombre_docente" value="<?php echo $nombre ?>">
-                                            </fieldset>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <input placeholder="Apellidos" type="text" tabindex="3" name="apellido_docente" value="<?php echo $apellido ?>">
-                                            </fieldset>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <label>Contraseña</label>
-                                                <input placeholder="Contraseña" type="text" tabindex="4" name="contrasena" value="<?php echo $pass ?>">
-                                            </fieldset>
-                                            <fieldset class="col-md-6 col-md-offset-3">
+                                            <div class="form-group row" align="Left">
+                                              <label class="col-sm-3 col-form-label">Id del Docente</label>
+                                              <div class="col-sm-9">
+                                                <input placeholder="ID docente" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_docente ?>">
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group row" align="Left">
+                                              <label class="col-sm-3 col-form-label">Documento</label>
+                                              <div class="col-sm-9">
+                                                <input placeholder="Documento" class="form-control" type="text" name="documento_docente" id="inputText" value="<?php echo $doc ?>">
+                                              </div>
+                                            </div>
+                                            
+                                            <div class="form-group row" align="Left">
+                                              <label class="col-sm-3 col-form-label">Nombres</label>
+                                              <div class="col-sm-9">
+                                                <input placeholder="Nombres" class="form-control" type="text" name="nombre_docente" id="inputText" value="<?php echo $nombre ?>">
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group row" align="Left">
+                                              <label class="col-sm-3 col-form-label">Apellidos</label>
+                                              <div class="col-sm-9">
+                                                <input placeholder="Apellidos" class="form-control" type="text" name="apellido_docente" id="inputText" value="<?php echo $apellido ?>">
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group row" align="Left">
+                                              <label class="col-sm-3 col-form-label">Clave</label>
+                                              <div class="col-sm-9">
+                                                <input placeholder="Clave" class="form-control" type="text" name="contrasena" id="inputText" value="<?php echo $pass ?>">
+                                              </div>
+                                            </div>
+
+                                            <fieldset>
+                                                <label>Tipo de usuario</label>
                                                 <select class="form-control " name="tipousuario" required>
                                                     <option value="0" disabled="">Seleccione:</option>
                                                     <?php
@@ -202,7 +220,7 @@
                                         </center>
                                         <br>
                                         <fieldset>
-                                            <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Actualizar</button>
+                                          <button name="enviar" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
                                         </fieldset>
 
                                     </form>

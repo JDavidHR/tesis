@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Update Docente</title>
+    <title>Editar Docente</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -154,7 +154,7 @@
                                 
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
 										<form id="contact" action="update_docente2.php" method="post">
-										    <h3>Actualizar Docente</h3>
+										    <h3>Editar Docente</h3>
 										    <h4>Selecciona el docente a modificar</h4>
 										    <fieldset>
                                               <select class="form-control " name="docente" required>                                                
