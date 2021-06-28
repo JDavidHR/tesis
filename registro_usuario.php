@@ -155,7 +155,7 @@
 
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                   <form id="contact" action="Controlador/insertar_usuario.php" method="post">
-                    <h3>Registro del Estudiante</h3>
+                    <h3>Registrar Estudiante</h3>
                     <h4>Recuerda llenar todos los campos</h4>
 
                     <div class="form-group row" align="Left">

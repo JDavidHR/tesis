@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Actualizar Aula</title>
+    <title>Modificar Aula</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -143,9 +143,6 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                 <!-- ============================================================== -->
                 <div class="row">
 
-
-
-
                 </div>
                 <!-- ============================================================== -->
                 <!-- Email campaign chart -->
@@ -157,32 +154,35 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                           <div class="card-body">
-                                
+                           <div class="card-body">          
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
-										<form id="contact" action="Controlador/update_aula.php" method="post">
-										    <h3>Registro del Aula</h3>
-										    <h4>Recuerda llenar todos los campos</h4>
-                                            <br>
-                                            <fieldset>
-                                              <input placeholder="ID Aula" type="text" tabindex="1"  autofocus name="id" value="<?php echo $id ?>">
-                                            </fieldset>
-                                            <br>
-										    <fieldset>
-                                              <input placeholder="Nombre del Aula" type="text" tabindex="1"  autofocus name="nombre_aula" value="<?php echo $aula ?>">
-                                            </fieldset>
-										    <br>
-										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
-                                            </fieldset>
+    								<form id="contact" action="Controlador/update_aula.php" method="post">
+    								    <h3>Modificar Aula</h3>
+    								    <h4>Recuerda llenar todos los campos</h4>
+                                        <br>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Id del aula</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="ID Aula" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id ?>">
+                                          </div>
+                                        </div>
 
-                                        </form>
-                                        
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombre</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="Nombre del Aula" class="form-control" type="text" name="nombre_aula" id="inputText" value="<?php echo $aula ?>">
+                                          </div>
+                                        </div>
+
+    								    <fieldset>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
+                                        </fieldset>
+                                    </form>                         
 								</div>
                             </div> 
+                        </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -195,11 +195,11 @@ $mysql->desconectar();//funcion llamada desde mysql.php
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
-        </div>
+            </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-    </div>
+        </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->

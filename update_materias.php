@@ -149,15 +149,13 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
                                 <div class="container" style="text-align: center">
                                     <form id="contact" action="update_materias2.php" method="post">
-                                        <h3>Actualizar Materia</h3>
-                                        <h4>Seleciona la materia a actualizar</h4>
-                                        <br>
+                                        <h3>Update Materia</h3>
+                                        <h4>Selecione la materia a actualizar</h4>
                                         <center>
-                                            <fieldset>
-                                                <select class="form-control col-md-6 col-md-offset-3" name="materia" required>
+                                            <fieldset class="col-md-6 col-md-offset-3">
+                                                <select class="form-control" name="materia" required>
                                                     <?php
                                                     //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                                                     while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
@@ -168,9 +166,9 @@
                                                     }
                                                     ?>
                                                 </select>
-                                                <br>
                                             </fieldset>
                                         </center>
+                                        <br>
                                         <fieldset>
                                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
                                         </fieldset>

@@ -150,38 +150,37 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                           <div class="card-body">
-                                
-                               <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
-										<form id="contact" action="update_docente2.php" method="post">
-										    <h3>Editar Docente</h3>
-										    <h4>Selecciona el docente a modificar</h4>
-										    <fieldset>
-                                              <select class="form-control " name="docente" required>                                                
-                                                <?php 
-                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                  while ($resultado= mysqli_fetch_assoc($selecciondocente)){                         
-                                                ?> 
-                                                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                    <option value="<?php echo $resultado['id_docente']?>"><?php echo $resultado['nombres']?></option>                                                
-                                                <?php
-                                                  }
-                                                ?>
-                                              </select>
+                            <div class="card-body">
+                                <div class="container" style="text-align: center">  
+									<form id="contact" action="update_docente2.php" method="post">
+									    <h3>Update Docente</h3>
+									    <h4>Seleccione el docente a modificar</h4>
+                                        <center>
+    									    <fieldset class="col-md-6 col-md-offset-3">
+                                                <select class="form-control" name="docente" required>                                              
+                                                    <?php 
+                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                      while ($resultado= mysqli_fetch_assoc($selecciondocente)){                         
+                                                    ?> 
+                                                    <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                        <option value="<?php echo $resultado['id_docente']?>"><?php echo $resultado['nombres']?></option>                                                
+                                                    <?php
+                                                      }
+                                                    ?>
+                                                </select>
                                             <br>
                                             <fieldset>
-										    <br>
-										    <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
-                                            </fieldset>
-
-                                        </form>
-                                        
+                                        </center>
+									    <br>
+									    <fieldset>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
+                                        </fieldset>
+                                    </form>     
 								</div>
                             </div> 
+                        </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

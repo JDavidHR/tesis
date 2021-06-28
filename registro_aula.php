@@ -135,28 +135,29 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
-                                <div class="container" style="text-align: center">
+                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
                                     <form id="contact" action="Controlador/insertar_aula.php" method="post">
-                                        <h3>Registro del Aula</h3>
-                                        <h4>Recuerda llenar todos los campos</h4>
-                                        <center>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <input placeholder="Nombre del Aula" type="text" tabindex="1" autofocus name="nombre_aula">
-                                            </fieldset>
-                                        </center>
+                                        <h3>Registrar Aula</h3>
+                                        <h4>Recuerda llenar el campo</h4>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombre</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_aula" id="inputText">
+                                          </div>
+                                        </div>
                                         <br>
+
                                         <fieldset>
-                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Registrar</button>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
                                         </fieldset>
+                                        <br>
+
+                                        <div class="text-center"> 
+                                          <a class="btn" style="background-color: #037537;color: white" href="update_aula.php" role="button">Modificar Aula</a>
+                                          <a class="btn" style="background-color: #037537;color: white" href="delete_aulas.php" role="button">Eliminar Aula</a>
+                                        </div>
 
                                     </form>
-                                    <fieldset>
-                                        <center><a href="update_aula.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Modificar Aula</button></a></center>
-                                    </fieldset>
-                                    <fieldset>
-                                        <center><a href="delete_aulas.php"><button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="form-control col-2" style="background-color: #037537;color: white">Eliminar Aula</button></a></center>
-                                    </fieldset>
                                 </div>
                             </div>
                         </div>

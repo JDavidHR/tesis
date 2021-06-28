@@ -158,31 +158,34 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                     <div class="col-12">
                         <div class="card">
                            <div class="card-body">
-                                
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
-										<form id="contact" action="Controlador/update_materia.php" method="post">
-										    <h3>Actualizar Materia</h3>
-										    <h4>Seleciona la materia a actualizar</h4>
-										    <br>
-                                            <fieldset>
-                                              <input placeholder="ID materia" type="text" tabindex="1"  autofocus name="id" value="<?php echo $id ?>">
-                                            </fieldset>
-                                            <br>
-                                            <fieldset>
-                                              <input placeholder="Nombre de la materia" type="text" tabindex="1"  autofocus name="nombre_materia" value="<?php echo $materia ?>">
-                                            </fieldset>
+									<form id="contact" action="Controlador/update_materia.php" method="post">
+									    <h3>Modificar Materia</h3>
+									    <h4>Seleciona la materia a actualizar</h4>
+                                        <br>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Id de la materia</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="ID Materia" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id ?>">
+                                          </div>
+                                        </div>
 
-                                            <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
-                                            </fieldset>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombre</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="Nombre de la materia" class="form-control" type="text" name="nombre_materia" id="inputText" value="<?php echo $materia ?>">
+                                          </div>
+                                        </div>
 
-                                        </form>
-                                        
+                                        <fieldset>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
+                                        </fieldset>
+                                    </form>
 								</div>
                             </div> 
+                        </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

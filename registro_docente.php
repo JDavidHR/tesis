@@ -153,7 +153,7 @@
                            <div class="card-body">
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
 									<form id="contact" action="Controlador/insertar_docente.php" method="post">
-									    <h3>Registro del Docente</h3>
+									    <h3>Registrar Docente</h3>
 									    <h4>Recuerda llenar todos los campos</h4>
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Documento</label>
