@@ -184,8 +184,8 @@
                                 header("Location: ../index_administrador.php");
                             }else{
                                 //Mesanje de error por si no hay filas en la consulta
-                                echo "<div class=\"alert alert-warning alert-dismissible\"><a href=\"../login_teatro.php\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>Alerta!</strong>Usuario o contraseña incorrecta o esta inactivo.</div>";
-                                header( "refresh:3;url=../login_teatro.php" );
+                                echo "<div class=\"alert alert-warning alert-dismissible\"><a href=\"../login.php\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>Alerta!</strong>Usuario o contraseña incorrecta o esta inactivo.</div>";
+                                header( "refresh:3;url=../login.php" );
                             }                                    
                         }else{
                             //Mensaje de error si la consulta esta vacia
