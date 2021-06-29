@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     
-    <title>Update Carreras</title>
+    <title>Update Carrera</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -161,8 +161,8 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                 
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
 										<form id="contact" action="Controlador/update_carreras.php" method="post">
-										    <h3>Actualizar Carreras</h3>
-										    <h4>Seleciona la materia a actualizar</h4>
+										    <h3>Modificar Carreras</h3>
+										    <h4>Recuerda rellenar el campo</h4>
 										    <br>
                                             <fieldset>
                                               <input placeholder="ID materia" type="text" tabindex="1"  autofocus name="id" value="<?php echo $id ?>">

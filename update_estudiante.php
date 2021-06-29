@@ -155,7 +155,6 @@
                                     <form id="contact" action="update_estudiante2.php" method="post">
                                         <h3>Editar estudiante</h3>
                                         <h4>Selecciona el estudiante a modificar</h4>
-
                                         <center>
                                             <fieldset>
                                                 <select class="form-control col-md-6 col-md-offset-3" name="usuario" required>

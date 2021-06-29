@@ -161,7 +161,7 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
 									<form id="contact" action="Controlador/update_materia.php" method="post">
 									    <h3>Modificar Materia</h3>
-									    <h4>Seleciona la materia a actualizar</h4>
+									    <h4>Recuerda rellenar el campo</h4>
                                         <br>
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Id de la materia</label>

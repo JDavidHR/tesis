@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Delete Horario</title>
+    <title>Delete Clase</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -154,8 +154,8 @@
 
                                 <div class="container" style="text-align: center">
                                     <form id="contact" action="Controlador/delete_horario.php" method="post">
-                                        <h3>Eliminar Horario</h3>
-                                        <h4>Selecciona el Horario a eliminar</h4>
+                                        <h3>Eliminar Clase</h3>
+                                        <h4>Selecciona la clase a eliminar</h4>
 
                                         <center>
                                             <fieldset>

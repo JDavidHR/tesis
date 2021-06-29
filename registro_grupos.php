@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Registro Carrera</title>
+    <title>Registro Grupos</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,6 +32,24 @@
 </head>
 
 <body>
+    <?php
+      //session_start();
+      if (!isset($_SESSION['tipousuario'])) {
+        //llamado del archivo mysql
+        require_once 'Modelo/MySQL.php';
+        //creacion de nueva "consulta"
+        $mysql = new MySQL;
+        //se conecta a la base de datos
+        $mysql->conectar();
+
+        //respectiva consulta para los select
+        $seleccionEstudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante where asistencia.estudiante.estado = 1");
+        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1");
+
+        //se desconecta de la base de datos
+        $mysql->desconectar();
+      }
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -132,17 +150,40 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                                    <form id="contact" action="Controlador/insertar_carreras.php" method="post">
-                                        <h3>Registrar Carrera</h3>
-                                        <h4>Recuerda llenar el campo</h4>
+                                <div class="container col-md-10" style="text-align: center">
+                                    <form id="contact" action="Controlador/insertar_grupos.php" method="post">
+                                        <h3>Registrar Grupo</h3>
+                                        <h4>Recuerda llenar todos los campo</h4>
                                         <div class="form-group row" align="Left">
-                                          <label class="col-sm-3 col-form-label">Nombre</label>
+                                          <label class="col-sm-3 col-form-label">Id del grupo</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="nombre_carrera" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="id_grupo" id="inputText">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombre del grupo</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_grupo" id="inputText">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Estudiante:</label>
+                                          <div class="col-sm-9">
+                                            <select class="form-control" name="usuario" required>
+                                                <?php
+                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                while ($resultado = mysqli_fetch_assoc($seleccionEstudiante)) {
+                                                ?>
+                                                    <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
+                                                    <option value="<?php echo $resultado['id_estudiante'] ?>"><?php echo $resultado['nombres'] ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
                                           </div>
                                         </div>
 
@@ -152,14 +193,45 @@
                                         <br>
 
                                         <div class="text-center"> 
-                                          <a class="btn" style="background-color: #037537;color: white" href="update_carreras.php" role="button">Modificar Carrera</a>
-                                          <a class="btn" style="background-color: #037537;color: white" href="delete_carreras.php" role="button">Eliminar Carrera</a>
+                                          <a class="btn" style="background-color: #037537;color: white" href="update_grupos.php" role="button">Modificar Grupo</a>
+                                          <a class="btn" style="background-color: #037537;color: white" href="delete_grupos.php" role="button">Eliminar Grupo</a>
                                         </div>
                                     </form>
+                                </div>
+                            
+                        </div>
+                    </div>    
+
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 align="center">Datos para tener en cuenta: </h2>
+                                <label>Tenga en cuenta los siguientes datos al momento de registrar un grupo y su estudiante al mismo.</label>
+                                <label>(Debe escribir los mismos datos en los campos para que el estudiante sea guardado en ese grupo, en caso de querer crear uno nuevo, no tiene que seguir lo anterior.)</label>
+                                <br><br>
+                                <div class="container col-md-10" style="text-align: center">
+                                    <fieldset>
+                                        <label>Id del grupo y nombre disponibles: </label>
+                                        <center>
+                                            <select name="gruposdisponibles" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
+                                                ?>
+                                                  <!--se traen los datos a mostrar en el select-->
+                                                  <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['id_grupo']. " - Nombre: " . $resultado['nombre']?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </center>
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Container fluid  -->
