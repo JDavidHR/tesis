@@ -43,7 +43,7 @@
         $mysql->conectar();
         //respectiva consulta para la seleccion de usuario  
 
-        $seleccionclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.materia.nombre from clase join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia where asistencia.clase.estado = 1");
+        $seleccionclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.clase.horafin, asistencia.materia.nombre from clase join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia where asistencia.clase.estado = 1");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -153,7 +153,7 @@
                             <div class="card-body">
 
                                 <div class="container" style="text-align: center">
-                                    <form id="contact" action="Controlador/delete_horario.php" method="post">
+                                    <form id="contact" action="Controlador/delete_clase.php" method="post">
                                         <h3>Eliminar Clase</h3>
                                         <h4>Selecciona la clase a eliminar</h4>
 
@@ -165,7 +165,7 @@
                                                     while ($resultado = mysqli_fetch_assoc($seleccionclase)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['id_clase'] . " - Hora: " . $resultado['hora'] . " - Materia: " . $resultado['nombre'] ?></option>
+                                                        <option value="<?php echo $resultado['id_clase'] ?>"><?php echo $resultado['id_clase'] . " - Hora: " . $resultado['hora'] . " - " . $resultado['horafin'] . " - Materia: " . $resultado['nombre'] ?></option>
                                                     <?php
                                                     }
                                                     ?>

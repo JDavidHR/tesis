@@ -7,6 +7,7 @@
         
         //$fecha=time('H:i:s');
         $hora=$_POST["hora"];
+        $horafin=$_POST["horafin"];
         $materia = $_POST["materia"];
         $aula = $_POST["aula"];
         $ides = $_GET['id'];
@@ -18,7 +19,7 @@
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
         
-        $sql=$mysql->efectuarConsulta("UPDATE asistencia.clase SET Dias_id_dia ='".$dia."', hora ='".$hora."',codigo ='".$codigo."',Docente_id_docente ='".$docente."',Aula_id_aula ='".$aula."', Materia_id_materia = '".$materia."', Grupo_id_grupo ='".$grupo."' WHERE id_clase = ".$ides."");
+        $sql=$mysql->efectuarConsulta("UPDATE asistencia.clase SET Dias_id_dia ='".$dia."', hora ='".$hora."', horafin ='".$horafin."',codigo ='".$codigo."',Docente_id_docente ='".$docente."',Aula_id_aula ='".$aula."', Materia_id_materia = '".$materia."', Grupo_id_grupo ='".$grupo."' WHERE id_clase = ".$ides."");
         //condicion donde si la consulta se hace correcto
         //echo "dia: ".$dia;
         //echo " hora: ".$hora;
