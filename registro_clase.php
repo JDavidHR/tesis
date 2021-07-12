@@ -176,9 +176,16 @@
                     </div>
 
                     <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Hora estimada: </label>
+                      <label class="col-sm-4 col-form-label">Hora inicio: </label>
                       <div class="col-sm-8">
                         <input type="time" name="hora" class="form-control" min="07:00:00" max="22:00:00">
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-4 col-form-label">Hora fin: </label>
+                      <div class="col-sm-8">
+                        <input type="time" name="horafin" class="form-control" min="07:00:00" max="22:00:00">
                       </div>
                     </div>
 
