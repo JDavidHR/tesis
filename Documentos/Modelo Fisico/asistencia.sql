@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2021 a las 00:05:21
+-- Tiempo de generación: 12-07-2021 a las 18:55:43
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -32,9 +32,9 @@ CREATE TABLE `administrador` (
   `documento` varchar(45) NOT NULL COMMENT 'Documento del administrador',
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del administrador',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del administrador',
-  `clave` varchar(45) NOT NULL,
-  `estado` int(11) NOT NULL,
-  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+  `clave` varchar(45) NOT NULL COMMENT 'Clave del administrador',
+  `estado` int(11) NOT NULL COMMENT 'Activo o inactiva',
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL COMMENT 'Tipo de usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -53,7 +53,7 @@ INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apelli
 CREATE TABLE `aula` (
   `id_aula` int(11) NOT NULL COMMENT 'Id del aula',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre del aula',
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL COMMENT 'Activa o inactiva'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -71,9 +71,9 @@ INSERT INTO `aula` (`id_aula`, `nombre`, `estado`) VALUES
 --
 
 CREATE TABLE `carrera` (
-  `id_carrera` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `estado` int(11) NOT NULL
+  `id_carrera` int(11) NOT NULL COMMENT 'Id de la carrera',
+  `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la carrera',
+  `estado` int(11) NOT NULL COMMENT 'Activa o inactiva'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -92,24 +92,25 @@ INSERT INTO `carrera` (`id_carrera`, `nombre`, `estado`) VALUES
 
 CREATE TABLE `clase` (
   `id_clase` int(11) NOT NULL COMMENT 'Id de la clase',
-  `Dias_id_dia` int(11) NOT NULL,
-  `hora` time NOT NULL,
-  `codigo` varchar(45) NOT NULL,
-  `Docente_id_docente` int(11) NOT NULL,
-  `Aula_id_aula` int(11) NOT NULL,
-  `Materia_id_materia` int(11) NOT NULL,
-  `Grupo_id_grupo` int(11) NOT NULL,
-  `estado` int(11) NOT NULL
+  `Dias_id_dia` int(11) NOT NULL COMMENT 'Id del dia',
+  `hora` time NOT NULL COMMENT 'Hora de inicio de la clase',
+  `horafin` time NOT NULL COMMENT 'Hora fin de la clase',
+  `codigo` varchar(45) NOT NULL COMMENT 'Codigo de la clase',
+  `Docente_id_docente` int(11) NOT NULL COMMENT 'Id del docente que la dara',
+  `Aula_id_aula` int(11) NOT NULL COMMENT 'Id del aula en la que se vera',
+  `Materia_id_materia` int(11) NOT NULL COMMENT 'Id de la materia que se vera',
+  `Grupo_id_grupo` int(11) NOT NULL COMMENT 'Id del grupo asignado',
+  `estado` int(11) NOT NULL COMMENT 'Estado de la clase'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clase`
 --
 
-INSERT INTO `clase` (`id_clase`, `Dias_id_dia`, `hora`, `codigo`, `Docente_id_docente`, `Aula_id_aula`, `Materia_id_materia`, `Grupo_id_grupo`, `estado`) VALUES
-(1, 1, '07:45:00', 'code_lunes', 1, 1, 1, 1, 1),
-(6, 2, '11:22:50', 'code_martes', 1, 1, 6, 1, 1),
-(11, 6, '09:55:37', 'code_sabado', 1, 1, 7, 1, 1);
+INSERT INTO `clase` (`id_clase`, `Dias_id_dia`, `hora`, `horafin`, `codigo`, `Docente_id_docente`, `Aula_id_aula`, `Materia_id_materia`, `Grupo_id_grupo`, `estado`) VALUES
+(1, 1, '07:45:00', '10:15:00', 'code_lunes', 1, 1, 1, 1, 1),
+(2, 2, '09:30:00', '12:00:00', 'code_martes', 2, 1, 7, 1, 1),
+(3, 3, '07:45:00', '09:30:00', 'code_miercoles', 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -118,8 +119,8 @@ INSERT INTO `clase` (`id_clase`, `Dias_id_dia`, `hora`, `codigo`, `Docente_id_do
 --
 
 CREATE TABLE `dias` (
-  `id_dia` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
+  `id_dia` int(11) NOT NULL COMMENT 'Id el dia',
+  `nombre` varchar(45) NOT NULL COMMENT 'Nombre del dia'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -143,12 +144,12 @@ INSERT INTO `dias` (`id_dia`, `nombre`) VALUES
 
 CREATE TABLE `docente` (
   `id_docente` int(11) NOT NULL COMMENT 'Identificador del docente',
-  `documento` varchar(45) NOT NULL,
+  `documento` varchar(45) NOT NULL COMMENT 'Documento del docente',
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del docente\n\n',
-  `apellidos` varchar(45) NOT NULL,
-  `clave` varchar(45) NOT NULL,
-  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL,
-  `estado` int(11) NOT NULL
+  `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del docente',
+  `clave` varchar(45) NOT NULL COMMENT 'Clave del docente',
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL COMMENT 'Tipo de usuario',
+  `estado` int(11) NOT NULL COMMENT 'Activo o inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -156,8 +157,8 @@ CREATE TABLE `docente` (
 --
 
 INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `clave`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
-(1, '123', 'Natalia', 'Agudelo', '123', 2, 1),
-(2, '456', 'Pruebas', 'Pruebas', '456', 2, 0);
+(1, '123', 'Nicole', 'Agudelo', '123', 2, 1),
+(2, '456', 'Camila', 'Moreno', '456', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -171,11 +172,11 @@ CREATE TABLE `estudiante` (
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del estudiante',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del estudiante',
   `jornada` varchar(45) NOT NULL COMMENT 'Jornada del estudiante',
-  `semestre` varchar(45) NOT NULL,
-  `clave` varchar(45) NOT NULL,
-  `estado` int(11) NOT NULL,
-  `Carrera_id_carrera` int(11) NOT NULL,
-  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL
+  `semestre` varchar(45) NOT NULL COMMENT 'Semestre en el que se encuentra',
+  `clave` varchar(45) NOT NULL COMMENT 'Clave del estudiante',
+  `estado` int(11) NOT NULL COMMENT 'Activo o inactivo',
+  `Carrera_id_carrera` int(11) NOT NULL COMMENT 'Id de la carrera que cursa',
+  `tipo_usuario_id_tipo_usuario` int(11) NOT NULL COMMENT 'Id del tipo de usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -183,8 +184,9 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `clave`, `estado`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '123', 'Diego', 'Rios', 'Diurna', 'Septimo', '123', 1, 1, 1),
-(2, '456', 'Pruebas', 'Pruebas', 'Sabatina', 'Quinto', '456', 0, 1, 1);
+(1, '123', 'Diego', 'Rios', 'Diurna', 'Septimo', '456', 1, 1, 1),
+(2, '456', 'Pruebas', 'Pruebas', 'Sabatina', 'Quinto', '456', 1, 1, 1),
+(3, '1010', 'Daniel', 'Andres', 'Diurna', 'Quinto', '123', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -193,10 +195,10 @@ INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, 
 --
 
 CREATE TABLE `grupo` (
-  `id_grupo` int(11) NOT NULL,
-  `nombre` varchar(45) CHARACTER SET utf8 NOT NULL,
-  `Estudiante_id_estudiante` int(11) NOT NULL,
-  `estado` int(11) NOT NULL
+  `id_grupo` int(11) NOT NULL COMMENT 'Id del grupo',
+  `nombre` varchar(45) CHARACTER SET utf8 NOT NULL COMMENT 'Nombre del grupo',
+  `Estudiante_id_estudiante` int(11) NOT NULL COMMENT 'Id del estudiante',
+  `estado` int(11) NOT NULL COMMENT 'Activo o inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -216,7 +218,7 @@ INSERT INTO `grupo` (`id_grupo`, `nombre`, `Estudiante_id_estudiante`, `estado`)
 CREATE TABLE `materia` (
   `id_materia` int(11) NOT NULL COMMENT 'Id de la materia',
   `nombre` varchar(45) NOT NULL COMMENT 'Nombre de la materia',
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL COMMENT 'Activo o inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -355,19 +357,19 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_carrera` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la carrera', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=13;
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `dias`
 --
 ALTER TABLE `dias`
-  MODIFY `id_dia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_dia` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id el dia', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `docente`
@@ -379,7 +381,7 @@ ALTER TABLE `docente`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=3;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
