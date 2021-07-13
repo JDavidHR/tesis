@@ -160,42 +160,42 @@
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Documento</label>
                       <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="documento_usuario" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="documento_usuario" id="inputText" required="">
                       </div>
                     </div>
                     
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Nombres</label>
                       <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="nombre_usuario" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="nombre_usuario" id="inputText" required="">
                       </div>
                     </div>
 
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Apellidos</label>
                       <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="apellido_usuario" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="apellido_usuario" id="inputText" required="">
                       </div>
                     </div>
                     
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Semestre</label>
                       <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="Semestre" id="inputText">
+                        <input placeholder="..." class="form-control" type="text" name="Semestre" id="inputText" required="">
                       </div>
                     </div>
 
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">Clave</label>
                       <div class="col-sm-9">
-                        <input placeholder="***" class="form-control" type="text" name="clave" id="inputText">
+                        <input placeholder="***" class="form-control" type="text" name="clave" id="inputText" required="">
                       </div>
                     </div>
 
                     <fieldset>
                       <label>Tipo de usuario: </label>
                       <center>
-                        <select class="form-control col-md-8 col-md-offset-1" name="tipousuario" required>
+                        <select class="form-control col-md-8 col-md-offset-1" name="tipousuario" required="">
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
                           //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
@@ -214,7 +214,7 @@
                     <fieldset>
                       <label>Carrera: </label>
                       <center>
-                        <select name="carrera" class="form-control col-md-8 col-md-offset-1">
+                        <select name="carrera" class="form-control col-md-8 col-md-offset-1" required="">
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
                           //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
@@ -234,7 +234,7 @@
                     <fieldset>
                       <label>Jornada: </label><br>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna" required="">
                         <label class="form-check-label" for="inlineRadio1">Diurna</label>
                       </div>
                       <div class="form-check form-check-inline">

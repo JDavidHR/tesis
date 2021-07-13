@@ -254,7 +254,7 @@
                     <fieldset>
                       <label>Jornada: </label><br>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna" required="">
                         <label class="form-check-label" for="inlineRadio1">Diurna</label>
                       </div>
                       <div class="form-check form-check-inline">

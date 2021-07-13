@@ -142,7 +142,7 @@
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Nombre</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="nombre_aula" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_aula" id="inputText" required="">
                                           </div>
                                         </div>
 

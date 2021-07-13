@@ -158,28 +158,28 @@
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Documento</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="documento_docente" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="documento_docente" id="inputText" required="">
                                           </div>
                                         </div>
                                         
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Nombres</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="nombre_docente" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_docente" id="inputText" required="">
                                           </div>
                                         </div>
 
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Apellidos</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="apellido_docente" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="apellido_docente" id="inputText" required="">
                                           </div>
                                         </div>
 
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Clave</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="***" class="form-control" type="text" name="contrasena" id="inputText">
+                                            <input placeholder="***" class="form-control" type="text" name="contrasena" id="inputText" required="">
                                           </div>
                                         </div>
 

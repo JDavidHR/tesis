@@ -161,14 +161,14 @@
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Id del grupo</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="id_grupo" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="id_grupo" id="inputText" required="">
                                           </div>
                                         </div>
 
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Nombre del grupo</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="..." class="form-control" type="text" name="nombre_grupo" id="inputText">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_grupo" id="inputText" required="">
                                           </div>
                                         </div>
 
