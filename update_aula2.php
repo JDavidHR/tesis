@@ -43,8 +43,8 @@
     $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
     //declaracion de variables metodo post
-    $id = $_POST['aula'];
-    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.aula.nombre from aula WHERE asistencia.aula.id_aula = ".$id."");
+    $id_aula = $_POST['aula'];
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.aula.nombre from aula WHERE asistencia.aula.id_aula = ".$id_aula."");
     //se inicia el recorrido para mostrar los datos de la BD
      while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
     //declaracion de variables
@@ -156,14 +156,14 @@
                         <div class="card">
                            <div class="card-body">          
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
-    								<form id="contact" action="Controlador/update_aula.php" method="post">
+    								<form id="contact" action="Controlador/update_aula.php?id=<?php echo $id_aula; ?>" method="post"> 
     								    <h3>Modificar Aula</h3>
     								    <h4>Recuerda llenar todos los campos</h4>
                                         <br>
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Id del aula</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="ID Aula" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id ?>">
+                                            <input placeholder="ID Aula" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_aula ?>">
                                           </div>
                                         </div>
 

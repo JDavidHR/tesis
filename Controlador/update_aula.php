@@ -5,13 +5,13 @@ if(isset($_POST['submit']) && !empty($_POST['nombre_aula'])){
         require_once '../Modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
         $aula=$_POST["nombre_aula"];
-        $id = $_POST['id']; 
+        $ides = $_GET['id']; 
 
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
 
-        $sql=$mysql->efectuarConsulta("UPDATE asistencia.aula SET nombre ='".$aula."' WHERE id_aula = ".$id."");
+        $sql=$mysql->efectuarConsulta("UPDATE asistencia.aula SET nombre ='".$aula."' WHERE id_aula = ".$ides."");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina

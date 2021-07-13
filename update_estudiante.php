@@ -42,7 +42,7 @@
         //se conecta a la base de datos
         $mysql->conectar();
         //respectiva consulta para la seleccion de usuario  
-        $seleccionEstudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante where asistencia.estudiante.estado = 1");
+        $seleccionEstudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento from estudiante where asistencia.estudiante.estado = 1");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -158,12 +158,13 @@
                                         <center>
                                             <fieldset>
                                                 <select class="form-control col-md-6 col-md-offset-3" name="usuario" required>
+                                                    <option value="0" disabled="">Seleccione:</option>
                                                     <?php
                                                     //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                                                     while ($resultado = mysqli_fetch_assoc($seleccionEstudiante)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_estudiante'] ?>"><?php echo $resultado['nombres'] ?></option>
+                                                        <option value="<?php echo $resultado['id_estudiante'] ?>"><?php echo 'Nombre: ' . $resultado['nombres'] . ' ' . $resultado['apellidos'] . ' - Documento: ' . $resultado['documento']?></option>
                                                     <?php
                                                     }
                                                     ?>

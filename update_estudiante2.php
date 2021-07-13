@@ -219,6 +219,7 @@
                     <fieldset>
                       <label>Tipo de usuario</label>
                       <select class="form-control " name="tipousuario" required>
+                        <option value="0" disabled="">Seleccione:</option>
                         <?php
                         //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                         while ($resultado = mysqli_fetch_assoc($seleccionUsuario)) {

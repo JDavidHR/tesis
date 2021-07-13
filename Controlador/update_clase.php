@@ -1,6 +1,6 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-
+if(isset($_POST['enviar']) && !empty($_POST['hora']) && !empty($_POST['horafin']) && !empty($_POST['materia']) && !empty($_POST['aula']) && !empty($_POST['dia']) && !empty($_POST['codigo']) && !empty($_POST['nombre_docente']) && !empty($_POST['grupo'])){
 
         require_once '../Modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
@@ -39,5 +39,5 @@
         }
         
         
-    
+}    
 ?>

@@ -1,6 +1,6 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-
+if(isset($_POST['enviar']) && !empty($_POST['documento_usuario']) && !empty($_POST['nombre_usuario']) && !empty($_POST['apellido_usuario']) && !empty($_POST['Semestre']) && !empty($_POST['clave']) && !empty($_POST['carrera']) && !empty($_POST['inlineRadioOptions']) && !empty($_POST['tipousuario'])  ){
 
         require_once '../Modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
@@ -34,5 +34,5 @@
         }
         
          
-
+}
 ?>

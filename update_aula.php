@@ -156,6 +156,7 @@
                                         <center>
                                             <fieldset class="col-md-6 col-md-offset-3">
                                                 <select class="form-control" name="aula" required>
+                                                    <option value="0" disabled="">Seleccione:</option>
                                                     <?php
                                                     //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                                                     while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
