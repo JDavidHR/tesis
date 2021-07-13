@@ -42,7 +42,7 @@
         //se conecta a la base de datos
         $mysql->conectar();
         //respectiva consulta para la seleccion de usuario  
-        $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres from docente where asistencia.docente.estado = 1");
+        $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres, asistencia.docente.apellidos, asistencia.docente.documento from docente where asistencia.docente.estado = 1");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -164,7 +164,7 @@
                                                     while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombres'] ?></option>
+                                                        <option value="<?php echo $resultado['id_docente'] ?>"><?php echo 'Nombre: ' . $resultado['nombres'] . ' ' . $resultado['apellidos'] . ' - Documento: ' . $resultado['documento']?></option>
                                                     <?php
                                                     }
                                                     ?>
