@@ -35,25 +35,24 @@
 <?php 
     //session_start();
     if(!isset($_SESSION['tipousuario'])){
-    //llamado del archivo mysql
-    require_once 'Modelo/MySQL.php';
-    //creacion de nueva "consulta"
-    $mysql = new MySQL; //se crea un nuevo musql
+        //llamado del archivo mysql
+        require_once 'Modelo/MySQL.php';
+        //creacion de nueva "consulta"
+        $mysql = new MySQL; //se crea un nuevo musql
 
-    $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
+        $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
-//declaracion de variables metodo post
-$id = $_POST['materia'];
-$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.materia.nombre from materia WHERE asistencia.materia.id_materia = ".$id."");
-//se inicia el recorrido para mostrar los datos de la BD
- while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
-//declaracion de variables
-$materia = $valores1['nombre'];
-
+        //declaracion de variables metodo post
+        $id = $_POST['materia'];
+        $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.materia.nombre from materia WHERE asistencia.materia.id_materia = ".$id."");
+        //se inicia el recorrido para mostrar los datos de la BD
+        while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+        //declaracion de variables
+            $materia = $valores1['nombre'];
+        }
     }
-}
-$mysql->desconectar();//funcion llamada desde mysql.php
-?>
+    $mysql->desconectar();//funcion llamada desde mysql.php
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->

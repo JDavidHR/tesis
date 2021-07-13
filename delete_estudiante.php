@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Update Clase</title>
+    <title>Delete Estudiante</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->

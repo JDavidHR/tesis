@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Update carreras</title>
+    <title>Update Grupos</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -41,7 +41,7 @@
         $mysql = new MySQL;
         //se conecta a la base de datos
         $mysql->conectar();
-        $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera,asistencia.carrera.nombre from carrera where asistencia.carrera.estado = 1");
+        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1 GROUP by asistencia.grupo.id_grupo");
         //se desconecta de la base de datos
         $mysql->desconectar();
     }
@@ -149,28 +149,27 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
                                 <div class="container" style="text-align: center">
-                                    <form id="contact" action="update_carreras2.php" method="post">
-                                        <h3>Actualizar Carrera</h3>
-                                        <h4>Seleciona la materia a actualizar</h4>
-                                        <br>
+                                    <form id="contact" action="update_grupos2.php" method="post">
+                                        <h3>Update Grupo</h3>
+                                        <h4>Selecione el grupo a actualizar</h4>
                                         <center>
-                                            <fieldset>
-                                                <select class="form-control col-md-6 col-md-offset-3" name="carrera" required>
+                                            <fieldset class="col-md-6 col-md-offset-3">
+                                                <select class="form-control" name="grupo" required>
+                                                    <option value="0" disabled="">Seleccione:</option>
                                                     <?php
-                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                    while ($resultado = mysqli_fetch_assoc($seleccioncarrera)) {
+                                                    //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                    while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
                                                     ?>
-                                                        <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_carrera'] ?>"><?php echo $resultado['nombre'] ?></option>
+                                                      <!--se traen los datos a mostrar en el select-->
+                                                      <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['id_grupo']. " - Nombre: " . $resultado['nombre']?></option>
                                                     <?php
                                                     }
                                                     ?>
                                                 </select>
-                                                <br>
                                             </fieldset>
                                         </center>
+                                        <br>
                                         <fieldset>
                                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
                                         </fieldset>

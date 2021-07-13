@@ -42,18 +42,18 @@
 
     $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
-//declaracion de variables metodo post
-$id = $_POST['materia'];
-$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.carrera.nombre from carrera WHERE asistencia.carrera.id_carrera = ".$id."");
-//se inicia el recorrido para mostrar los datos de la BD
- while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
-//declaracion de variables
-$carrera = $valores1['nombre'];
+    //declaracion de variables metodo post
+    $id = $_POST['carrera'];
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.carrera.nombre from carrera WHERE asistencia.carrera.id_carrera = ".$id."");
+    //se inicia el recorrido para mostrar los datos de la BD
+     while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+    //declaracion de variables
+    $carrera = $valores1['nombre'];
 
+        }
     }
-}
-$mysql->desconectar();//funcion llamada desde mysql.php
-?>
+    $mysql->desconectar();//funcion llamada desde mysql.php
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -158,31 +158,34 @@ $mysql->desconectar();//funcion llamada desde mysql.php
                     <div class="col-12">
                         <div class="card">
                            <div class="card-body">
-                                
                                <div class="container col-md-6 col-md-offset-3" style="text-align: center">  
-										<form id="contact" action="Controlador/update_carreras.php" method="post">
-										    <h3>Modificar Carreras</h3>
-										    <h4>Recuerda rellenar el campo</h4>
-										    <br>
-                                            <fieldset>
-                                              <input placeholder="ID materia" type="text" tabindex="1"  autofocus name="id" value="<?php echo $id ?>">
-                                            </fieldset>
-                                            <br>
-                                            <fieldset>
-                                              <input placeholder="Nombre de la carrera" type="text" tabindex="1"  autofocus name="nombre_carrera" value="<?php echo $carrera ?>">
-                                            </fieldset>
+									<form id="contact" action="Controlador/update_carreras.php?id_carrera=<?php echo $id; ?>" method="post">
+									    <h3>Modificar Carreras</h3>
+									    <h4>Recuerda rellenar el campo</h4>
+									    <br>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Id de la carrera</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="ID Carrera" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id ?>">
+                                          </div>
+                                        </div>
 
-                                            <fieldset>
-                                              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
-                                            </fieldset>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombre</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="Nombre de la carrera" class="form-control" type="text" name="nombre_carrera" id="inputText" value="<?php echo $carrera ?>">
+                                          </div>
+                                        </div>
 
-                                        </form>
-                                        
+                                        <fieldset>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
+                                        </fieldset>
+                                    </form>     
 								</div>
                             </div> 
+                        </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

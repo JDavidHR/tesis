@@ -177,7 +177,7 @@
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">ID del Estudiante</label>
                       <div class="col-sm-9">
-                        <input placeholder="ID del estudiante" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_usuario ?>">
+                        <input placeholder="ID del estudiante" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_usuario ?>">
                       </div>
                     </div>
                     

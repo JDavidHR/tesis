@@ -44,7 +44,9 @@
 
         //respectiva consulta para los select
         $seleccionEstudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante where asistencia.estudiante.estado = 1");
-        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1");
+        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1 GROUP by asistencia.grupo.id_grupo");
+
+        $selecciongrupo2 = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo as idgrupo, asistencia.grupo.nombre as nombregrupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from grupo join estudiante on asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante where asistencia.grupo.estado = 1");
 
         //se desconecta de la base de datos
         $mysql->desconectar();
@@ -155,7 +157,7 @@
                                 <div class="container col-md-10" style="text-align: center">
                                     <form id="contact" action="Controlador/insertar_grupos.php" method="post">
                                         <h3>Registrar Grupo</h3>
-                                        <h4>Recuerda llenar todos los campo</h4>
+                                        <h4>Recuerda llenar todos los campos</h4>
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Id del grupo</label>
                                           <div class="col-sm-9">
@@ -174,6 +176,7 @@
                                           <label class="col-sm-3 col-form-label">Estudiante:</label>
                                           <div class="col-sm-9">
                                             <select class="form-control" name="usuario" required>
+                                                <option value="0" disabled="">Seleccione:</option>
                                                 <?php
                                                 //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
                                                 while ($resultado = mysqli_fetch_assoc($seleccionEstudiante)) {
@@ -221,6 +224,28 @@
                                                 ?>
                                                   <!--se traen los datos a mostrar en el select-->
                                                   <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['id_grupo']. " - Nombre: " . $resultado['nombre']?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </center>
+                                    </fieldset>
+                                </div>
+
+                                <br>
+
+                                <div class="container col-md-10" style="text-align: center">
+                                    <fieldset>
+                                        <label>Estudiantes en grupos: </label>
+                                        <center>
+                                            <select name="gruposdisponibles" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                while ($resultado = mysqli_fetch_assoc($selecciongrupo2)) {
+                                                ?>
+                                                  <!--se traen los datos a mostrar en el select-->
+                                                  <option value="<?php echo $resultado['idgrupo'] ?>"><?php echo $resultado['nombregrupo']. " - Estudiante: " . $resultado['nombres']?></option>
                                                 <?php
                                                 }
                                                 ?>

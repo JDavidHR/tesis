@@ -42,18 +42,18 @@
 
     $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
-//declaracion de variables metodo post
-$id = $_POST['aula'];
-$mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.aula.nombre from aula WHERE asistencia.aula.id_aula = ".$id."");
-//se inicia el recorrido para mostrar los datos de la BD
- while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
-//declaracion de variables
-$aula = $valores1['nombre'];
+    //declaracion de variables metodo post
+    $id = $_POST['aula'];
+    $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.aula.nombre from aula WHERE asistencia.aula.id_aula = ".$id."");
+    //se inicia el recorrido para mostrar los datos de la BD
+     while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+    //declaracion de variables
+    $aula = $valores1['nombre'];
 
+        }
     }
-}
-$mysql->desconectar();//funcion llamada desde mysql.php
-?>
+    $mysql->desconectar();//funcion llamada desde mysql.php
+    ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->

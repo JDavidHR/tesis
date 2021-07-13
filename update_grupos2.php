@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Update carreras</title>
+    <title>Registro Grupos</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -33,18 +33,34 @@
 
 <body>
     <?php
-    //session_start();
-    if (!isset($_SESSION['tipousuario'])) {
+      //session_start();
+      if (!isset($_SESSION['tipousuario'])) {
         //llamado del archivo mysql
         require_once 'Modelo/MySQL.php';
         //creacion de nueva "consulta"
         $mysql = new MySQL;
         //se conecta a la base de datos
         $mysql->conectar();
-        $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera,asistencia.carrera.nombre from carrera where asistencia.carrera.estado = 1");
+
+        //respectiva consulta para los select
+        $idgrupo= $_POST['grupo'];
+        //respectiva consulta para los select
+        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.nombre as nombre_grupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from grupo join asistencia.estudiante on asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante where asistencia.grupo.id_grupo = ".$idgrupo."");
+
+        $selecciongrupo2 = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1 GROUP by asistencia.grupo.id_grupo");
+        $seleccionEstudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante where asistencia.estudiante.estado = 1");
+
+        while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
+        //declaracion de variables
+            $nombre_grupo = $valores1['nombre_grupo'];
+            $idestudiante = $valores1['Estudiante_id_estudiante'];
+            $estudiante = $valores1['nombres'];
+
+        }
+
         //se desconecta de la base de datos
         $mysql->desconectar();
-    }
+      }
     ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -146,41 +162,65 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12">
+                    <div class="col-6">
+                        <div class="card">
+                                <div class="container col-md-10" style="text-align: center">
+                                    <form id="contact" action="Controlador/update_grupo.php?id=<?php echo $idgrupo; ?>" method="post">
+                                        <h3>Modificar Grupo</h3>
+                                        <h4>Recuerda rellenar el campo</h4>
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Id del grupo</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="Id del horario" class="form-control" type="text" disabled="" name="id" id="inputText" value="<?php echo $idgrupo ?>">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group row" align="Left">
+                                          <label class="col-sm-3 col-form-label">Nombre del grupo</label>
+                                          <div class="col-sm-9">
+                                            <input placeholder="..." class="form-control" type="text" name="nombre_grupo" id="inputText" value="<?php echo $nombre_grupo ?>">
+                                          </div>
+                                        </div>
+
+                                        <fieldset>
+                                          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Actualizar</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            
+                        </div>
+                    </div>    
+
+                    <div class="col-6">
                         <div class="card">
                             <div class="card-body">
-
-                                <div class="container" style="text-align: center">
-                                    <form id="contact" action="update_carreras2.php" method="post">
-                                        <h3>Actualizar Carrera</h3>
-                                        <h4>Seleciona la materia a actualizar</h4>
-                                        <br>
+                                <h2 align="center">Datos para tener en cuenta: </h2>
+                                <label>Tenga en cuenta los siguientes datos al momento de cambiar el nombre del grupo.</label>
+                                <label>(Debe escribir los mismos datos en el campo para que el cambio se aplique correctamente.)</label>
+                                <br><br>
+                                <div class="container col-md-10" style="text-align: center">
+                                    <fieldset>
+                                        <label>Id del grupo y nombre disponibles: </label>
                                         <center>
-                                            <fieldset>
-                                                <select class="form-control col-md-6 col-md-offset-3" name="carrera" required>
-                                                    <?php
-                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                    while ($resultado = mysqli_fetch_assoc($seleccioncarrera)) {
-                                                    ?>
-                                                        <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_carrera'] ?>"><?php echo $resultado['nombre'] ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                                <br>
-                                            </fieldset>
+                                            <select name="gruposdisponibles" class="form-control">
+                                                <option value="0" disabled="">Seleccione:</option>
+                                                <?php
+                                                //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
+                                                while ($resultado = mysqli_fetch_assoc($selecciongrupo2)) {
+                                                ?>
+                                                  <!--se traen los datos a mostrar en el select-->
+                                                  <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['id_grupo']. " - Nombre: " . $resultado['nombre']?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
                                         </center>
-                                        <fieldset>
-                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
-                                        </fieldset>
-
-                                    </form>
-
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Container fluid  -->

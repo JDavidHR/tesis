@@ -1,17 +1,20 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-if(isset($_POST['submit']) && !empty($_POST['nombre_carrera'])){
+
 
         require_once '../Modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
-        $carrera=$_POST["nombre_carrera"];
-        $id = $_POST['id_carrera']; 
+        $id = $_GET['id']; 
+        $nombre=$_POST["nombre_grupo"];
+        
 
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
+        //$sql=$mysql->efectuarConsulta("insert into asistencia.estudiante(documento,nombres,apellidos,jornada,semestre,horario_id_horario,Carrera_id_carrera,tipo_usuario_id_tipo_usuario) VALUES ('".$documento."','".$nombre."','".$apellido."','".$jornada."','".$semestre."','".$horario."','".$carrera."','".$tipo."')");
 
-        $sql=$mysql->efectuarConsulta("UPDATE asistencia.carrera SET nombre ='".$carrera."' WHERE id_carrera = ".$id."");
+
+        $sql=$mysql->efectuarConsulta("UPDATE asistencia.grupo SET nombre ='".$nombre."' WHERE id_grupo = ".$id."");
         //condicion donde si la consulta se hace correcto
         if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
@@ -19,9 +22,9 @@ if(isset($_POST['submit']) && !empty($_POST['nombre_carrera'])){
 
         }else{
             //mensaje de salida en caso de que la consulta falle
-            echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../update_carreras.php';</script>";
+            echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_grupos.php';</script>";
         }
         
          
-}
+
 ?>
