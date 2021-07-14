@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registro Estudiante</title>
+  <title>Gestionar Estudiante</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -23,6 +23,12 @@
 
   <link href="css/registro.css" rel="stylesheet" media="all">
 
+
+  <!--datatables-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" media="all">
+  <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" media="all">
+
+  
 
 </head>
 
@@ -37,9 +43,8 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");
-    //$seleccionhorario = $mysql->efectuarConsulta("SELECT asistencia.horario.id_horario from horario where estado = 1");
-    $seleccioncarrera = $mysql->efectuarConsulta("SELECT asistencia.carrera.id_carrera, asistencia.carrera.nombre from carrera where estado = 1");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 1");
+    
     //se desconecta de la base de datos
     $mysql->desconectar();
   }
@@ -143,108 +148,53 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-              <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="Controlador/insertar_usuario.php" method="post">
-                    <h3>Registrar Estudiante</h3>
-                    <h4>Recuerda llenar todos los campos</h4>
+                <div class="container col-md-12 col-md-offset-3">
+                  <!--DATATABLE-->
+                  <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Documento</th>
+                        <th>Jornada</th>
+                        <th>Semestre</th>
+                        <th>Carrera</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <?php
+                        while ($valores1 = mysqli_fetch_assoc($MostrarDatos)) {
+                        ?>
+                          <th scope="row"><?php echo $valores1['nombres'] ?></th>
+                          <td><?php echo $valores1['apellidos'] ?></td>
+                          <td><?php echo $valores1['documento'] ?></td>
+                          <td><?php echo $valores1['jornada'] ?></td>
+                          <td><?php echo $valores1['semestre'] ?></td>
+                          <td><?php echo $valores1['nombre'] ?></td>
+                          <td>
+                            <div class="text-center">
+                              <a class="btn" style="background-color: #037537;color: white" href="update_estudiante.php" role="button"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn" style="background-color: #037537;color: white" href="delete_estudiante.php" role="button"><i class="mdi mdi-delete"></i></a>
+                            </div>
+                          </td>
+                      </tr>
+                    <?php
+                        }
+                    ?>
+                    </tbody>
+                  </table>
+                  <script>
+                    $(document).ready(function() {
+                      $('#example').DataTable();
+                    });
+                  </script>
 
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-3 col-form-label">Documento</label>
-                      <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="documento_usuario" id="inputText" required="">
-                      </div>
-                    </div>
-                    
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-3 col-form-label">Nombres</label>
-                      <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="nombre_usuario" id="inputText" required="">
-                      </div>
-                    </div>
+                  <div class="text-center">
+                  <a class="btn" style="background-color: #037537;color: white" href="registro_usuario.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
+                  </div>
 
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-3 col-form-label">Apellidos</label>
-                      <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="apellido_usuario" id="inputText" required="">
-                      </div>
-                    </div>
-                    
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-3 col-form-label">Semestre</label>
-                      <div class="col-sm-9">
-                        <input placeholder="..." class="form-control" type="text" name="Semestre" id="inputText" required="">
-                      </div>
-                    </div>
-
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-3 col-form-label">Clave</label>
-                      <div class="col-sm-9">
-                        <input placeholder="***" class="form-control" type="text" name="clave" id="inputText" required="">
-                      </div>
-                    </div>
-
-                    <fieldset>
-                      <label>Tipo de usuario: </label>
-                      <center>
-                        <select class="form-control col-md-8 col-md-offset-1" name="tipousuario" required="">
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                          while ($resultado = mysqli_fetch_assoc($seleccionUsuario)) {
-                          ?>
-                            <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                            <option value="<?php echo $resultado['id_tipo_usuario'] ?>"><?php echo $resultado['nombre'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </center>
-                    </fieldset>
-                    
-                    <br>
-                    <fieldset>
-                      <label>Carrera: </label>
-                      <center>
-                        <select name="carrera" class="form-control col-md-8 col-md-offset-1" required="">
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                          while ($valores1 = mysqli_fetch_assoc($seleccioncarrera)) {
-                          ?>
-                            <!--se traen los datos a mostrar en el select-->
-                            <option value="<?php echo $valores1['id_carrera'] ?>"><?php echo $valores1['nombre'] ?></option>';
-                          <?php
-                          }
-                          ?>
-
-                        </select>
-                      </center>
-                    </fieldset>
-                    <br>
-
-                    <fieldset>
-                      <label>Jornada: </label><br>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Diurna" required="">
-                        <label class="form-check-label" for="inlineRadio1">Diurna</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Nocturna">
-                        <label class="form-check-label" for="inlineRadio2">Nocturna</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Sabatina">
-                        <label class="form-check-label" for="inlineRadio3">Sabatina</label>
-                      </div>
-                    </fieldset>
-                    <br>
-
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
-                    </fieldset>
-                    <br>
-
-                  </form>
                 </div>
               </div>
             </div>
@@ -291,7 +241,10 @@
     <script src="js/chartist-plugin-tooltip.min.js"></script>
     <script src="js/dashboard1.js"></script>
 
-    
+    <!--datatables-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>
