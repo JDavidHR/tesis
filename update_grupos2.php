@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Registro Grupos</title>
+    <title>Update Grupos</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -43,9 +43,9 @@
         $mysql->conectar();
 
         //respectiva consulta para los select
-        $idgrupo= $_POST['grupo'];
+        $id_grupo = $_GET['id_grupo'];
         //respectiva consulta para los select
-        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.nombre as nombre_grupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from grupo join asistencia.estudiante on asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante where asistencia.grupo.id_grupo = ".$idgrupo."");
+        $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.nombre as nombre_grupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from grupo join asistencia.estudiante on asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante where asistencia.grupo.id_grupo = ".$id_grupo."");
 
         $selecciongrupo2 = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1 GROUP by asistencia.grupo.id_grupo");
         $seleccionEstudiante = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres from estudiante where asistencia.estudiante.estado = 1");
@@ -165,13 +165,13 @@
                     <div class="col-6">
                         <div class="card">
                                 <div class="container col-md-10" style="text-align: center">
-                                    <form id="contact" action="Controlador/update_grupo.php?id=<?php echo $idgrupo; ?>" method="post">
+                                    <form id="contact" action="Controlador/update_grupo.php?id=<?php echo $id_grupo; ?>" method="post">
                                         <h3>Modificar Grupo</h3>
                                         <h4>Recuerda rellenar el campo</h4>
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-3 col-form-label">Id del grupo</label>
                                           <div class="col-sm-9">
-                                            <input placeholder="Id del horario" class="form-control" type="text" disabled="" name="id" id="inputText" value="<?php echo $idgrupo ?>">
+                                            <input placeholder="Id del horario" class="form-control" type="text" disabled="" name="id" id="inputText" value="<?php echo $id_grupo ?>">
                                           </div>
                                         </div>
 

@@ -195,10 +195,7 @@
                                         </fieldset>
                                         <br>
 
-                                        <div class="text-center"> 
-                                          <a class="btn" style="background-color: #037537;color: white" href="update_grupos.php" role="button">Modificar Grupo</a>
-                                          <a class="btn" style="background-color: #037537;color: white" href="delete_grupos.php" role="button">Eliminar Grupo</a>
-                                        </div>
+                                        
                                     </form>
                                 </div>
                             
