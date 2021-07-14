@@ -151,10 +151,7 @@
                                         </fieldset>
                                         <br>
 
-                                        <div class="text-center"> 
-                                          <a class="btn" style="background-color: #037537;color: white" href="update_aula.php" role="button">Modificar Aula</a>
-                                          <a class="btn" style="background-color: #037537;color: white" href="delete_aulas.php" role="button">Eliminar Aula</a>
-                                        </div>
+                                     
 
                                     </form>
                                 </div>

@@ -43,7 +43,8 @@
     $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
     //declaracion de variables metodo post
-    $id_carrera = $_POST['carrera'];
+    $id_carrera = $_GET['id_carrera'];
+    echo "dato: " . $id_carrera;
     $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.carrera.nombre from carrera WHERE asistencia.carrera.id_carrera = ".$id_carrera."");
     //se inicia el recorrido para mostrar los datos de la BD
      while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {

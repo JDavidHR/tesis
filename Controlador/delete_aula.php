@@ -1,14 +1,15 @@
 <?php
-if( isset($_POST['submit']) && isset($_POST['usuario'])){
+
     //Archivo requerido para hacer las peticiones a la base de datos
     require_once '../modelo/MySQL.php';
     
     
-    $aula=$_POST['usuario'];//Encriptada
+    $id_aula = $_GET['id_aula'];
+    echo "dato: " . $id_aula; 
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
-    $sql = $mysql->efectuarConsulta("UPDATE asistencia.aula SET estado = 0 WHERE id_aula = ".$aula."");
+    $sql = $mysql->efectuarConsulta("UPDATE asistencia.aula SET estado = 0 WHERE id_aula = ".$id_aula."");
     //Se valida si la consulta arrojo algun valor
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
@@ -19,7 +20,5 @@ if( isset($_POST['submit']) && isset($_POST['usuario'])){
         echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_docente.php';</script>";
     }
     $mysql->desconectar();   
-} else {
-    echo "0";
-}
+
 ?>

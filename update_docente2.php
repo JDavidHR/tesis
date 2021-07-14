@@ -41,7 +41,8 @@
         $mysql = new MySQL;
         //se conecta a la base de datos
         $mysql->conectar();
-        $id_docente = $_POST['docente'];
+        $id_docente = $_GET['id_docente'];
+        echo "dato: " . $id_docente; 
 
         $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.docente.documento,asistencia.docente.nombres,asistencia.docente.apellidos,asistencia.docente.clave,asistencia.docente.tipo_usuario_id_tipo_usuario from docente WHERE asistencia.docente.id_docente = " . $id_docente . "");
 

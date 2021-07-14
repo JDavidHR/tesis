@@ -1,14 +1,15 @@
 <?php
-if( isset($_POST['submit']) && isset($_POST['usuario'])){
+
     //Archivo requerido para hacer las peticiones a la base de datos
     require_once '../modelo/MySQL.php';
     
     
-    $materia=$_POST['usuario'];//Encriptada
+    $id_materia = $_GET['id_materia'];
+    echo "dato: " . $id_materia;
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
-    $sql = $mysql->efectuarConsulta("UPDATE asistencia.materia SET estado = 0 WHERE id_materia = ".$materia."");
+    $sql = $mysql->efectuarConsulta("UPDATE asistencia.materia SET estado = 0 WHERE id_materia = ".$id_materia."");
     //Se valida si la consulta arrojo algun valor
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
@@ -19,7 +20,5 @@ if( isset($_POST['submit']) && isset($_POST['usuario'])){
         echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_materias.php';</script>";
     }
     $mysql->desconectar();   
-} else {
-    echo "0";
-}
+
 ?>

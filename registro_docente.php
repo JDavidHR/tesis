@@ -207,10 +207,6 @@
                                         </fieldset>
                                         <br>
 
-                                        <div class="text-center"> 
-                                          <a class="btn" style="background-color: #037537;color: white" href="update_docente.php" role="button">Modificar Docente</a>
-                                          <a class="btn" style="background-color: #037537;color: white" href="delete_docente.php" role="button">Eliminar Docente</a>
-                                        </div>
                                     </form>
 							    </div>
                             </div> 

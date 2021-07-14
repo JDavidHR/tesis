@@ -151,10 +151,7 @@
                                         </fieldset>
                                         <br>
 
-                                        <div class="text-center"> 
-                                          <a class="btn" style="background-color: #037537;color: white" href="update_carreras.php" role="button">Modificar Carrera</a>
-                                          <a class="btn" style="background-color: #037537;color: white" href="delete_carreras.php" role="button">Eliminar Carrera</a>
-                                        </div>
+                                      
                                     </form>
                                 </div>
                             </div>

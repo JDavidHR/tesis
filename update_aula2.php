@@ -43,7 +43,8 @@
     $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
     //declaracion de variables metodo post
-    $id_aula = $_POST['aula'];
+    $id_aula = $_GET['id_aula'];
+    echo "dato: " . $id_aula; 
     $mostrardatos =$mysql->efectuarConsulta("SELECT asistencia.aula.nombre from aula WHERE asistencia.aula.id_aula = ".$id_aula."");
     //se inicia el recorrido para mostrar los datos de la BD
      while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {

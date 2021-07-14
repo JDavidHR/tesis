@@ -151,10 +151,7 @@
                                         </fieldset>
                                         <br>
 
-                                        <div class="text-center"> 
-                                          <a class="btn" style="background-color: #037537;color: white" href="update_materias.php" role="button">Modificar Materia</a>
-                                          <a class="btn" style="background-color: #037537;color: white" href="delete_materias.php" role="button">Eliminar Materia</a>
-                                        </div>
+                                        
                                     </form>
                                 </div>
                             </div>
