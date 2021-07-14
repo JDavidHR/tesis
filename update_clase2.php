@@ -42,10 +42,10 @@
         //se conecta a la base de datos
         $mysql->conectar();
 
-        $id_usuario = $_POST['horario'];
+        $id_clase = $_GET['id_clase'];
 
 
-        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.clase.hora, asistencia.clase.horafin, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as materianombre, asistencia.clase.Aula_id_aula, asistencia.aula.nombre as aulanombre, asistencia.clase.codigo, asistencia.dias.id_dia, asistencia.dias.nombre as nombredia, asistencia.docente.id_docente, docente.nombres, clase.Grupo_id_grupo, grupo.nombre as grupo from clase join dias on dias.id_dia = clase.Dias_id_dia join docente on docente.id_docente = clase.Docente_id_docente join aula on asistencia.clase.Aula_id_aula = asistencia.aula.id_aula join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia join grupo on clase.Grupo_id_grupo = grupo.id_grupo WHERE asistencia.clase.id_clase = " . $id_usuario . " GROUP by asistencia.clase.grupo_id_grupo");
+        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.clase.hora, asistencia.clase.horafin, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as materianombre, asistencia.clase.Aula_id_aula, asistencia.aula.nombre as aulanombre, asistencia.clase.codigo, asistencia.dias.id_dia, asistencia.dias.nombre as nombredia, asistencia.docente.id_docente, docente.nombres, clase.Grupo_id_grupo, grupo.nombre as grupo from clase join dias on dias.id_dia = clase.Dias_id_dia join docente on docente.id_docente = clase.Docente_id_docente join aula on asistencia.clase.Aula_id_aula = asistencia.aula.id_aula join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia join grupo on clase.Grupo_id_grupo = grupo.id_grupo WHERE asistencia.clase.id_clase = " . $id_clase . " GROUP by asistencia.clase.grupo_id_grupo");
 
 
         //se desconecta de la base de datos
@@ -180,13 +180,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                                    <form id="contact" action="Controlador/update_clase.php?id=<?php echo $id_usuario; ?>" method="post">
+                                    <form id="contact" action="Controlador/update_clase.php?id=<?php echo $id_clase; ?>" method="post">
                                         <h3>Modificar Clase</h3>
                                         <h4>Recuerda llenar todos los campos</h4>
                                         <div class="form-group row" align="Left">
                                           <label class="col-sm-4 col-form-label">Id del horario: </label>
                                           <div class="col-sm-8">
-                                            <input placeholder="Id del horario" class="form-control" type="text" disabled="" name="id" id="inputText" value="<?php echo $id_usuario ?>">
+                                            <input placeholder="Id del horario" class="form-control" type="text" disabled="" name="id" id="inputText" value="<?php echo $id_clase ?>">
                                           </div>
                                         </div>
 

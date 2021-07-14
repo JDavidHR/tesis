@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registro Clase</title>
+  <title>Gestionar Clases</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -23,12 +23,13 @@
 
   <link href="css/registro.css" rel="stylesheet" media="all">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+
+  <!--datatables-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" media="all">
+  <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" media="all">
+
+  
+
 </head>
 
 <body>
@@ -42,11 +43,9 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula where estado = 1");
-    $selecciondia = $mysql->efectuarConsulta("SELECT asistencia.dias.id_dia, asistencia.dias.nombre as nombredia from dias ORDER BY id_dia");
-    $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
-    $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1");
-    $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres as nombredocente from docente where estado = 1");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.clase.horafin, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as materianombre, asistencia.clase.Aula_id_aula, asistencia.aula.nombre as aulanombre, asistencia.clase.codigo, asistencia.dias.id_dia, asistencia.dias.nombre as nombredia, asistencia.docente.id_docente, docente.nombres, clase.Grupo_id_grupo, grupo.nombre as grupo from clase join dias on dias.id_dia = clase.Dias_id_dia join docente on docente.id_docente = clase.Docente_id_docente join aula on asistencia.clase.Aula_id_aula = asistencia.aula.id_aula join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia join grupo on clase.Grupo_id_grupo = grupo.id_grupo WHERE asistencia.clase.estado = 1 GROUP by asistencia.clase.codigo");
+
+    
     //se desconecta de la base de datos
     $mysql->desconectar();
   }
@@ -138,10 +137,6 @@
         <!-- Email campaign chart -->
         <!-- ============================================================== -->
         <div class="row">
-
-
-
-
         </div>
         <!-- ============================================================== -->
         <!-- Email campaign chart -->
@@ -154,128 +149,58 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="Controlador/insertar_clase.php" method="post">
-                    <h3>Registrar clase</h3>
-                    <h4>Recuerda llenar todos los campos</h4>
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Selecciona el día:</label>
-                      <div class="col-sm-8">
-                        <select class="form-control " name="dia" required>
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                          while ($resultado = mysqli_fetch_assoc($selecciondia)) {
-                          ?>
-                            <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                            <option value="<?php echo $resultado['id_dia'] ?>"><?php echo $resultado['nombredia'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                    </div>
+                <div class="container col-md-12 col-md-offset-3">
+                  <!--DATATABLE-->
+                  <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Dia</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fin</th>
+                        <th>Codigo</th>
+                        <th>Docente</th>
+                        <th>Aula</th>
+                        <th>Materia</th>
+                        <th>Grupo</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <?php
+                        while ($valores1 = mysqli_fetch_assoc($MostrarDatos)) {
+                          $id_clase = $valores1 ['id_clase'];
+                        ?>
+                          <th scope="row"><?php echo $valores1['nombredia'] ?></th>
+                          <td><?php echo $valores1['hora'] ?></td>
+                          <td><?php echo $valores1['horafin'] ?></td>
+                          <td><?php echo $valores1['codigo'] ?></td>
+                          <td><?php echo $valores1['nombres'] ?></td>
+                          <td><?php echo $valores1['aulanombre'] ?></td>
+                          <td><?php echo $valores1['materianombre'] ?></td>
+                          <td><?php echo $valores1['grupo'] ?></td>
+                          <td>
+                            <div class="text-center">
+                              <a class="btn" style="background-color: #037537;color: white" href='update_clase2.php?id_clase=<?php echo $id_clase; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn" style="background-color: #037537;color: white" href='Controlador/delete_clase.php?id_clase=<?php echo $id_clase; ?>' role="button"><i class="mdi mdi-delete"></i></a>
+                            </div>
+                          </td>
+                      </tr>
+                    <?php
+                        }
+                    ?>
+                    </tbody>
+                  </table>
+                  <script>
+                    $(document).ready(function() {
+                      $('#example').DataTable();
+                    });
+                  </script>
 
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Hora inicio: </label>
-                      <div class="col-sm-8">
-                        <input type="time" name="hora" class="form-control" min="07:00:00" max="22:00:00" required="">
-                      </div>
-                    </div>
+                  <div class="text-center">
+                  <a class="btn" style="background-color: #037537;color: white" href="registro_clase.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
+                  </div>
 
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Hora fin: </label>
-                      <div class="col-sm-8">
-                        <input type="time" name="horafin" class="form-control" min="07:00:00" max="22:00:00" required="">
-                      </div>
-                    </div>
-
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Codigo de la clase: </label>
-                      <div class="col-sm-8">
-                        <input placeholder="..." class="form-control" type="text" name="codigo" id="inputText" required="">
-                      </div>
-                    </div>
-
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Docente:</label>
-                      <div class="col-sm-8">
-                        <select class="form-control " name="nombre_docente" required>
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                          while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
-                          ?>
-                            <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                            <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Aula:</label>
-                      <div class="col-sm-8">
-                        <select class="form-control " name="aula" required>
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                          while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
-                          ?>
-                            <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                            <option value="<?php echo $resultado['id_aula'] ?>"><?php echo $resultado['nombre'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Materia:</label>
-                      <div class="col-sm-8">
-                        <select class="form-control " name="materia" required>
-                          <option value="0" disabled="">Seleccione:</option>
-                          <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                          while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
-                          ?>
-                            <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                            <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombre'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group row" align="Left">
-                      <label class="col-sm-4 col-form-label">Grupo:</label>
-                      <div class="col-sm-8">
-                        <select name="grupo" class="form-control">
-                            <option value="0" disabled="">Seleccione:</option>
-                            <?php
-                            //se hace el recorrido de la consulta establecida en la parte superior para mostrar los datos en el respectivo select
-                            while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
-                            ?>
-                              <!--se traen los datos a mostrar en el select-->
-                              <option value="<?php echo $resultado['id_grupo'] ?>"><?php echo $resultado['nombre'] ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                      </div>
-                    </div>
-
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Registrar</button>
-                    </fieldset>
-                    <br>
-
-                   
-                  </form>
                 </div>
               </div>
             </div>
@@ -321,6 +246,11 @@
     <script src="js/chartist.min.js"></script>
     <script src="js/chartist-plugin-tooltip.min.js"></script>
     <script src="js/dashboard1.js"></script>
+
+    <!--datatables-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>
