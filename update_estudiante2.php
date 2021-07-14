@@ -41,10 +41,14 @@
     $mysql = new MySQL;
     //se conecta a la base de datos
     $mysql->conectar();
-    $id_usuario = $_POST['usuario'];
+    
+    $id_estudiante = $_GET['id_estudiante'];
+    echo "dato: " . $id_estudiante; 
+    
+    
     //respectiva consulta para la seleccion de usuario
 
-    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.clave,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = " . $id_usuario . "");
+    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.clave,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = " . $id_estudiante . "");
 
 
     $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");
@@ -170,14 +174,14 @@
               <div class="card-body">
 
                 <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="Controlador/update_estudiante.php?id=<?php echo $id_usuario; ?>" method="post">
+                  <form id="contact" action="Controlador/update_estudiante.php?id=<?php echo $id_estudiante; ?>" method="post">
                     <h3>Update del Estudiante</h3>
                     <h4>Recuerda llenar todos los campos</h4>
                     
                     <div class="form-group row" align="Left">
                       <label class="col-sm-3 col-form-label">ID del Estudiante</label>
                       <div class="col-sm-9">
-                        <input placeholder="ID del estudiante" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_usuario ?>">
+                        <input placeholder="ID del estudiante" disabled="" class="form-control" type="text" name="id" id="inputText" value="<?php echo $id_estudiante ?>">
                       </div>
                     </div>
                     

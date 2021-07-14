@@ -176,8 +176,8 @@
                           <td><?php echo $valores1['nombre'] ?></td>
                           <td>
                             <div class="text-center">
-                              <a class="btn" style="background-color: #037537;color: white" href='update_estudiante.php?id_estudiante=<?php echo $id_estudiante; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
-                              <a class="btn" style="background-color: #037537;color: white" href="delete_estudiante.php" role="button"><i class="mdi mdi-delete"></i></a>
+                              <a class="btn" style="background-color: #037537;color: white" href='update_estudiante2.php?id_estudiante=<?php echo $id_estudiante; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn" style="background-color: #037537;color: white" href='Controlador/delete_estudiante.php?id_estudiante=<?php echo $id_estudiante; ?>' role="button"><i class="mdi mdi-delete"></i></a>
                             </div>
                           </td>
                       </tr>
