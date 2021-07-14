@@ -43,7 +43,7 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 1");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 1");
     
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -166,6 +166,7 @@
                       <tr>
                         <?php
                         while ($valores1 = mysqli_fetch_assoc($MostrarDatos)) {
+                          $id_estudiante = $valores1 ['id_estudiante'];
                         ?>
                           <th scope="row"><?php echo $valores1['nombres'] ?></th>
                           <td><?php echo $valores1['apellidos'] ?></td>
@@ -175,7 +176,7 @@
                           <td><?php echo $valores1['nombre'] ?></td>
                           <td>
                             <div class="text-center">
-                              <a class="btn" style="background-color: #037537;color: white" href="update_estudiante.php" role="button"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn" style="background-color: #037537;color: white" href='update_estudiante.php?id_estudiante=<?php echo $id_estudiante; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
                               <a class="btn" style="background-color: #037537;color: white" href="delete_estudiante.php" role="button"><i class="mdi mdi-delete"></i></a>
                             </div>
                           </td>

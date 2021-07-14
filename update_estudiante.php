@@ -176,7 +176,10 @@
                                         <fieldset>
                                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Selecionar</button>
                                         </fieldset>
-
+                                             <?php 
+                                             $id_estudiante = $_GET['id_estudiante'];
+                                             echo "dato: " . $id_estudiante; 
+                                             ?>   
                                     </form>
 
                                 </div>
