@@ -147,12 +147,19 @@
           <!-- column -->
           <div class="col-12">
             <div class="card">
+              <div class="card-body" align="center">
+                  <h2 style="color: #037537">Gestionar carreras</h2>
+              </div>
+            </div>
+
+            <div class="card">
               <div class="card-body">
                 <div class="container col-md-6 col-md-offset-3">
                   <!--DATATABLE-->
                   <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
+                        <th>Id</th>
                         <th>Nombres</th>
                         <th>Opciones</th>
                       </tr>
@@ -163,11 +170,12 @@
                         while ($valores1 = mysqli_fetch_assoc($MostrarDatos)) {
                           $id_carrera = $valores1 ['id_carrera'];
                         ?>
-                          <th scope="row"><?php echo $valores1['nombre'] ?></th>
+                          <td><?php echo $valores1['id_carrera'] ?></td>
+                          <td><?php echo $valores1['nombre'] ?></td>
                           <td>
                             <div class="text-center">
-                              <a class="btn" style="background-color: #037537;color: white" href='update_carreras2.php?id_carrera=<?php echo $id_carrera; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
-                              <a class="btn" style="background-color: #037537;color: white" href='Controlador/delete_carrera.php?id_carrera=<?php echo $id_carrera; ?>' role="button"><i class="mdi mdi-delete"></i></a>
+                              <a class="btn" style="background-color: #2EC82E;color: white" href='update_carreras2.php?id_carrera=<?php echo $id_carrera; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn" style="background-color: #FF5454;color: white" href='Controlador/delete_carrera.php?id_carrera=<?php echo $id_carrera; ?>' role="button"><i class="mdi mdi-delete"></i></a>
                             </div>
                           </td>
                       </tr>
@@ -182,9 +190,7 @@
                     });
                   </script>
 
-                  <div class="text-center">
-                  <a class="btn" style="background-color: #037537;color: white" href="registro_usuario.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
-                  </div>
+                  <a class="btn" style="background-color: #2962FF;color: white" href="registro_usuario.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
 
                 </div>
               </div>

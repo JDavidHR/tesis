@@ -148,6 +148,12 @@
           <!-- column -->
           <div class="col-12">
             <div class="card">
+              <div class="card-body" align="center">
+                  <h2 style="color: #037537">Gestionar clases</h2>
+              </div>
+            </div>
+
+            <div class="card">
               <div class="card-body">
                 <div class="container col-md-12 col-md-offset-3">
                   <!--DATATABLE-->
@@ -181,8 +187,8 @@
                           <td><?php echo $valores1['grupo'] ?></td>
                           <td>
                             <div class="text-center">
-                              <a class="btn" style="background-color: #037537;color: white" href='update_clase2.php?id_clase=<?php echo $id_clase; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
-                              <a class="btn" style="background-color: #037537;color: white" href='Controlador/delete_clase.php?id_clase=<?php echo $id_clase; ?>' role="button"><i class="mdi mdi-delete"></i></a>
+                              <a class="btn" style="background-color: #2EC82E;color: white" href='update_clase2.php?id_clase=<?php echo $id_clase; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn" style="background-color: #FF5454;color: white" href='Controlador/delete_clase.php?id_clase=<?php echo $id_clase; ?>' role="button"><i class="mdi mdi-delete"></i></a>
                             </div>
                           </td>
                       </tr>
@@ -197,9 +203,7 @@
                     });
                   </script>
 
-                  <div class="text-center">
-                  <a class="btn" style="background-color: #037537;color: white" href="registro_clase.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
-                  </div>
+                  <a class="btn" style="background-color: #2962FF;color: white" href="registro_clase.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
 
                 </div>
               </div>
