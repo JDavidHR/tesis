@@ -43,22 +43,31 @@
 		$nombres = $valores1['nombres'];
 		$tipo_usuario = $valores1['nombre'];
 	}
-	$dhorario = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . "");
+	$dhorario = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " ORDER BY clase.hora, nombredia");
 
-	$Amaterias = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.hora, dias.nombre as nombredia, materia.nombre as nombremateria, clase.codigo FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . "");
+	$Amaterias = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.hora, dias.id_dia, dias.nombre as nombredia, materia.nombre as nombremateria, clase.codigo FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " order by dias.id_dia");
 
-	//dias del horario y las materias al mismo
-	$lunes = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " and dias.nombre = 'Lunes'");
 
-	$martes = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " and dias.nombre = 'Martes'");
+	//Codigo proporcionado por el usuario Triby en stack overflow
+	//https://es.stackoverflow.com/questions/390749/como-poner-campos-en-una-tabla-php-y-mysql
+	// Crear arreglo para armar horario
+    $horario = [];
 
-	$miercoles = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " and dias.nombre = 'Miercoles'");
+    while($valores1 = mysqli_fetch_assoc($dhorario)) {
+        // Verificar que existe hora_inicial en arreglo
+        $hora = $valores1['hora'];
+        if(!isset($horario[$hora])) {
+            // Crear arreglo con 5 elementos, uno para cada día
+            $horario[$hora] = ['', '', '', '', '', '', ''];
+        }
+        // Agregar materia a $hora, en espacio correspondiente
+        // Los índices de arreglo inician en cero, van de cero = lunes a 4 = viernes
+        // Por eso el - 1
+        $horario[$hora][$valores1['id_dia'] - 1] = $valores1['nombre'];
+    }
 
-	$jueves = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " and dias.nombre = 'Jueves'");
-
-	$viernes = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " and dias.nombre = 'Viernes'");
-
-	$sabado = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " and dias.nombre = 'Sabado'");
+    
+    
 
 	//se desconecta de la base de datos
 	$mysql->desconectar();
@@ -245,6 +254,7 @@
 									<table id="example" class="table table-striped table-bordered" style="width:100%">
 										<thead>
 											<tr>
+												<th>Hora</th>
 												<th>Lunes</th>
 												<th>Martes</th>
 												<th>Miercoles</th>
@@ -255,55 +265,28 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<?php
-												while ($valores1 = mysqli_fetch_assoc($dhorario)) {
-													$nombredia = $valores1['nombredia'];
-												?>
-													<td><?php if ($nombredia == "Lunes") {
-															echo $valores1['nombre'];
-														} else {
-															echo " - ";
-														} ?></td>
-													<td><?php if ($nombredia == "Martes") {
-															echo $valores1['nombre'];
-														} else {
-															echo " - ";
-														} ?></td>
-													<td><?php if ($nombredia == "Miercoles") {
-															echo $valores1['nombre'];
-														} else {
-															echo " - ";
-														} ?></td>
-													<td><?php if ($nombredia == "Jueves") {
-															echo $valores1['nombre'];
-														} else {
-															echo " - ";
-														} ?></td>
-													<td><?php if ($nombredia == "Viernes") {
-															echo $valores1['nombre'];
-														} else {
-															echo " - ";
-														} ?></td>
-													<td><?php if ($nombredia == "Sabado") {
-															echo $valores1['nombre'];
-														} else {
-															echo " - ";
-														} ?></td>
-													<td><?php echo '-' ?></td>
-											</tr>
-										<?php
-												}
-										?>
+											<?php
+											        // Llenar tabla
+											        foreach($horario as $hora => $dias) {
+											            echo <<<HTML
+											            <tr>
+											                <td>$hora</td>
+											                <td>{$dias[0]}</td>
+											                <td>{$dias[1]}</td>
+											                <td>{$dias[2]}</td>
+											                <td>{$dias[3]}</td>
+											                <td>{$dias[4]}</td>
+											                <td>{$dias[5]}</td>
+											                <td></td>
+											            </tr>
+											HTML; // Esta línea debe estar en la primera columna, sin espacios ni tabuladores previos
+											        }
+											        // Cerrar tabla
+											?>
 
 
 										</tbody>
 									</table>
-									<script>
-										$(document).ready(function() {
-											$('#example').DataTable();
-										});
-									</script>
 
 									</tbody>
 									</table>
@@ -314,14 +297,14 @@
 								<div class="card-body col-md-7 col-md-offset-3">
 
 									<center>
-										<p>Materias</p>
+										<p>Materias asignadas a dar</p>
 									</center>
 									<table id="mater" class="table table-striped table-bordered" style="width:100%">
 										<thead>
 											<tr>
+												<th scope="col">Dia</th>
 												<th scope="col">Materia</th>
 												<th scope="col">Codigo de Ingreso</th>
-												<th scope="col">Dia</th>
 												<th scope="col">Hora</th>
 											</tr>
 										</thead>
@@ -330,9 +313,9 @@
 												<?php
 												while ($valores3 = mysqli_fetch_assoc($Amaterias)) {
 												?>
+													<td><?php echo $valores3['nombredia'] ?></td>
 													<td><?php echo $valores3['nombremateria'] ?></td>
 													<td><?php echo $valores3['codigo'] ?></td>
-													<td><?php echo $valores3['nombredia'] ?></td>
 													<td><?php echo $valores3['hora'] ?></td>
 											</tr>
 										<?php

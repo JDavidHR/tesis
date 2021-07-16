@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2021 a las 18:55:43
+-- Tiempo de generación: 17-07-2021 a las 00:08:32
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -62,7 +62,34 @@ CREATE TABLE `aula` (
 
 INSERT INTO `aula` (`id_aula`, `nombre`, `estado`) VALUES
 (1, 'LAB C', 1),
-(6, 'Texto', 0);
+(2, 'LAB E', 1),
+(3, 'LAB D', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `a_docente`
+--
+
+CREATE TABLE `a_docente` (
+  `ida_docente` int(11) NOT NULL COMMENT 'Id de la asistencia/registro del docente',
+  `clase_id_clase` int(11) NOT NULL COMMENT 'Id de la clase registrada',
+  `fecha` time NOT NULL COMMENT 'Fecha en la que se registra la clase'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `a_estudiante`
+--
+
+CREATE TABLE `a_estudiante` (
+  `ida_estudiante` int(11) NOT NULL COMMENT 'Id de la asistencia del estudiante',
+  `fecha` time NOT NULL COMMENT 'Fecha de la asistencia a la clase',
+  `asistio` int(11) NOT NULL COMMENT 'Si/No',
+  `estudiante_id_estudiante` int(11) NOT NULL COMMENT 'Id del estudiante',
+  `clase_id_clase` int(11) NOT NULL COMMENT 'Id de la clase'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -81,8 +108,8 @@ CREATE TABLE `carrera` (
 --
 
 INSERT INTO `carrera` (`id_carrera`, `nombre`, `estado`) VALUES
-(1, 'Ingeniería en Sistemas', 1),
-(2, 'Administracion Empresas', 0);
+(1, 'Hoteleria y turismo', 1),
+(2, 'Administracion Empresas', 1);
 
 -- --------------------------------------------------------
 
@@ -109,8 +136,11 @@ CREATE TABLE `clase` (
 
 INSERT INTO `clase` (`id_clase`, `Dias_id_dia`, `hora`, `horafin`, `codigo`, `Docente_id_docente`, `Aula_id_aula`, `Materia_id_materia`, `Grupo_id_grupo`, `estado`) VALUES
 (1, 1, '07:45:00', '10:15:00', 'code_lunes', 1, 1, 1, 1, 1),
-(2, 2, '09:30:00', '12:00:00', 'code_martes', 2, 1, 7, 1, 1),
-(3, 3, '07:45:00', '09:30:00', 'code_miercoles', 1, 1, 1, 1, 1);
+(2, 2, '09:30:00', '12:00:00', 'code_martes', 2, 1, 3, 1, 1),
+(3, 3, '08:45:00', '09:30:00', 'code_miercoles', 1, 1, 2, 1, 1),
+(4, 5, '19:15:00', '21:30:00', 'code_viernes', 2, 1, 3, 1, 1),
+(5, 1, '11:45:00', '12:00:00', 'code_lunes', 1, 1, 3, 1, 1),
+(6, 2, '07:45:00', '10:15:00', 'code_martes', 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +187,7 @@ CREATE TABLE `docente` (
 --
 
 INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `clave`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
-(1, '123', 'Nicole', 'Agudelo', '123', 2, 1),
+(1, '123', 'Gabriela', 'Agudelo', '123', 2, 1),
 (2, '456', 'Camila', 'Moreno', '456', 2, 1);
 
 -- --------------------------------------------------------
@@ -185,7 +215,7 @@ CREATE TABLE `estudiante` (
 
 INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `clave`, `estado`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`) VALUES
 (1, '123', 'Diego', 'Rios', 'Diurna', 'Septimo', '456', 1, 1, 1),
-(2, '456', 'Pruebas', 'Pruebas', 'Sabatina', 'Quinto', '456', 1, 1, 1),
+(2, '456', 'Emilio', 'Rivera', 'Diurna', 'Quinto', '456', 1, 2, 1),
 (3, '1010', 'Daniel', 'Andres', 'Diurna', 'Quinto', '123', 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -206,8 +236,21 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`id_grupo`, `nombre`, `Estudiante_id_estudiante`, `estado`) VALUES
-(1, 'grupo 1 dia', 1, 0),
-(1, 'grupo 1 dia', 2, 1);
+(1, 'grupo 1 dia', 1, 1),
+(1, 'grupo 1 dia', 2, 1),
+(2, 'grupo 2 noche', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `links`
+--
+
+CREATE TABLE `links` (
+  `id_links` int(11) NOT NULL COMMENT 'Llave principal',
+  `links` varchar(255) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Campo para pegar/adjuntar los links',
+  `clase_id_clase` int(11) NOT NULL COMMENT 'id de la clase a la que se adjuntan los links'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -226,9 +269,9 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`id_materia`, `nombre`, `estado`) VALUES
-(1, 'Gestion Contable', 1),
-(6, 'Calculo 2', 1),
-(7, 'Ingles A2', 1);
+(1, 'Gestion contable', 1),
+(2, 'Calculo 2', 1),
+(3, 'Ingles A2', 1);
 
 -- --------------------------------------------------------
 
@@ -269,6 +312,23 @@ ALTER TABLE `administrador`
 ALTER TABLE `aula`
   ADD PRIMARY KEY (`id_aula`),
   ADD UNIQUE KEY `id_UNIQUE` (`id_aula`);
+
+--
+-- Indices de la tabla `a_docente`
+--
+ALTER TABLE `a_docente`
+  ADD PRIMARY KEY (`ida_docente`,`clase_id_clase`),
+  ADD UNIQUE KEY `ida_docente_UNIQUE` (`ida_docente`),
+  ADD KEY `fk_a_docente_clase1_idx` (`clase_id_clase`);
+
+--
+-- Indices de la tabla `a_estudiante`
+--
+ALTER TABLE `a_estudiante`
+  ADD PRIMARY KEY (`ida_estudiante`,`estudiante_id_estudiante`,`clase_id_clase`),
+  ADD UNIQUE KEY `ida_estudiante_UNIQUE` (`ida_estudiante`),
+  ADD KEY `fk_a_estudiante_estudiante1_idx` (`estudiante_id_estudiante`),
+  ADD KEY `fk_a_estudiante_clase1_idx` (`clase_id_clase`);
 
 --
 -- Indices de la tabla `carrera`
@@ -324,6 +384,14 @@ ALTER TABLE `grupo`
   ADD KEY `fk_Grupo_Estudiante1_idx` (`Estudiante_id_estudiante`);
 
 --
+-- Indices de la tabla `links`
+--
+ALTER TABLE `links`
+  ADD PRIMARY KEY (`id_links`,`clase_id_clase`),
+  ADD UNIQUE KEY `id_links_UNIQUE` (`id_links`),
+  ADD KEY `fk_links_clase1_idx` (`clase_id_clase`);
+
+--
 -- Indices de la tabla `materia`
 --
 ALTER TABLE `materia`
@@ -351,7 +419,19 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=7;
+  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del aula', AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `a_docente`
+--
+ALTER TABLE `a_docente`
+  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente';
+
+--
+-- AUTO_INCREMENT de la tabla `a_estudiante`
+--
+ALTER TABLE `a_estudiante`
+  MODIFY `ida_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia del estudiante';
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
@@ -363,7 +443,7 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=4;
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `dias`
@@ -381,7 +461,13 @@ ALTER TABLE `docente`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=5;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del estudiante', AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `links`
+--
+ALTER TABLE `links`
+  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal';
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
@@ -404,6 +490,19 @@ ALTER TABLE `tipo_usuario`
 --
 ALTER TABLE `administrador`
   ADD CONSTRAINT `fk_administrador_tipo_usuario1` FOREIGN KEY (`tipo_usuario_id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `a_docente`
+--
+ALTER TABLE `a_docente`
+  ADD CONSTRAINT `fk_a_docente_clase1` FOREIGN KEY (`clase_id_clase`) REFERENCES `clase` (`id_clase`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `a_estudiante`
+--
+ALTER TABLE `a_estudiante`
+  ADD CONSTRAINT `fk_a_estudiante_clase1` FOREIGN KEY (`clase_id_clase`) REFERENCES `clase` (`id_clase`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_a_estudiante_estudiante1` FOREIGN KEY (`estudiante_id_estudiante`) REFERENCES `estudiante` (`id_estudiante`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `clase`
@@ -433,6 +532,12 @@ ALTER TABLE `estudiante`
 --
 ALTER TABLE `grupo`
   ADD CONSTRAINT `fk_Grupo_Estudiante1` FOREIGN KEY (`Estudiante_id_estudiante`) REFERENCES `estudiante` (`id_estudiante`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `links`
+--
+ALTER TABLE `links`
+  ADD CONSTRAINT `fk_links_clase1` FOREIGN KEY (`clase_id_clase`) REFERENCES `clase` (`id_clase`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
