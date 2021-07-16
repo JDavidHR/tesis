@@ -173,8 +173,8 @@
                     <div class="card">
                       <center>
                         <div class="card-body col-md-6 col-md-offset-3">
-                          <table class="table">
-                            <thead class="thead-dark">
+                        <table id="mater" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
                               <tr>
                                 <th scope="col">Documento</th>
                                 <th scope="col">Nombre</th>

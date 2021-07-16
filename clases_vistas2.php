@@ -150,11 +150,11 @@
         <div class="row">
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
-            <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
             <?php echo "Nombre grupo: " . $nombregrupo ?>
             <br>
-            <?php echo "ID grupo: " . $idgrupo  ?>
+            <?php echo "ID grupo: " . $idgrupo  ?>-->
           </div>
 
         </div>
@@ -194,8 +194,8 @@
                     <div class="card">
                       <center>
                         <div class="card-body col-md-6 col-md-offset-3">
-                          <table class="table">
-                            <thead class="thead-dark">
+                        <table id="" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
                               <tr>
                                 <th scope="col">Documento</th>
                                 <th scope="col">Nombre</th>
@@ -225,8 +225,8 @@
                   <div class="card">
                     <center>
                       <div class="card-body col-md-6 col-md-offset-3">
-                        <table class="table">
-                          <thead class="thead-dark">
+                      <table id="" class="table table-striped table-bordered" style="width:100%">
+                          <thead>
                             <tr>
                               <th scope="col">Hora</th>
                               <th scope="col">Documento</th>
@@ -239,6 +239,7 @@
                               <th scope="row"><?php   ?></th>
                               <td><?php   ?></td>
                               <td><?php  ?></td>
+                              <td><?php ?></td>
                             </tr>
                           </tbody>
                         </table>

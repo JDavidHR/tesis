@@ -43,8 +43,8 @@
         $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
 
         //declaracion de variables metodo post
-        $id = $_POST['selecmateria'];
-        $mostrardatos = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre from estudiante join grupo on grupo.Estudiante_id_estudiante = estudiante.id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where asistencia.materia.id_materia = " . $id . "");
+        $id_materia = $_GET['id_materia'];
+        $mostrardatos = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre from estudiante join grupo on grupo.Estudiante_id_estudiante = estudiante.id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where asistencia.materia.id_materia = " . $id_materia . "");
         //se inicia el recorrido para mostrar los datos de la BD
         while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
             //declaracion de variables

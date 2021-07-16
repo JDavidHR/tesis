@@ -23,30 +23,27 @@
 
     <link href="css/registro.css" rel="stylesheet" media="all">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <!--datatables-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" media="all">
+    <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" media="all">
 </head>
 
 <body>
     <?php
     session_start();
-    
-        //llamado del archivo mysql
-        require_once 'Modelo/MySQL.php';
-        //creacion de nueva "consulta"
-        $mysql = new MySQL;
-        //se conecta a la base de datos
-        $mysql->conectar();
-        $id_estudiante = $_SESSION['idEstudiante'];
-       // $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");
-        $seleccionmateria = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
-        //se desconecta de la base de datos
-        $mysql->desconectar();
-    
+
+    //llamado del archivo mysql
+    require_once 'Modelo/MySQL.php';
+    //creacion de nueva "consulta"
+    $mysql = new MySQL;
+    //se conecta a la base de datos
+    $mysql->conectar();
+    $id_estudiante = $_SESSION['idEstudiante'];
+    // $seleccionaula = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula,asistencia.aula.nombre from aula");
+    $seleccionmateria = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where estudiante.id_estudiante = " . $id_estudiante . "");
+    //se desconecta de la base de datos
+    $mysql->desconectar();
+
     ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -151,26 +148,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
                                 <div class="container" style="text-align: center">
-                                    <form id="contact" action="validar_asistencia2.php" method="post">
-                                        <h3>Registro de Asistencia</h3>
-                                        <h4>Seleccione la clase correspondiente</h4>
-                                        <center>
-                                            <fieldset>
-                                                <select class="form-control col-md-6 col-md-offset-3" name="selecmateria" required>
-                                                    <?php
-                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                                                    while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
-                                                    ?>
-                                                        <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                                                        <option value="<?php echo $resultado['id_materia'] ?>"><?php echo $resultado['nombremateria'] ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </fieldset>
-                                        </center>
+                                    <div class="container col-md-8 col-md-offset-3">
                                         <br>
                                         <fieldset>
                                             <p>
@@ -178,12 +157,40 @@
                                                 por el docente, ¡Pidelo primero!
                                             </p>
                                         </fieldset>
-                                        <fieldset>
-                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Seleccionar</button>
-                                        </fieldset>
-
-                                    </form>
-
+                                        <!--DATATABLE-->
+                                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Nombre</th>
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <?php
+                                                    while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
+                                                        $id_materia = $valores1['id_materia'];
+                                                    ?>
+                                                        <td><?php echo $valores1['id_materia'] ?></td>
+                                                        <td><?php echo $valores1['nombremateria'] ?></td>
+                                                        <td>
+                                                            <div class="text-center">
+                                                                <a class="btn" style="background-color: #2EC82E;color: white" href='validar_asistencia2.php?id_materia=<?php echo $id_materia; ?>' role="button"><i class="mdi mdi-clipboard-check "></i></a>
+                                                            </div>
+                                                        </td>
+                                                </tr>
+                                            <?php
+                                                    }
+                                            ?>
+                                            </tbody>
+                                        </table>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('#example').DataTable();
+                                            });
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -229,6 +236,11 @@
         <script src="js/chartist.min.js"></script>
         <script src="js/chartist-plugin-tooltip.min.js"></script>
         <script src="js/dashboard1.js"></script>
+
+        <!--datatables-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>
