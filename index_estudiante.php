@@ -136,7 +136,7 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            
 
                         </li>
                         <!-- ============================================================== -->
@@ -170,7 +170,7 @@
                 <div class="row">
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Bienvenido</h4>
-                        <?php echo "ID Estudiante: " . $_SESSION['idEstudiante']; ?>
+                        <!--<?php echo "ID Estudiante: " . $_SESSION['idEstudiante']; ?>-->
                     </div>
 
                 </div>

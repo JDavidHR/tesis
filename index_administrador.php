@@ -116,7 +116,7 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="">
-                            <a class="" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->

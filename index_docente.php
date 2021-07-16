@@ -135,11 +135,11 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <!--<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                 <a class="dropdown-item" href="javascript:void(0)"> Perfil</a>
                                 <a class="dropdown-item" href="javascript:void(0)"> Cerrar Sesion</a>
-                            </div>
+                            </div>-->
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -205,8 +205,8 @@
                         <div class="card">
                             <center>
                                 <div class="card-body col-md-6 col-md-offset-3">
-                                    <table class="table">
-                                        <thead class="thead-dark">
+                                <table id="mater" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
                                             <tr>
                                                 <th scope="col">Documento</th>
                                                 <th scope="col">Nombre</th>

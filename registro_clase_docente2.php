@@ -144,9 +144,9 @@
         <div class="row">
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
-            <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
-            <?php echo " Materia: " . $smateria ?>
+            <?php echo " Materia: " . $smateria ?>-->
           </div>
 
         </div>
