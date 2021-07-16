@@ -37,13 +37,14 @@
 	$id_docente = $_SESSION['idDocente'];
 	//$id_estudiante = $_POST['idEstudiante']; 
 	//respectiva consulta para la seleccion de usuario
-	$datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
+	$datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.apellidos, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
 	while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
 		$documento = $valores1['documento'];
 		$nombres = $valores1['nombres'];
+		$apellidos = $valores1['apellidos'];
 		$tipo_usuario = $valores1['nombre'];
 	}
-	$dhorario = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " ORDER BY clase.hora, nombredia");
+	$dhorario = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, clase.horafin, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " ORDER BY clase.hora, nombredia");
 
 	$Amaterias = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.hora, dias.id_dia, dias.nombre as nombredia, materia.nombre as nombremateria, clase.codigo FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " order by dias.id_dia");
 
@@ -55,7 +56,7 @@
 
     while($valores1 = mysqli_fetch_assoc($dhorario)) {
         // Verificar que existe hora_inicial en arreglo
-        $hora = $valores1['hora'];
+        $hora = $valores1['hora'] . ' - ' . $valores1['horafin'];
         if(!isset($horario[$hora])) {
             // Crear arreglo con 5 elementos, uno para cada día
             $horario[$hora] = ['', '', '', '', '', '', ''];
@@ -229,7 +230,8 @@
 										<thead>
 											<tr>
 												<th scope="col">Documento</th>
-												<th scope="col">Nombre</th>
+												<th scope="col">Nombres</th>
+												<th scope="col">Apellidos</th>
 												<th scope="col">Tipo de usuario</th>
 											</tr>
 										</thead>
@@ -237,6 +239,7 @@
 											<tr>
 												<td><?php echo $documento ?></td>
 												<td><?php echo $nombres ?></td>
+												<td><?php echo $apellidos ?></td>
 												<td><?php echo $tipo_usuario ?></td>
 											</tr>
 										</tbody>
@@ -247,7 +250,7 @@
 							</center>
 
 							<center>
-								<div class="card-body col-md-8 col-md-offset-3">
+								<div class="card-body col-md-9 col-md-offset-3">
 									<center>
 										<p>Distribucion de clases</p>
 									</center>
