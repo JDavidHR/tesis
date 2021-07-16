@@ -25,7 +25,7 @@
   <section class="login-block">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 login-sec">
+        <div class="col-md-4 col-md-offset-3 login-sec">
           <h2 class="text-center">Bienvenido</h2>
           <form class="login-form" action="Controlador/loginvalidacion.php" method="POST">
             <div class="form-group">
@@ -56,7 +56,7 @@
             </div>
           </form>   
         </div>
-        <div class="col-md-8 banner-sec">     
+        <div class="col-md-8 col-md-offset-3 banner-sec">     
           <img class="d-block img-fluid" src="images/logo.png" alt="First slide">
           <div class="banner-text">
               <h2 style="color: white;">Bienvenido</h2>
