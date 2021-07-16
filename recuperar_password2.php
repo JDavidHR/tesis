@@ -20,8 +20,8 @@
     //respectiva consulta para la seleccion de usuario
     $tipousuario = $_SESSION['tipousuario'];
     $documento = $_SESSION['doc'];
-    echo "tipo usuario: " . $tipousuario;
-    echo " documento: " . $documento;
+    //echo "tipo usuario: " . $tipousuario;
+    //echo " documento: " . $documento;
     //se desconecta de la base de datos
     $mysql->desconectar();    
     ?>
