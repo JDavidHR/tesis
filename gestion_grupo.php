@@ -43,7 +43,7 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.estudiante.nombres from grupo join estudiante on estudiante.id_estudiante = grupo.Estudiante_id_estudiante where asistencia.grupo.estado = 1");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.estudiante.apellidos, asistencia.estudiante.nombres from grupo join estudiante on estudiante.id_estudiante = grupo.Estudiante_id_estudiante where asistencia.grupo.estado = 1");
     
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -173,7 +173,7 @@
                         ?>
                           <td><?php echo $valores1['id_grupo'] ?></td>
                           <td><?php echo $valores1['nombre'] ?></td>
-                          <td><?php echo $valores1['nombres'] ?></td>
+                          <td><?php echo $valores1['nombres']." ".$valores1['apellidos'] ?></td>
                           <td>
                             <div class="text-center">
                               <a class="btn" style="background-color: #2EC82E;color: white" href='update_grupos2.php?id_grupo=<?php echo $id_grupo; ?>' role="button"><i class="mdi mdi-pencil"></i></a>

@@ -41,11 +41,12 @@
     $id_docente = $_SESSION['idDocente'];
     //$id_estudiante = $_POST['idEstudiante']; 
     //respectiva consulta para la seleccion de usuario
-    $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
+    $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.apellidos, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
     while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
         $documento = $valores1['documento'];
         $nombres = $valores1['nombres'];
         $tipo_usuario = $valores1['nombre'];
+        $apellidos = $valores1['apellidos'];
     }
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -215,8 +216,8 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row"><?php echo $documento ?></th>
-                                                <td><?php echo $nombres ?></td>
+                                                <td><?php echo $documento ?></td>
+                                                <td><?php echo $nombres." ".$apellidos ?></td>
                                                 <td><?php echo $tipo_usuario ?></td>
                                             </tr>
                                         </tbody>

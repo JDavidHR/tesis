@@ -43,7 +43,7 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.clase.horafin, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as materianombre, asistencia.clase.Aula_id_aula, asistencia.aula.nombre as aulanombre, asistencia.clase.codigo, asistencia.dias.id_dia, asistencia.dias.nombre as nombredia, asistencia.docente.id_docente, docente.nombres, clase.Grupo_id_grupo, grupo.nombre as grupo from clase join dias on dias.id_dia = clase.Dias_id_dia join docente on docente.id_docente = clase.Docente_id_docente join aula on asistencia.clase.Aula_id_aula = asistencia.aula.id_aula join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia join grupo on clase.Grupo_id_grupo = grupo.id_grupo WHERE asistencia.clase.estado = 1 GROUP by asistencia.clase.codigo");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.hora, asistencia.clase.horafin, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as materianombre, asistencia.clase.Aula_id_aula, asistencia.aula.nombre as aulanombre, asistencia.clase.codigo, asistencia.dias.id_dia, asistencia.dias.nombre as nombredia, asistencia.docente.id_docente, docente.nombres, docente.apellidos, clase.Grupo_id_grupo, grupo.nombre as grupo from clase join dias on dias.id_dia = clase.Dias_id_dia join docente on docente.id_docente = clase.Docente_id_docente join aula on asistencia.clase.Aula_id_aula = asistencia.aula.id_aula join materia on asistencia.clase.materia_id_materia = asistencia.materia.id_materia join grupo on clase.Grupo_id_grupo = grupo.id_grupo WHERE asistencia.clase.estado = 1 GROUP by asistencia.clase.id_clase");
 
     
     //se desconecta de la base de datos
@@ -181,7 +181,7 @@
                           <td><?php echo $valores1['hora'] ?></td>
                           <td><?php echo $valores1['horafin'] ?></td>
                           <td><?php echo $valores1['codigo'] ?></td>
-                          <td><?php echo $valores1['nombres'] ?></td>
+                          <td><?php echo $valores1['nombres']." ".$valores1['apellidos'] ?></td>
                           <td><?php echo $valores1['aulanombre'] ?></td>
                           <td><?php echo $valores1['materianombre'] ?></td>
                           <td><?php echo $valores1['grupo'] ?></td>

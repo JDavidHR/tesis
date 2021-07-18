@@ -46,7 +46,7 @@
     $selecciondia = $mysql->efectuarConsulta("SELECT asistencia.dias.id_dia, asistencia.dias.nombre as nombredia from dias ORDER BY id_dia");
     $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.materia.id_materia,asistencia.materia.nombre from materia where estado = 1");
     $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.grupo.id_grupo, asistencia.grupo.nombre from grupo where estado = 1");
-    $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres as nombredocente from docente where estado = 1");
+    $selecciondocente = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.nombres as nombredocente, asistencia.docente.apellidos from docente where estado = 1");
     //se desconecta de la base de datos
     $mysql->desconectar();
   }
@@ -207,7 +207,7 @@
                           while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
                           ?>
                             <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                            <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente'] ?></option>
+                            <option value="<?php echo $resultado['id_docente'] ?>"><?php echo $resultado['nombredocente']. " ". $resultado['apellidos']?></option>
                           <?php
                           }
                           ?>

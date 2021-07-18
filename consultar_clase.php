@@ -42,6 +42,7 @@
 		$documento = $valores1['documento'];
 		$nombres = $valores1['nombres'];
 		$apellidos = $valores1['apellidos'];
+		$apellidos = $valores1['apellidos'];
 		$tipo_usuario = $valores1['nombre'];
 	}
 	$dhorario = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, clase.horafin, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " ORDER BY clase.hora, nombredia");
@@ -56,7 +57,9 @@
 
     while($valores1 = mysqli_fetch_assoc($dhorario)) {
         // Verificar que existe hora_inicial en arreglo
-        $hora = $valores1['hora'] . ' - ' . $valores1['horafin'];
+        $hora = $valores1['hora']; // . ' - ' . $valores1['horafin'];
+        $horafin = $valores1['horafin'];
+        $materia = $valores1['nombre'];
         if(!isset($horario[$hora])) {
             // Crear arreglo con 5 elementos, uno para cada día
             $horario[$hora] = ['', '', '', '', '', '', ''];
@@ -64,7 +67,7 @@
         // Agregar materia a $hora, en espacio correspondiente
         // Los índices de arreglo inician en cero, van de cero = lunes a 4 = viernes
         // Por eso el - 1
-        $horario[$hora][$valores1['id_dia'] - 1] = $valores1['nombre'];
+        $horario[$hora][$valores1['id_dia'] - 1] = $valores1['nombre']. " " . $hora . " - ". $horafin;
     }
 
     
@@ -230,16 +233,14 @@
 										<thead>
 											<tr>
 												<th scope="col">Documento</th>
-												<th scope="col">Nombres</th>
-												<th scope="col">Apellidos</th>
+												<th scope="col">Nombre</th>
 												<th scope="col">Tipo de usuario</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td><?php echo $documento ?></td>
-												<td><?php echo $nombres ?></td>
-												<td><?php echo $apellidos ?></td>
+												<td><?php echo $nombres." ".$apellidos ?></td>
 												<td><?php echo $tipo_usuario ?></td>
 											</tr>
 										</tbody>
@@ -257,7 +258,7 @@
 									<table id="example" class="table table-striped table-bordered" style="width:100%">
 										<thead>
 											<tr>
-												<th>Hora</th>
+												<!-- <th>Hora</th> -->
 												<th>Lunes</th>
 												<th>Martes</th>
 												<th>Miercoles</th>
@@ -273,7 +274,7 @@
 											        foreach($horario as $hora => $dias) {
 											            echo <<<HTML
 											            <tr>
-											                <td>$hora</td>
+											                <!-- <td>$hora</td> -->
 											                <td>{$dias[0]}</td>
 											                <td>{$dias[1]}</td>
 											                <td>{$dias[2]}</td>
