@@ -65,13 +65,17 @@
   while ($valores1 = mysqli_fetch_assoc($selecciongrupo)) {
     //declaracion de variables
     $grupo = $valores1['nombregrupo'];
+    $idgrupo = $valores1['Grupo_id_grupo'];
   }
 
-  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . " ");
+  $codigoclase = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.clase.codigo, asistencia.materia.nombre from clase join materia on asistencia.materia.id_materia = asistencia.clase.Materia_id_materia where clase.Materia_id_materia = " . $smateria3 . " and asistencia.clase.Grupo_id_grupo = ". $idgrupo ." and asistencia.clase.Docente_id_docente = ". $id_docente."");
   while ($valores1 = mysqli_fetch_assoc($codigoclase)) {
     //declaracion de variables
     $codigo = $valores1['codigo'];
+    $idclase = $valores1['id_clase'];
   }
+
+  $listaE = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $idclase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -156,7 +160,7 @@
         <div class="row">
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
-            <!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
             <?php echo " Materia: "  . $nombremateria ?>
             <br>
@@ -164,7 +168,9 @@
             <br>
             <?php echo " grupo: "  . $grupo ?>
             <br>
-            <?php echo " ID grupo: "  . $id ?>-->
+            <?php echo " ID grupo: "  . $id ?>
+            <br>
+            <?php echo " ID clase: "  . $idclase ?>
           </div>
 
         </div>
@@ -201,14 +207,35 @@
                   <form id="contact" action="Controlador/newcode.php" method="post">
                     <h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>
                     <br>
-                    <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
-                      <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
-                    </select>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Id de la clase:</label>
+                      <div class="col-sm-5">
+                        <select class="form-control " id="idclaseimprimir" name="idclaseimprimir" required>
+                          <option value="<?php echo $idclase ?>"><?php echo $idclase ?></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Clase seleccionada:</label>
+                      <div class="col-sm-5">
+                        <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
+                          <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Nuevo codigo (Opcional):</label>
+                      <div class="col-sm-5">
+                        <fieldset>
+                          <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
+                        </fieldset>
+                      </div>
+                    </div>
                     <br>
-                    <fieldset>
-                      <input class="form-control " name="newcode" placeholder="Nuevo Codigo">
-                    </fieldset>
-                    <br>
+
                     <fieldset>
                       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Generar nuevo</button>
                     </fieldset>
@@ -224,17 +251,21 @@
                         <table id="" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                               <tr>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Tipo de usuario</th>
+                                <th scope="col">Numero de documentos</th>
+                                <th scope="col">Nombres de los estudiantes</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row"><?php echo $documento ?></th>
-                                <td><?php echo $nombres ?></td>
-                                <td><?php echo $tipo_usuario ?></td>
+                                <?php
+                                while ($valores3 = mysqli_fetch_assoc($listaE)) {
+                                ?>
+                                  <td><?php echo $valores3['documento'] ?></td>
+                                  <td><?php echo $valores3['nombres']." ".$valores3['apellidos'] ?></td>
                               </tr>
+                            <?php
+                                }
+                            ?>
                             </tbody>
                           </table>
                           </tbody>
@@ -247,9 +278,12 @@
 
                 <form id="contact" action="index_docente.php" method="post">
                 <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                  <center>
+                    <h3>Espacio para adjuntar links y/o comentarios a la clase</h3>
+                  </center>
                   <br>
                   <fieldset>
-                    <textarea name="comentarios" rows="5" cols="70">Escribe aquí tus comentarios de la clase o enlaces de la misma</textarea>
+                    <textarea name="comentarios" rows="5" cols="70">Escribe aquí una descripción...</textarea>
                   </fieldset>
                   <br>
                   <fieldset>

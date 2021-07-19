@@ -253,7 +253,7 @@
 							<center>
 								<div class="card-body col-md-9 col-md-offset-3">
 									<center>
-										<p>Distribucion de clases</p>
+										<h3>Distribucion de clases</h3>
 									</center>
 									<table id="example" class="table table-striped table-bordered" style="width:100%">
 										<thead>
@@ -301,7 +301,7 @@
 								<div class="card-body col-md-7 col-md-offset-3">
 
 									<center>
-										<p>Materias asignadas a dar</p>
+										<h3>Materias asignadas a dar</h3>
 									</center>
 									<table id="mater" class="table table-striped table-bordered" style="width:100%">
 										<thead>

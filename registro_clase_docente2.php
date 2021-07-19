@@ -225,7 +225,7 @@
                     <fieldset>
                       <select class="form-control " name="selectgrupo" required>
                         <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                        //ciclo while que nos sirve para traer cuales son los grpos disponibles
                         while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
                         ?>
                           <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
