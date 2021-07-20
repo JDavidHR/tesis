@@ -159,7 +159,8 @@
       <div class="page-breadcrumb">
         <div class="row">
           <div class="col-5 align-self-center">
-            <h4 class="page-title">Bienvenido</h4>
+            <h4 class="page-title">Registrar clases</h4>
+            <!--
             <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
             <?php echo " Materia: "  . $nombremateria ?>
@@ -171,6 +172,7 @@
             <?php echo " ID grupo: "  . $id ?>
             <br>
             <?php echo " ID clase: "  . $idclase ?>
+          -->
           </div>
 
         </div>
@@ -247,6 +249,7 @@
                   <div class="col-12">
                     <div class="card">
                       <center>
+                        <h3>Listado de estudiantes</h3>
                         <div class="card-body col-md-6 col-md-offset-3">
                         <table id="" class="table table-striped table-bordered" style="width:100%">
                             <thead>
@@ -276,20 +279,39 @@
                   </div>
                 </div>
 
-                <form id="contact" action="index_docente.php" method="post">
-                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
-                  <center>
-                    <h3>Espacio para adjuntar links y/o comentarios a la clase</h3>
-                  </center>
-                  <br>
-                  <fieldset>
-                    <textarea name="comentarios" rows="5" cols="70">Escribe aquí una descripción...</textarea>
-                  </fieldset>
-                  <br>
-                  <fieldset>
-                    <button name="submit_text" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Guardar</button>
-                  </fieldset>
-                </div>
+                <form id="contact" action="Controlador/asistenciaDocente.php" method="post">
+                  <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                    <center>
+                      <h3>Espacio para adjuntar links y/o comentarios a la clase</h3>
+                    </center>
+
+                    <div class="form-group row">
+                      <fieldset>
+                        <textarea name="comentarios" rows="5" cols="70" required="" placeholder="Escribe aquí una descripción..."></textarea>
+                      </fieldset>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Id de la clase:</label>
+                      <div class="col-sm-5">
+                        <select class="form-control " id="idclaseimprimir" name="idclaseimprimir" required>
+                          <option value="<?php echo $idclase ?>"><?php echo $idclase ?></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Fecha de registro:</label>
+                      <div class="col-sm-5">
+                          <input type="date" name="fechaclase" class="form-control" required="">
+                      </div>
+                    </div>
+
+                    <br>
+                    <fieldset>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Guardar y registrar clase</button>
+                    </fieldset>
+                  </div>
                 </form>
 
               </div>
