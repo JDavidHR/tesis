@@ -226,9 +226,9 @@
                               <td><?php echo $valores1['estado'] ?></td>
                               <td>
                                 <div class="text-center">
-                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_ocente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
+                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_ocente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-eye"></i></a>
                                   <a class="btn" style="background-color: #FF5454;color: white" href='Controlador/delete_a_docente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-delete"></i></a>
-                                  <a class="btn" style="background-color: #2962FF;color: white" href='Controlador/activar_desactivar_clase.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-check"></i></a>
+                                  <a class="btn" style="background-color: #2962FF;color: white" href='Controlador/activar_desactivar_clase.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-sleep"></i></a>
                                 </div>
                               </td>
                           </tr>
