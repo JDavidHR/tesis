@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2021 a las 00:08:32
+-- Tiempo de generación: 20-07-2021 a las 22:20:27
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -74,8 +74,16 @@ INSERT INTO `aula` (`id_aula`, `nombre`, `estado`) VALUES
 CREATE TABLE `a_docente` (
   `ida_docente` int(11) NOT NULL COMMENT 'Id de la asistencia/registro del docente',
   `clase_id_clase` int(11) NOT NULL COMMENT 'Id de la clase registrada',
-  `fecha` time NOT NULL COMMENT 'Fecha en la que se registra la clase'
+  `fecha` date NOT NULL COMMENT 'Fecha en la que se registra la clase',
+  `estado` int(11) NOT NULL COMMENT 'Si la clase esta activa o no (1 - 0)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `a_docente`
+--
+
+INSERT INTO `a_docente` (`ida_docente`, `clase_id_clase`, `fecha`, `estado`) VALUES
+(1, 6, '2021-07-20', 1);
 
 -- --------------------------------------------------------
 
@@ -85,7 +93,7 @@ CREATE TABLE `a_docente` (
 
 CREATE TABLE `a_estudiante` (
   `ida_estudiante` int(11) NOT NULL COMMENT 'Id de la asistencia del estudiante',
-  `fecha` time NOT NULL COMMENT 'Fecha de la asistencia a la clase',
+  `fecha` date NOT NULL COMMENT 'Fecha de la asistencia a la clase',
   `asistio` int(11) NOT NULL COMMENT 'Si/No',
   `estudiante_id_estudiante` int(11) NOT NULL COMMENT 'Id del estudiante',
   `clase_id_clase` int(11) NOT NULL COMMENT 'Id de la clase'
@@ -135,12 +143,13 @@ CREATE TABLE `clase` (
 --
 
 INSERT INTO `clase` (`id_clase`, `Dias_id_dia`, `hora`, `horafin`, `codigo`, `Docente_id_docente`, `Aula_id_aula`, `Materia_id_materia`, `Grupo_id_grupo`, `estado`) VALUES
-(1, 1, '07:45:00', '10:15:00', 'code_lunes', 1, 1, 1, 1, 1),
+(1, 1, '07:45:00', '10:15:00', 'code_lunes', 1, 1, 1, 2, 1),
 (2, 2, '09:30:00', '12:00:00', 'code_martes', 2, 1, 3, 1, 1),
 (3, 3, '08:45:00', '09:30:00', 'code_miercoles', 1, 1, 2, 1, 1),
 (4, 5, '19:15:00', '21:30:00', 'code_viernes', 2, 1, 3, 1, 1),
 (5, 1, '11:45:00', '12:00:00', 'code_lunes', 1, 1, 3, 1, 1),
-(6, 2, '07:45:00', '10:15:00', 'code_martes', 1, 1, 1, 1, 1);
+(6, 2, '07:45:00', '11:15:00', 'code_martes', 1, 1, 1, 1, 1),
+(7, 1, '07:45:00', '10:15:00', 'code_lunes', 2, 1, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -249,8 +258,16 @@ INSERT INTO `grupo` (`id_grupo`, `nombre`, `Estudiante_id_estudiante`, `estado`)
 CREATE TABLE `links` (
   `id_links` int(11) NOT NULL COMMENT 'Llave principal',
   `links` varchar(255) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Campo para pegar/adjuntar los links',
+  `fecha` date NOT NULL COMMENT 'fecha en la que se registra la clase con los links',
   `clase_id_clase` int(11) NOT NULL COMMENT 'id de la clase a la que se adjuntan los links'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `links`
+--
+
+INSERT INTO `links` (`id_links`, `links`, `fecha`, `clase_id_clase`) VALUES
+(1, 'https://www.youtube.com/watch?v=om3n2ni8luE', '2021-07-20', 6);
 
 -- --------------------------------------------------------
 
@@ -425,7 +442,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `a_docente`
 --
 ALTER TABLE `a_docente`
-  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente';
+  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `a_estudiante`
@@ -443,7 +460,7 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=7;
+  MODIFY `id_clase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la clase', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `dias`
@@ -467,7 +484,7 @@ ALTER TABLE `estudiante`
 -- AUTO_INCREMENT de la tabla `links`
 --
 ALTER TABLE `links`
-  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal';
+  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
