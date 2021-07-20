@@ -39,22 +39,15 @@
   $id_docente = $_SESSION['idDocente'];
   //$id = $_POST['materiaselect'];
 
-  $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
+  $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.apellidos, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
   while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
     $documento = $valores1['documento'];
     $nombres = $valores1['nombres'];
+    $apellidos = $valores1['apellidos'];
     $tipo_usuario = $valores1['nombre'];
   }
-  //respectiva consulta para la seleccion de usuario
-  //$seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.materia.nombre as nombremateria, asistencia.materia.id_materia from docente join clase on asistencia.clase.Docente_id_docente = asistencia.docente.id_docente join grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo join materia on materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.Materia_id_materia = ". $id ." GROUP BY asistencia.materia.id_materia");
-  //se inicia el recorrido para mostrar los datos de la BD
 
-  //while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
-    //declaracion de variables
-    //$smateria = $valores1['nombremateria'];
-  //}
-
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo, clase.hora FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Docente_id_docente = " . $id_docente . " GROUP BY asistencia.clase.hora");
+  $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.a_docente.ida_docente, asistencia.a_docente.clase_id_clase, asistencia.clase.Materia_id_materia, asistencia.materia.nombre, asistencia.grupo.nombre as nombregrupo, asistencia.a_docente.fecha, asistencia.a_docente.estado FROM a_docente JOIN asistencia.clase ON asistencia.a_docente.clase_id_clase = asistencia.clase.id_clase JOIN asistencia.materia ON asistencia.clase.Materia_id_materia = asistencia.materia.id_materia JOIN asistencia.grupo ON asistencia.clase.Grupo_id_grupo = asistencia.grupo.id_grupo WHERE asistencia.a_docente.estado = 'Activa' GROUP BY asistencia.grupo.nombre");
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -190,7 +183,7 @@
                             <tbody>
                               <tr>
                                 <th scope="row"><?php echo $documento ?></th>
-                                <td><?php echo $nombres ?></td>
+                                <td><?php echo $nombres." ".$apellidos ?></td>
                                 <td><?php echo $tipo_usuario ?></td>
                               </tr>
                             </tbody>
@@ -203,28 +196,54 @@
                   </div>
                 </div>
 
-                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="clases_vistas2.php" method="post">
-                    <?php echo "Grupos disponibles: "?>
-                    <br>
-                    <fieldset>
-                      <select class="form-control " name="selectgrupo" required>
+                <div class="card">
+                  <div class="card-body">
+                    <center>
+                      <h3>Clases vistas</h3>
+                      <br>
+                    </center>
+                    <div class="container col-md-9 col-md-offset-3">
+                      <!--DATATABLE-->
+                      <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>Nombre de la clase</th>
+                            <th>Nombre del grupo</th>
+                            <th>Fecha de registro</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <?php
+                            while ($valores1 = mysqli_fetch_assoc($MostrarDatos)) {
+                              $ida_docente = $valores1 ['ida_docente'];
+                            ?>
+                              <td><?php echo $valores1['nombre'] ?></td>
+                              <td><?php echo $valores1['nombregrupo'] ?></td>
+                              <td><?php echo $valores1['fecha'] ?></td>
+                              <td><?php echo $valores1['estado'] ?></td>
+                              <td>
+                                <div class="text-center">
+                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_ocente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
+                                  <a class="btn" style="background-color: #FF5454;color: white" href='Controlador/delete_a_docente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-delete"></i></a>
+                                  <a class="btn" style="background-color: #2962FF;color: white" href='Controlador/activar_desactivar_clase.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-check"></i></a>
+                                </div>
+                              </td>
+                          </tr>
                         <?php
-                        //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
-                        while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
+                            }
                         ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['Grupo_id_grupo'] ?>"><?php echo $resultado['nombregrupo'] ?><?php echo " - " . $resultado['hora'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
-                    </fieldset>
-                  </form>
+                        </tbody>
+                      </table>
+                      <script>
+                        $(document).ready(function() {
+                          $('#example').DataTable();
+                        });
+                      </script>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -270,6 +289,11 @@
     <script src="js/chartist.min.js"></script>
     <script src="js/chartist-plugin-tooltip.min.js"></script>
     <script src="js/dashboard1.js"></script>
+
+    <!--datatables-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ if(isset($_POST['submit']) && !empty($_POST['idclaseimprimir']) && !empty($_POST
         //echo "fechaclase: " . $fechaclase;
 
 
-        $sql = $mysql->efectuarConsulta("insert into asistencia.a_docente(clase_id_clase, fecha,estado) VALUES ('".$id_clase."','".$fechaclase."',1)");
+        $sql = $mysql->efectuarConsulta("insert into asistencia.a_docente(clase_id_clase, fecha,estado) VALUES ('".$id_clase."','".$fechaclase."','Activa')");
         //condicion donde si la consulta se hace correcto
         if($sql){
             $sql2 = $mysql->efectuarConsulta("insert into asistencia.links(links, fecha, clase_id_clase) VALUES ('".$comentarios."','".$fechaclase."', '".$id_clase."')");
