@@ -47,7 +47,7 @@
 	}
 	$dhorario = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.id_clase, clase.hora, clase.horafin, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " ORDER BY clase.hora, nombredia");
 
-	$Amaterias = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.hora, dias.id_dia, dias.nombre as nombredia, materia.nombre as nombremateria, clase.codigo FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " order by dias.id_dia");
+	$Amaterias = $mysql->efectuarConsulta("SELECT docente.id_docente, clase.hora, dias.id_dia, dias.nombre as nombrediaM, materia.nombre as nombremateria, clase.codigo FROM docente join clase on clase.Docente_id_docente = docente.id_docente join dias on dias.id_dia = clase.Dias_id_dia join materia on materia.id_materia = clase.Materia_id_materia where docente.id_docente = " . $id_docente . " order by dias.id_dia");
 
 
 	//Codigo proporcionado por el usuario Triby en stack overflow
@@ -311,7 +311,7 @@
 												<?php
 												while ($valores3 = mysqli_fetch_assoc($Amaterias)) {
 												?>
-													<td><?php echo $valores3['nombredia'] ?></td>
+													<td><?php echo $valores3['nombrediaM'] ?></td>
 													<td><?php echo $valores3['nombremateria'] ?></td>
 													<td><?php echo $valores3['codigo'] ?></td>
 													<td><?php echo $valores3['hora'] ?></td>
