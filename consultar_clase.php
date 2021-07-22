@@ -266,7 +266,7 @@
 											<?php
 											        // Llenar tabla
 											        foreach($horario as $hora => $dias) {
-											            echo <<<HTML
+											            echo "
 											            <tr>
 											                <!-- <td>$hora</td> -->
 											                <td>{$dias[0]}</td>
@@ -276,8 +276,8 @@
 											                <td>{$dias[4]}</td>
 											                <td>{$dias[5]}</td>
 											                <td></td>
-											            </tr>
-											HTML; // Esta línea debe estar en la primera columna, sin espacios ni tabuladores previos
+											            </tr>";
+											//HTML; // Esta línea debe estar en la primera columna, sin espacios ni tabuladores previos
 											        }
 											        // Cerrar tabla
 											?>
