@@ -44,8 +44,33 @@
 	}
 
 
-	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, clase.hora, materia.nombre, dias.nombre as nombredia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
+	//$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, clase.hora, materia.nombre, dias.nombre as nombredia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
+	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, clase.id_clase, clase.hora, clase.horafin, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . " ORDER BY clase.hora, nombredia");
 	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia, docente.nombres, aula.nombre as nombreaula, dias.nombre as nombredia, clase.hora FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join docente on docente.id_docente = clase.Docente_id_docente join aula on aula.id_aula = clase.Aula_id_aula join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
+
+
+
+	//Codigo proporcionado por el usuario Triby en stack overflow
+	//https://es.stackoverflow.com/questions/390749/como-poner-campos-en-una-tabla-php-y-mysql
+	// Crear arreglo para armar horario
+    $horario = [];
+
+    while($valores1 = mysqli_fetch_assoc($dhorario)) {
+        // Verificar que existe hora_inicial en arreglo
+        $hora = $valores1['hora']; // . ' - ' . $valores1['horafin'];
+        $horafin = $valores1['horafin'];
+        $materia = $valores1['nombre'];
+        if(!isset($horario[$hora])) {
+            // Crear arreglo con 5 elementos, uno para cada día
+            $horario[$hora] = ['', '', '', '', '', '', ''];
+        }
+        // Agregar materia a $hora, en espacio correspondiente
+        // Los índices de arreglo inician en cero, van de cero = lunes a 4 = viernes
+        // Por eso el - 1
+        $horario[$hora][$valores1['id_dia'] - 1] = $valores1['nombre']. " " . $hora . " - ". $horafin;
+    }
+
+
 
 	//se desconecta de la base de datos
 	$mysql->desconectar();
@@ -226,36 +251,49 @@
 								</div>
 							</center>
 							
+
 							<center>
-								<div class="card-body col-md-6 col-md-offset-3">
+								<div class="card-body col-md-9 col-md-offset-3">
 									<center>
-										<b>Distribucion Horaria</b>
+										<h3>Distribucion de clases</h3>
 									</center>
-									<br>
-									<table id="" class="table table-striped table-bordered" style="width:100%">
+									<table id="example" class="table table-striped table-bordered" style="width:100%">
 										<thead>
 											<tr>
-												<th scope="col">Hora</th>
-												<th scope="col">Materia</th>
-												<th scope="col">Dia</th>
+												<!-- <th>Hora</th> -->
+												<th>Lunes</th>
+												<th>Martes</th>
+												<th>Miercoles</th>
+												<th>Jueves</th>
+												<th>Viernes</th>
+												<th>Sabado</th>
+												<th>Domingo</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
-											while ($valores2 = mysqli_fetch_assoc($dhorario)) {
-												//$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
-												//$dia = $dias[(date('N', strtotime($valores2['dia']))) - 1];
+											        // Llenar tabla
+											        foreach($horario as $hora => $dias) {
+											            echo "
+											            <tr>
+											                <!-- <td>$hora</td> -->
+											                <td>{$dias[0]}</td>
+											                <td>{$dias[1]}</td>
+											                <td>{$dias[2]}</td>
+											                <td>{$dias[3]}</td>
+											                <td>{$dias[4]}</td>
+											                <td>{$dias[5]}</td>
+											                <td></td>
+											            </tr>";
+											//HTML; // Esta línea debe estar en la primera columna, sin espacios ni tabuladores previos
+											        }
+											        // Cerrar tabla
 											?>
-												<tr>
-													<th scope="row"><?php echo $valores2['hora'] ?></th>
-													<td><?php echo $valores2['nombre'] ?></td>
-													<td><?php echo $valores2['nombredia'] ?></td>
-												</tr>
-											<?php
-											}
-											?>
+
+
 										</tbody>
 									</table>
+
 									</tbody>
 									</table>
 								</div>
