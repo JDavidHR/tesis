@@ -266,6 +266,7 @@
 											<?php
 											        // Llenar tabla
 											        foreach($horario as $hora => $dias) {
+											            //echo <<<HTML
 											            echo "
 											            <tr>
 											                <!-- <td>$hora</td> -->
