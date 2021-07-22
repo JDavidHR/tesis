@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-07-2021 a las 22:20:27
+-- Tiempo de generación: 22-07-2021 a las 21:55:42
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -75,7 +75,7 @@ CREATE TABLE `a_docente` (
   `ida_docente` int(11) NOT NULL COMMENT 'Id de la asistencia/registro del docente',
   `clase_id_clase` int(11) NOT NULL COMMENT 'Id de la clase registrada',
   `fecha` date NOT NULL COMMENT 'Fecha en la que se registra la clase',
-  `estado` int(11) NOT NULL COMMENT 'Si la clase esta activa o no (1 - 0)'
+  `estado` varchar(255) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Si la clase esta activa o no'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -83,7 +83,8 @@ CREATE TABLE `a_docente` (
 --
 
 INSERT INTO `a_docente` (`ida_docente`, `clase_id_clase`, `fecha`, `estado`) VALUES
-(1, 6, '2021-07-20', 1);
+(1, 6, '2021-07-20', 'Activa'),
+(2, 5, '2021-07-22', 'Activa');
 
 -- --------------------------------------------------------
 
@@ -267,7 +268,8 @@ CREATE TABLE `links` (
 --
 
 INSERT INTO `links` (`id_links`, `links`, `fecha`, `clase_id_clase`) VALUES
-(1, 'https://www.youtube.com/watch?v=om3n2ni8luE', '2021-07-20', 6);
+(1, 'https://www.youtube.com/watch?v=om3n2ni8luE\r\nhttps://www.youtube.com/watch?v=dy90tA3TT1c', '2021-07-20', 6),
+(2, 'Prueba de links', '2021-07-22', 5);
 
 -- --------------------------------------------------------
 
@@ -442,7 +444,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `a_docente`
 --
 ALTER TABLE `a_docente`
-  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente', AUTO_INCREMENT=2;
+  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `a_estudiante`
@@ -484,7 +486,7 @@ ALTER TABLE `estudiante`
 -- AUTO_INCREMENT de la tabla `links`
 --
 ALTER TABLE `links`
-  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal', AUTO_INCREMENT=2;
+  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
