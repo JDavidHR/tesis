@@ -15,10 +15,10 @@
         //echo "fechaclase: " . $fechaclase;
 
 
-        $sql = $mysql->efectuarConsulta("UPDATE asistencia.a_docente SET estado2 = 0 WHERE ida_docente = ".$ida_docente."");
+        $sql = $mysql->efectuarConsulta("UPDATE asistencia.a_docente SET estado = 'Activa' WHERE ida_docente = ".$ida_docente."");
         //condicion donde si la consulta se hace correcto
         if($sql){
-            echo"<script type=\"text/javascript\">alert('Eliminado Correctamente'); window.location='../clases_vistas.php';</script>";
+            echo"<script type=\"text/javascript\">alert('Se cambio el estado Correctamente'); window.location='../clases_vistas.php';</script>";
         }else{
             //mensaje de salida en caso de que la consulta falle
             echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_clase_docente.php';</script>";
