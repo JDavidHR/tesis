@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
 
-    <title>Home</title>
+    <title>Validar Asistencia</title>
     <!-- Custom CSS -->
     <link href="css/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -20,6 +20,8 @@
 
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link href="css/weather-icons.min.css" rel="stylesheet">
+
+    <link href="css/registro.css" rel="stylesheet" media="all">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,30 +33,45 @@
 
 <body>
     <?php
-    session_start();
-    //llamado del archivo mysql
-    require_once 'Modelo/MySQL.php';
-    //creacion de nueva "consulta"
-    $mysql = new MySQL;
-    //se conecta a la base de datos
-    $mysql->conectar();
-    $id_estudiante = $_SESSION['idEstudiante'];
-    //$id_estudiante = $_POST['idEstudiante']; 
-    //respectiva consulta para la seleccion de usuario
-    $datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.apellidos, estudiante.Carrera_id_carrera, estudiante.semestre, carrera.id_carrera, carrera.nombre from estudiante join carrera on estudiante.Carrera_id_carrera = carrera.id_carrera where estudiante.id_estudiante = " . $id_estudiante . "");
-    while ($valores1 = mysqli_fetch_assoc($datosestudiante)) {
-        $documento = $valores1['documento'];
-        $nombres = $valores1['nombres'];
-        $apellidos = $valores1['apellidos'];
-        $carrera = $valores1['nombre'];
-        $semestre = $valores1['semestre'];
+    //session_start();
+    if (!isset($_SESSION['tipousuario'])) {
+        //llamado del archivo mysql
+        require_once 'Modelo/MySQL.php';
+        //creacion de nueva "consulta"
+        $mysql = new MySQL; //se crea un nuevo musql
+
+        $mysql->conectar(); //se ejecuta la funcion almacenda en mysql.php
+
+        session_start();
+        $id_estudiante = $_SESSION['idEstudiante'];
+        //declaracion de variables metodo post
+        $id_materia = $_POST['idmateria'];
+        $codigoclase = $_POST['codigo_clase'];
+        $fechaclase = $_POST['fechaclase'];
+
+        
+        $mostrardatos = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, materia.nombre from estudiante join grupo on grupo.Estudiante_id_estudiante = estudiante.id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia where asistencia.materia.id_materia = " . $id_materia . "");
+        //se inicia el recorrido para mostrar los datos de la BD
+        while ($valores1 = mysqli_fetch_assoc($mostrardatos)) {
+            //declaracion de variables
+            $materia = $valores1['nombre'];
+        }
+
+        $consulta = $mysql->efectuarConsulta("SELECT asistencia.a_docente.clase_id_clase, asistencia.clase.Materia_id_materia, asistencia.materia.nombre, asistencia.a_docente.fecha, asistencia.a_docente.estado, asistencia.clase.codigo, asistencia.clase.Grupo_id_grupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from asistencia.a_docente JOIN asistencia.clase ON asistencia.a_docente.clase_id_clase = asistencia.clase.id_clase JOIN asistencia.materia ON asistencia.clase.Materia_id_materia = asistencia.materia.id_materia JOIN asistencia.grupo ON asistencia.clase.Grupo_id_grupo = asistencia.grupo.id_grupo JOIN asistencia.estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.Materia_id_materia = ". $id_materia." AND asistencia.clase.codigo = ".$codigoclase." AND asistencia.a_docente.fecha = ".$fechaclase." AND asistencia.estudiante.id_estudiante = ".$id_estudiante." AND asistencia.a_docente.estado = 'Activa'");
+
+        while ($valores2 = mysqli_fetch_assoc($consulta)) {
+            //declaracion de variables
+            $idclasedocente = $valores2['clase_id_clase'];
+        }
+
+        
     }
-    //se desconecta de la base de datos
-    $mysql->desconectar();
+    $mysql->desconectar(); //funcion llamada desde mysql.php
     ?>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -104,47 +121,7 @@
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-left mr-auto">
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <!--<a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 mr-1"></i>
-                                    <div class="ml-1 d-none d-sm-block">
-                                        <span>Buscar</span>
-                                    </div>
-                                </div>
-                            </a>-->
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            
 
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -167,15 +144,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">Bienvenido</h4>
-                        <!--<?php echo "ID Estudiante: " . $_SESSION['idEstudiante']; ?>-->
-                    </div>
 
-                </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -202,38 +171,47 @@
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
-                            <center>
-                                <div class="card-body col-md-6 col-md-offset-3">
-                                <table id="" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Documento</th>
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Carrera</th>
-                                                <th scope="col">Semestre</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><?php echo $documento ?></td>
-                                                <td><?php echo $nombres." ".$apellidos ?></td>
-                                                <td><?php echo $carrera ?></td>
-                                                <td><?php echo $semestre ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </center>
-                            <br><br>
-                            <center>
-                                <div class="card-body">
-                                    <p>Bienvenido estudiante, aqui podras realizar las diferentes gestiones de tu interes.<br>
-                                        Recuerda que si deseas hacer alguna modificación debes de ponerte en contacto con
-                                        un administrador.</p>
-                                </div>
-                            </center>
+                            <div class="card-body">
+                                <form id="contact" action="controlador/validar_asistencia.php" method="post">
+                                    <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                                    <center>
+                                        <h3>Confirmar asistencia</h3>
+                                        <h4>Materia Seleccionada: <?php echo $idclasedocente ?></h4>
+                                        <br>
+                                    </center>
+
+                                    <div class="form-group row" align="right">
+                                      <label class="col-sm-5 col-form-label">Clase seleccionada:</label>
+                                      <div class="col-sm-5">
+                                        <select class="form-control " id="idmateria" name="idmateria" required>
+                                          <option value="<?php echo $id_materia ?>"><?php echo $materia ?></option>
+                                        </select>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row" align="right">
+                                      <label class="col-sm-5 col-form-label">Codigo ingresado:</label>
+                                      <div class="col-sm-5">
+                                        <fieldset>
+                                          <input value="<?php echo $codigoclase ?>" class="form-control " name="codigo_clase" placeholder="Escriba el codigo aqui" required>
+                                        </fieldset>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row" align="right">
+                                      <label class="col-sm-5 col-form-label">Fecha de registro:</label>
+                                      <div class="col-sm-5">
+                                          <input value="<?php echo $fechaclase ?>" type="date" name="fechaclase" class="form-control" required>
+                                      </div>
+                                    </div>
+
+                                    <br>
+                                    <fieldset>
+                                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-4">Registrar asistencia</button>
+                                    </fieldset>
+                                  </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

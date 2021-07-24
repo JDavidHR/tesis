@@ -157,23 +157,45 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-
-                                <div class="container" style="text-align: center">
-                                    <form id="contact" action="controlador/validar_asistencia.php" method="post">
+                                <form id="contact" action="validar_asistencia3.php" method="post">
+                                    <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                                    <center>
                                         <h3>Registro de Asistencia</h3>
-                                        <h4>Materia Seleccionada: <?php echo $materia ?></h4>
+                                        <!--<h4>Materia Seleccionada: <?php echo $materia ?></h4>-->
                                         <br>
-                                        <center>
-                                            <fieldset class="col-md-6 col-md-offset-3">
-                                                <input placeholder="Codigo de Asistencia" type="text" tabindex="1" autofocus name="codigo_clase">
-                                            </fieldset>
-                                        </center>
-                                        <br>
+                                    </center>
+
+                                    <div class="form-group row" align="right">
+                                      <label class="col-sm-5 col-form-label">Clase seleccionada:</label>
+                                      <div class="col-sm-5">
+                                        <select class="form-control " id="idmateria" name="idmateria" required>
+                                          <option value="<?php echo $id_materia ?>"><?php echo $materia ?></option>
+                                        </select>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row" align="right">
+                                      <label class="col-sm-5 col-form-label">Codigo de la clase:</label>
+                                      <div class="col-sm-5">
                                         <fieldset>
-                                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Validar</button>
+                                          <input class="form-control " name="codigo_clase" placeholder="Escriba el codigo aqui" required>
                                         </fieldset>
-                                    </form>
-                                </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row" align="right">
+                                      <label class="col-sm-5 col-form-label">Fecha de registro:</label>
+                                      <div class="col-sm-5">
+                                          <input type="date" name="fechaclase" class="form-control" required>
+                                      </div>
+                                    </div>
+
+                                    <br>
+                                    <fieldset>
+                                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-2">Validar</button>
+                                    </fieldset>
+                                  </div>
+                                </form>
                             </div>
                         </div>
                     </div>

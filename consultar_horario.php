@@ -35,10 +35,11 @@
 	$id_estudiante = $_SESSION['idEstudiante'];
 	//$id_estudiante = $_POST['idEstudiante']; 
 	//respectiva consulta para la seleccion de usuario
-	$datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.Carrera_id_carrera, estudiante.semestre, carrera.id_carrera, carrera.nombre from estudiante join carrera on estudiante.Carrera_id_carrera = carrera.id_carrera where estudiante.id_estudiante = " . $id_estudiante . "");
+	$datosestudiante = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.documento, estudiante.nombres, estudiante.apellidos, estudiante.Carrera_id_carrera, estudiante.semestre, carrera.id_carrera, carrera.nombre from estudiante join carrera on estudiante.Carrera_id_carrera = carrera.id_carrera where estudiante.id_estudiante = " . $id_estudiante . "");
 	while ($valores1 = mysqli_fetch_assoc($datosestudiante)) {
 		$documento = $valores1['documento'];
 		$nombres = $valores1['nombres'];
+		$apellidos = $valores1['apellidos'];
 		$carrera = $valores1['nombre'];
 		$semestre = $valores1['semestre'];
 	}
@@ -46,7 +47,7 @@
 
 	//$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, clase.hora, materia.nombre, dias.nombre as nombredia FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
 	$dhorario = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, clase.id_clase, clase.hora, clase.horafin, dias.id_dia, dias.nombre as nombredia, materia.nombre FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . " ORDER BY clase.hora, nombredia");
-	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia, docente.nombres, aula.nombre as nombreaula, dias.nombre as nombredia, clase.hora FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join docente on docente.id_docente = clase.Docente_id_docente join aula on aula.id_aula = clase.Aula_id_aula join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . "");
+	$Amaterias = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, grupo.Estudiante_id_estudiante, materia.nombre as nombremateria, materia.id_materia, docente.nombres, aula.nombre as nombreaula, dias.nombre as nombredia, clase.hora FROM estudiante JOIN grupo on estudiante.id_estudiante = grupo.Estudiante_id_estudiante join clase on clase.Grupo_id_grupo = grupo.id_grupo join materia on materia.id_materia = clase.Materia_id_materia join docente on docente.id_docente = clase.Docente_id_docente join aula on aula.id_aula = clase.Aula_id_aula join dias on dias.id_dia = clase.Dias_id_dia where estudiante.id_estudiante = " . $id_estudiante . " order by clase.hora");
 
 
 
@@ -240,7 +241,7 @@
 										<tbody>
 											<tr>
 												<th scope="row"><?php echo $documento ?></th>
-												<td><?php echo $nombres ?></td>
+												<td><?php echo $nombres." ".$apellidos ?></td>
 												<td><?php echo $carrera ?></td>
 												<td><?php echo $semestre ?></td>
 											</tr>
