@@ -8,25 +8,24 @@ if(isset($_POST['submit']) && isset($_POST['codigo_clase']) && isset($_POST['idm
     $codigo = $_POST['codigo_clase'];//Encriptada
     $idmateria = $_POST['idmateria'];
     $fechaclase = $_POST['fechaclase'];
+    //$idclase = $_POST['idclaser'];
 
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
 
-    $consulta = $mysql->efectuarConsulta("SELECT asistencia.a_docente.clase_id_clase, asistencia.clase.Materia_id_materia, asistencia.materia.nombre, asistencia.a_docente.fecha, asistencia.a_docente.estado, asistencia.clase.codigo, asistencia.clase.Grupo_id_grupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from asistencia.a_docente JOIN asistencia.clase ON asistencia.a_docente.clase_id_clase = asistencia.clase.id_clase JOIN asistencia.materia ON asistencia.clase.Materia_id_materia = asistencia.materia.id_materia JOIN asistencia.grupo ON asistencia.clase.Grupo_id_grupo = asistencia.grupo.id_grupo JOIN asistencia.estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.Materia_id_materia = '.$idmateria.' AND asistencia.clase.codigo = '.$codigo.' AND asistencia.a_docente.fecha = '.$fechaclase.' AND asistencia.estudiante.id_estudiante = '.$id_estudiante.' AND asistencia.a_docente.estado = 'Activa'");
+    $consulta = $mysql->efectuarConsulta("SELECT asistencia.a_docente.clase_id_clase, asistencia.clase.Materia_id_materia, asistencia.materia.nombre, asistencia.a_docente.fecha, asistencia.a_docente.estado, asistencia.clase.codigo, asistencia.clase.Grupo_id_grupo, asistencia.grupo.Estudiante_id_estudiante, asistencia.estudiante.nombres from asistencia.a_docente JOIN asistencia.clase ON asistencia.a_docente.clase_id_clase = asistencia.clase.id_clase JOIN asistencia.materia ON asistencia.clase.Materia_id_materia = asistencia.materia.id_materia JOIN asistencia.grupo ON asistencia.clase.Grupo_id_grupo = asistencia.grupo.id_grupo JOIN asistencia.estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.Materia_id_materia = ".$idmateria." AND asistencia.clase.codigo = '".$codigo."' AND asistencia.a_docente.fecha = '".$fechaclase."' AND asistencia.estudiante.id_estudiante = ".$id_estudiante." AND asistencia.a_docente.estado = 'Activa'");
 
     while ($valores1 = mysqli_fetch_assoc($consulta)) {
-        //declaracion de variables
-        $idclase = $valores1['clase_id_clase'];
-    }
+            //declaracion de variables
+            $idclase = $valores1['clase_id_clase'];
+        }
+    
+    //echo "El id de la clase es: ".$idclase;
 
     $sql = $mysql->efectuarConsulta("INSERT INTO asistencia.a_estudiante(fecha, asistio, estudiante_id_estudiante, clase_id_clase) VALUES ('".$fechaclase."','Si','".$id_estudiante."','".$idclase."')");
 
-    echo "la codigo es: ".$idclase;
-    echo "la codigo es: ".$idclase;
     //Se valida si la consulta arrojo algun valor
-
-    
     if($consulta){
         if ($sql) {
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
@@ -38,6 +37,7 @@ if(isset($_POST['submit']) && isset($_POST['codigo_clase']) && isset($_POST['idm
         //mensaje de salida en caso de que la consulta falle
         echo"<script type=\"text/javascript\">alert('La clase esta inactiva, por favor revise los datos'); window.location='../validar_asistencia.php';</script>";
     }
+    
     $mysql->desconectar();   
 } else {
     echo "0";
