@@ -4,7 +4,7 @@
     require_once '../modelo/MySQL.php';
     
     $id_estudiante = $_GET['id_estudiante'];
-    echo "dato: " . $id_estudiante; 
+    //echo "dato: " . $id_estudiante; 
     
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
@@ -15,11 +15,11 @@
     //Se valida si la consulta arrojo algun valor
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
-        echo"<script type=\"text/javascript\">alert('Se elimino correctamente'); window.location='../index_administrador.php';</script>";
+        echo"<script type=\"text/javascript\">alert('Se elimino correctamente'); window.location='../gestion_estudiante.php';</script>";
         //echo $estudiante;
     }else{
         //mensaje de salida en caso de que la consulta falle
-        echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_usuario.php';</script>";
+        echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../index_administrador.php';</script>";
     }
     $mysql->desconectar();   
 

@@ -44,6 +44,7 @@
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
     $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula, asistencia.aula.nombre from aula where asistencia.aula.estado = 1");
+    $MostrarDatos2 = $mysql->efectuarConsulta("SELECT asistencia.aula.id_aula, asistencia.aula.nombre from aula where asistencia.aula.estado = 0");
     
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -191,6 +192,46 @@
                   </script>
 
                   <a class="btn" style="background-color: #2962FF;color: white" href="registro_aula.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
+
+                  <br><br>
+                  <div class="card">
+                    <div class="card-body" align="center">
+                        <h2 style="color: #037537">Aulas desactivadas/eliminadas</h2>
+                    </div>
+                  </div>
+                  <table id="example2" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <?php
+                        while ($valores1 = mysqli_fetch_assoc($MostrarDatos2)) {
+                          $id_aula = $valores1 ['id_aula'];
+                        ?>
+                          <td><?php echo $valores1['id_aula'] ?></td>
+                          <td><?php echo $valores1['nombre'] ?></td>
+                          <td>
+                            <div class="text-center">
+                              <a class="btn" style="background-color: #2EC82E;color: white" href='Controlador/activar_aula.php?id_aula=<?php echo $id_aula; ?>' role="button"><i class="mdi mdi-check"></i></a>
+                            </div>
+                          </td>
+                      </tr>
+                    <?php
+                        }
+                    ?>
+                    </tbody>
+                  </table>
+                  <script>
+                    $(document).ready(function() {
+                      $('#example2').DataTable();
+                    });
+                  </script>
+
                 </div>
               </div>
             </div>

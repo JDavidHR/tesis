@@ -8,11 +8,11 @@
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
-    $sql = $mysql->efectuarConsulta("UPDATE asistencia.clase SET estado = 0 WHERE id_clase = ".$id_clase."");
+    $sql = $mysql->efectuarConsulta("UPDATE asistencia.clase SET estado = 1 WHERE id_clase = ".$id_clase."");
     //Se valida si la consulta arrojo algun valor
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
-        echo"<script type=\"text/javascript\">alert('Se elimino correctamente'); window.location='../gestion_clases.php';</script>";
+        echo"<script type=\"text/javascript\">alert('Se activo correctamente'); window.location='../gestion_clases.php';</script>";
         //echo $estudiante;
     }else{
         //mensaje de salida en caso de que la consulta falle
