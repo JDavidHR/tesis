@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registro Horario</title>
+  <title>Registrar clase</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -251,7 +251,7 @@
                       <center>
                         <h3>Listado de estudiantes</h3>
                         <div class="card-body col-md-6 col-md-offset-3">
-                        <table id="" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                               <tr>
                                 <th scope="col">Numero de documentos</th>
@@ -273,6 +273,11 @@
                           </table>
                           </tbody>
                           </table>
+                          <script>
+                            $(document).ready(function() {
+                              $('#example').DataTable();
+                            });
+                          </script>
                         </div>
                       </center>
                     </div>
@@ -358,6 +363,11 @@
     <script src="js/chartist.min.js"></script>
     <script src="js/chartist-plugin-tooltip.min.js"></script>
     <script src="js/dashboard1.js"></script>
+
+    <!--datatables-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>

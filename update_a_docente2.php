@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!-- Favicon icon -->
 
-  <title>Registrar clase</title>
+  <title>Ver clase</title>
   <!-- Custom CSS -->
   <link href="css/chartist.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -23,12 +23,6 @@
 
   <link href="css/registro.css" rel="stylesheet" media="all">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
@@ -41,8 +35,14 @@
   $mysql = new MySQL;
   //se conecta a la base de datos
   $mysql->conectar();
+
+
   $id_docente = $_SESSION['idDocente'];
-  $id = $_POST['materiaselect'];
+  $clase = $_GET['ida_docente'];
+
+  //$smateria3 = $_POST['materianombre'];
+  //$id = $_POST['selectgrupo'];
+
 
   $datosdocente = $mysql->efectuarConsulta("SELECT docente.id_docente, docente.nombres, docente.documento, docente.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from docente join tipo_usuario on tipo_usuario.id_tipo_usuario = docente.tipo_usuario_id_tipo_usuario where docente.id_docente = " . $id_docente . "");
   while ($valores1 = mysqli_fetch_assoc($datosdocente)) {
@@ -50,16 +50,26 @@
     $nombres = $valores1['nombres'];
     $tipo_usuario = $valores1['nombre'];
   }
-  //respectiva consulta para la seleccion de usuario
-  $seleccionmateria = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.materia.nombre as nombremateria, asistencia.materia.id_materia from docente join clase on asistencia.clase.Docente_id_docente = asistencia.docente.id_docente join grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo join materia on materia.id_materia = asistencia.clase.Materia_id_materia where asistencia.clase.Materia_id_materia = ". $id ." GROUP BY asistencia.materia.id_materia");
+
+  $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.a_docente.ida_docente, asistencia.a_docente.clase_id_clase, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as nombremateria, asistencia.grupo.id_grupo, asistencia.grupo.nombre as nombregrupo, asistencia.a_docente.fecha, asistencia.clase.codigo, asistencia.links.links, asistencia.a_docente.estado FROM a_docente JOIN asistencia.clase ON asistencia.a_docente.clase_id_clase = asistencia.clase.id_clase JOIN asistencia.materia ON asistencia.clase.Materia_id_materia = asistencia.materia.id_materia JOIN asistencia.grupo ON asistencia.clase.Grupo_id_grupo = asistencia.grupo.id_grupo JOIN asistencia.links ON asistencia.a_docente.clase_id_clase = asistencia.links.clase_id_clase WHERE asistencia.a_docente.estado = 'Activa' AND asistencia.a_docente.estado2 = 1 AND asistencia.a_docente.ida_docente = ".$clase." GROUP BY asistencia.materia.nombre");
+
   //se inicia el recorrido para mostrar los datos de la BD
 
-  while ($valores1 = mysqli_fetch_assoc($seleccionmateria)) {
+  while ($valores1 = mysqli_fetch_assoc($MostrarDatos)) {
     //declaracion de variables
-    $smateria = $valores1['nombremateria'];
+    $nombremateria = $valores1['nombremateria'];
+    $idMateria = $valores1['Materia_id_materia'];
+    $codigo = $valores1['codigo'];
+    $grupo = $valores1['nombregrupo'];
+    $idgrupo = $valores1['id_grupo'];
+    $links = $valores1['links'];
+    $fecha = $valores1['fecha'];
   }
 
-  $selecciongrupo = $mysql->efectuarConsulta("SELECT asistencia.clase.Grupo_id_grupo, asistencia.grupo.nombre as nombregrupo FROM clase JOIN grupo on asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo WHERE asistencia.clase.Materia_id_materia = " . $id . " GROUP BY asistencia.grupo.id_grupo");
+  $listaE = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $clase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
+
+  $listaEA = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.a_estudiante.asistio, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante JOIN asistencia.a_estudiante ON asistencia.a_estudiante.estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $clase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
+  
 
   //se desconecta de la base de datos
   $mysql->desconectar();
@@ -143,10 +153,10 @@
       <div class="page-breadcrumb">
         <div class="row">
           <div class="col-5 align-self-center">
-            <h4 class="page-title">Bienvenido</h4>
-            <!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <h4 class="page-title">Ver clase</h4>
+            <?php //echo "ID Docente: " . $_SESSION['idDocente']; ?>
             <br>
-            <?php echo " Materia: " . $smateria ?>-->
+            <?php //echo "ID a_docente: " . $clase ?>
           </div>
 
         </div>
@@ -179,29 +189,112 @@
             <div class="card">
               <div class="card-body">
 
+                <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                  <form id="contact" action="Controlador/newcode.php" method="post">
+                    <!--<h3><?php echo "Clase: " . $nombremateria . "<br>Codigo generado: " . $codigo ?></h3>-->
+                    <h3>Datos de la clase</h3>
+                    <br>
+                    <!--
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Id de la clase:</label>
+                      <div class="col-sm-5">
+                        <select class="form-control " id="idclaseimprimir" name="idclaseimprimir" required>
+                          <option value="<?php echo $clase ?>"><?php echo $clase ?></option>
+                        </select>
+                      </div>
+                    </div>-->
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Clase seleccionada:</label>
+                      <div class="col-sm-5">
+                        <select class="form-control " id="newcodeidmateria" name="newcodeidmateria" required>
+                          <option value="<?php echo $idMateria ?>"><?php echo $nombremateria ?></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Codigo:</label>
+                      <div class="col-sm-5">
+                        <fieldset>
+                          <input placeholder="Codigo" disabled="" class="form-control" type="text" name="codigo" id="inputText" value="<?php echo $codigo ?>">
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
 
                 <div class="row">
-                  <!-- column -->
                   <div class="col-12">
                     <div class="card">
                       <center>
+                        <h3>Listado de estudiantes que asistieron</h3>
                         <div class="card-body col-md-6 col-md-offset-3">
-                        <table id="" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                               <tr>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Tipo de usuario</th>
+                                <th scope="col">Numero de documentos</th>
+                                <th scope="col">Nombres de los estudiantes</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row"><?php echo $documento ?></th>
-                                <td><?php echo $nombres ?></td>
-                                <td><?php echo $tipo_usuario ?></td>
+                                <?php
+                                while ($valores3 = mysqli_fetch_assoc($listaEA)) {
+                                ?>
+                                  <td><?php echo $valores3['documento'] ?></td>
+                                  <td><?php echo $valores3['nombres']." ".$valores3['apellidos'] ?></td>
                               </tr>
+                            <?php
+                                }
+                            ?>
                             </tbody>
                           </table>
+                          </tbody>
+                          </table>
+                          <script>
+                            $(document).ready(function() {
+                              $('#example').DataTable();
+                            });
+                          </script>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <center>
+                        <h3>Listado de estudiantes</h3>
+                        <div class="card-body col-md-6 col-md-offset-3">
+                        <table id="example2" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                              <tr>
+                                <th scope="col">Numero de documentos</th>
+                                <th scope="col">Nombres de los estudiantes</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <?php
+                                while ($valores3 = mysqli_fetch_assoc($listaE)) {
+                                ?>
+                                  <td><?php echo $valores3['documento'] ?></td>
+                                  <td><?php echo $valores3['nombres']." ".$valores3['apellidos'] ?></td>
+                              </tr>
+                            <?php
+                                }
+                            ?>
+                            </tbody>
+                          </table>
+                          <script>
+                            $(document).ready(function() {
+                              $('#example2').DataTable();
+                            });
+                          </script>
                           </tbody>
                           </table>
                         </div>
@@ -210,37 +303,41 @@
                   </div>
                 </div>
 
-                <div class="container col-md-6 col-md-offset-3" style="text-align: center">
-                  <form id="contact" action="registro_clase_docente3.php" method="post">
-                    <?php echo "Materia seleccionada: "?>
-                    <br>
-                    <select class="form-control " id="materianombre" name="materianombre" required>
-                      <option value="<?php echo $id ?>"><?php echo $smateria ?></option>
-                      
-                      <!--<option value="<?//php echo $id ?>"><?//php echo $smateria?></option>-->
-                    </select>
-                    <br>
-                    <?php echo "Grupos disponibles: "?>
+                <form id="contact" action="Controlador/asistenciaDocente.php" method="post">
+                  <div class="container col-md-7 col-md-offset-3" style="text-align: center">
+                    <center>
+                      <h3>Links y/o comentarios a la clase adjuntados</h3>
+                    </center>
+
+                    <div class="form-group row">
+                      <fieldset>
+                        <textarea name="comentarios" rows="5" cols="70" required="" placeholder="Escribe aquí una descripción..." ><?php echo $links ?></textarea>
+                      </fieldset>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Id de la clase:</label>
+                      <div class="col-sm-5">
+                        <select class="form-control " id="idclaseimprimir" name="idclaseimprimir" required>
+                          <option value="<?php echo $clase ?>"><?php echo $clase ?></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                      <label class="col-sm-5 col-form-label">Fecha de registro:</label>
+                      <div class="col-sm-5">
+                          <input type="date" name="fechaclase" class="form-control" required="" value="<?php echo $fecha ?>">
+                      </div>
+                    </div>
+
                     <br>
                     <fieldset>
-                      <select class="form-control " name="selectgrupo" required>
-                        <?php
-                        //ciclo while que nos sirve para traer cuales son los grpos disponibles
-                        while ($resultado = mysqli_fetch_assoc($selecciongrupo)) {
-                        ?>
-                          <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
-                          <option value="<?php echo $resultado['Grupo_id_grupo'] ?>"><?php echo $resultado['nombregrupo'] ?></option>
-                        <?php
-                        }
-                        ?>
-                      </select>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-5">Guardar y actualizar</button>
                     </fieldset>
-                    <br>
-                    <fieldset>
-                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="col-3">Seleccionar</button>
-                    </fieldset>
-                  </form>
-                </div>
+                  </div>
+                </form>
+
               </div>
             </div>
           </div>
@@ -285,6 +382,11 @@
     <script src="js/chartist.min.js"></script>
     <script src="js/chartist-plugin-tooltip.min.js"></script>
     <script src="js/dashboard1.js"></script>
+
+    <!--datatables-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>

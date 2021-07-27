@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>envio de emails con archivos adjuntos</title>
+	<title>Envio de material</title>
 	<style>
 
 	</style>
@@ -59,7 +59,8 @@
 							<textarea name="msn" id="msn" rows="10" required></textarea>
 						</li>
 						<li>
-							<input type="submit" value="Enviar">
+							<input type="submit" value="Enviar"><br><br>
+							<a href="../index_docente.php"><input style="background-color: #FF5454;color: white" type="button"  value="Cancelar"></a>
 						</li>
 					</ul>
 				</fieldset>

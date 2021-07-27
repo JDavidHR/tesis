@@ -133,7 +133,7 @@
         <div class="row">
           <div class="col-5 align-self-center">
             <h4 class="page-title">Bienvenido</h4>
-            <?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+            <!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>-->
           </div>
 
         </div>
@@ -203,7 +203,7 @@
                       <h3>Clases vistas (Activas)</h3>
                       <br>
                     </center>
-                    <div class="container col-md-9 col-md-offset-3">
+                    <div class="container col-md-11 col-md-offset-3">
                       <!--DATATABLE-->
                       <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -227,7 +227,7 @@
                               <td><?php echo $valores1['estado'] ?></td>
                               <td>
                                 <div class="text-center">
-                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_ocente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-eye"></i></a>
+                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_docente2.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-eye"></i></a>
                                   <a class="btn" style="background-color: #FF5454;color: white" href='Controlador/delete_a_docente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-delete"></i></a>
                                   <a class="btn" style="background-color: #2962FF;color: white" href='Controlador/activar_desactivar_clase.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-sleep"></i></a>
                                 </div>
@@ -255,7 +255,7 @@
                       <h3>Clases vistas (Inactivas)</h3>
                       <br>
                     </center>
-                    <div class="container col-md-9 col-md-offset-3">
+                    <div class="container col-md-11 col-md-offset-3">
                       <!--DATATABLE-->
                       <table id="example2" class="table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -279,7 +279,7 @@
                               <td><?php echo $valores2['estado'] ?></td>
                               <td>
                                 <div class="text-center">
-                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_ocente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-eye"></i></a>
+                                  <a class="btn" style="background-color: #2EC82E;color: white" href='update_a_docente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-eye"></i></a>
                                   <a class="btn" style="background-color: #FF5454;color: white" href='Controlador/delete_a_docente.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-delete"></i></a>
                                   <a class="btn" style="background-color: #2962FF;color: white" href='Controlador/activar_desactivar_clase2.php?ida_docente=<?php echo $ida_docente; ?>' role="button"><i class="mdi mdi-bookmark-check"></i></a>
                                 </div>

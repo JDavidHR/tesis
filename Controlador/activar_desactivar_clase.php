@@ -21,7 +21,7 @@
             echo"<script type=\"text/javascript\">alert('Se cambio el estado Correctamente'); window.location='../clases_vistas.php';</script>";
         }else{
             //mensaje de salida en caso de que la consulta falle
-            echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../registro_clase_docente.php';</script>";
+            echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../index_docente.php';</script>";
         }
         
     

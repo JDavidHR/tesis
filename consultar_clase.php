@@ -10,7 +10,7 @@
 	<meta name="author" content="">
 	<!-- Favicon icon -->
 
-	<title>Home</title>
+	<title>Consultar clase</title>
 	<!-- Custom CSS -->
 	<link href="css/chartist.min.css" rel="stylesheet">
 	<!-- Custom CSS -->
@@ -196,7 +196,7 @@
 				<div class="row">
 					<div class="col-5 align-self-center">
 						<h4 class="page-title">Bienvenido</h4>
-						<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>
+						<!--<?php echo "ID Docente: " . $_SESSION['idDocente']; ?>-->
 					</div>
 
 				</div>
