@@ -205,7 +205,7 @@
                     </center>
                     <div class="container col-md-11 col-md-offset-3">
                       <!--DATATABLE-->
-                      <table id="example" class="table table-striped table-bordered" style="width:100%">
+                      <table id="example2" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
                             <th>Nombre de la clase</th>
@@ -232,7 +232,7 @@
                       </table>
                       <script>
                         $(document).ready(function() {
-                          $('#example').DataTable();
+                          $('#example2').DataTable();
                         });
                       </script>
                     </div>
