@@ -64,6 +64,7 @@
     $idgrupo = $valores1['id_grupo'];
     $links = $valores1['links'];
     $fecha = $valores1['fecha'];
+    $id_clase = $valores1['clase_id_clase'];
   }
 
   $listaE = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $clase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
@@ -303,7 +304,7 @@
                   </div>
                 </div>
 
-                <form id="contact" action="Controlador/asistenciaDocente.php" method="post">
+                <form id="contact" action="Controlador/updateasistenciaDocente.php" method="post">
                   <div class="container col-md-7 col-md-offset-3" style="text-align: center">
                     <center>
                       <h3>Links y/o comentarios a la clase adjuntados</h3>
@@ -319,7 +320,7 @@
                       <label class="col-sm-5 col-form-label">Id de la clase:</label>
                       <div class="col-sm-5">
                         <select class="form-control " id="idclaseimprimir" name="idclaseimprimir" required>
-                          <option value="<?php echo $clase ?>"><?php echo $clase ?></option>
+                          <option value="<?php echo $id_clase ?>"><?php echo $id_clase ?></option>
                         </select>
                       </div>
                     </div>
