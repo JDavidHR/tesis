@@ -231,12 +231,13 @@
                     <div class="card">
                       <center>
                         <h3>Listado de estudiantes</h3>
-                        <div class="card-body col-md-6 col-md-offset-3">
+                        <div class="card-body col-md-7 col-md-offset-3">
                         <table id="example2" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                               <tr>
-                                <th scope="col">Numero de documentos</th>
-                                <th scope="col">Nombres de los estudiantes</th>
+                                <th scope="col">Numero de documento</th>
+                                <th scope="col">Nombre del estudiante</th>
+                                <th scope="col">Asistio</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -246,6 +247,7 @@
                                 ?>
                                   <td><?php echo $valores3['documento'] ?></td>
                                   <td><?php echo $valores3['nombres']." ".$valores3['apellidos'] ?></td>
+                                  <td><?php echo $valores3['asistio'] ?></td>
                               </tr>
                             <?php
                                 }
