@@ -345,6 +345,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 </body>
 
 </html>
