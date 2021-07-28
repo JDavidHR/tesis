@@ -43,9 +43,9 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 1");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre, asistencia.estudiante.correo from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 1");
 
-    $MostrarDatos2 = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 0");
+    $MostrarDatos2 = $mysql->efectuarConsulta("SELECT asistencia.estudiante.id_estudiante, asistencia.estudiante.documento, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.jornada, asistencia.estudiante.semestre, asistencia.carrera.nombre, asistencia.estudiante.correo from estudiante JOIN carrera on carrera.id_carrera = Carrera_id_carrera where asistencia.estudiante.estado = 0");
     
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -168,6 +168,7 @@
                         <th>Jornada</th>
                         <th>Semestre</th>
                         <th>Carrera</th>
+                        <th>Correo</th>
                         <th>Opciones</th>
                       </tr>
                     </thead>
@@ -183,6 +184,7 @@
                           <td><?php echo $valores1['jornada'] ?></td>
                           <td><?php echo $valores1['semestre'] ?></td>
                           <td><?php echo $valores1['nombre'] ?></td>
+                          <td><?php echo $valores1['correo'] ?></td>
                           <td>
                             <div class="text-center">
                               <a class="btn" style="background-color: #2EC82E;color: white" href='update_estudiante2.php?id_estudiante=<?php echo $id_estudiante; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
@@ -218,6 +220,7 @@
                         <th>Jornada</th>
                         <th>Semestre</th>
                         <th>Carrera</th>
+                        <th>Correo</th>
                         <th>Opciones</th>
                       </tr>
                     </thead>
@@ -233,6 +236,7 @@
                           <td><?php echo $valores1['jornada'] ?></td>
                           <td><?php echo $valores1['semestre'] ?></td>
                           <td><?php echo $valores1['nombre'] ?></td>
+                          <td><?php echo $valores1['correo'] ?></td>
                           <td>
                             <div class="text-center">
                               <a class="btn" style="background-color: #2EC82E;color: white" href='Controlador/activar_estudiante.php?id_estudiante=<?php echo $id_estudiante; ?>' role="button"><i class="mdi mdi-check"></i></a>

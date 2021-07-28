@@ -43,9 +43,9 @@
     //se conecta a la base de datos
     $mysql->conectar();
     //respectiva consulta para la seleccion de usuario
-    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.documento, asistencia.docente.nombres, asistencia.docente.apellidos from docente where asistencia.docente.estado = 1");
+    $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.documento, asistencia.docente.nombres, asistencia.docente.apellidos, asistencia.docente.correo from docente where asistencia.docente.estado = 1");
 
-    $MostrarDatos2 = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.documento, asistencia.docente.nombres, asistencia.docente.apellidos from docente where asistencia.docente.estado = 0");
+    $MostrarDatos2 = $mysql->efectuarConsulta("SELECT asistencia.docente.id_docente, asistencia.docente.documento, asistencia.docente.nombres, asistencia.docente.apellidos, asistencia.docente.correo from docente where asistencia.docente.estado = 0");
     
     //se desconecta de la base de datos
     $mysql->desconectar();
@@ -164,6 +164,7 @@
                         <th>Id</th>
                         <th>Nombre completo</th>
                         <th>Documento</th>
+                        <th>Correo</th>
                         <th>Opciones</th>
                       </tr>
                     </thead>
@@ -176,6 +177,7 @@
                           <td><?php echo $valores1['id_docente'] ?></td>
                           <td><?php echo $valores1['nombres']." ".$valores1['apellidos'] ?></td>
                           <td><?php echo $valores1['documento'] ?></td>
+                          <td><?php echo $valores1['correo'] ?></td>
                           <td>
                             <div class="text-center">
                               <a class="btn" style="background-color: #2EC82E;color: white" href='update_docente2.php?id_docente=<?php echo $id_docente; ?>' role="button"><i class="mdi mdi-pencil"></i></a>
@@ -209,6 +211,7 @@
                         <th>Id</th>
                         <th>Nombre completo</th>
                         <th>Documento</th>
+                        <th>Correo</th>
                         <th>Opciones</th>
                       </tr>
                     </thead>
@@ -221,6 +224,7 @@
                           <td><?php echo $valores1['id_docente'] ?></td>
                           <td><?php echo $valores1['nombres']." ".$valores1['apellidos'] ?></td>
                           <td><?php echo $valores1['documento'] ?></td>
+                          <td><?php echo $valores1['correo'] ?></td>
                           <td>
                             <div class="text-center">
                               <a class="btn" style="background-color: #2EC82E;color: white" href='Controlador/activar_docente.php?id_docente=<?php echo $id_docente; ?>' role="button"><i class="mdi mdi-check"></i></a>

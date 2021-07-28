@@ -44,7 +44,7 @@
         $id_docente = $_GET['id_docente'];
         echo "dato: " . $id_docente; 
 
-        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.docente.documento,asistencia.docente.nombres,asistencia.docente.apellidos,asistencia.docente.clave,asistencia.docente.tipo_usuario_id_tipo_usuario from docente WHERE asistencia.docente.id_docente = " . $id_docente . "");
+        $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.docente.documento,asistencia.docente.nombres,asistencia.docente.apellidos,asistencia.docente.clave,asistencia.docente.correo,asistencia.docente.tipo_usuario_id_tipo_usuario from docente WHERE asistencia.docente.id_docente = " . $id_docente . "");
 
         $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 2");
         //se inicia el recorrido para mostrar los datos de la BD
@@ -54,6 +54,7 @@
             $nombre = $valores1['nombres'];
             $apellido = $valores1['apellidos'];
             $pass = $valores1['clave'];
+            $correo = $valores1['correo'];
             $tipo = $valores1['tipo_usuario_id_tipo_usuario'];
         }
     }
@@ -200,6 +201,13 @@
                                               <label class="col-sm-3 col-form-label">Clave</label>
                                               <div class="col-sm-9">
                                                 <input placeholder="Clave" class="form-control" type="text" name="contrasena" id="inputText" value="<?php echo $pass ?>">
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group row" align="Left">
+                                              <label class="col-sm-3 col-form-label">Correo</label>
+                                              <div class="col-sm-9">
+                                                <input placeholder="Correo" class="form-control" type="text" name="correo" id="inputText" value="<?php echo $correo ?>">
                                               </div>
                                             </div>
 

@@ -48,7 +48,7 @@
     
     //respectiva consulta para la seleccion de usuario
 
-    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.clave,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = " . $id_estudiante . "");
+    $mostrardatos = $mysql->efectuarConsulta("SELECT asistencia.estudiante.documento,asistencia.estudiante.nombres,asistencia.estudiante.apellidos,asistencia.estudiante.jornada,asistencia.estudiante.semestre,asistencia.estudiante.clave,asistencia.estudiante.correo,asistencia.estudiante.Carrera_id_carrera,asistencia.estudiante.tipo_usuario_id_tipo_usuario from estudiante WHERE asistencia.estudiante.id_estudiante = " . $id_estudiante . "");
 
 
     $seleccionUsuario = $mysql->efectuarConsulta("SELECT asistencia.tipo_usuario.id_tipo_usuario, asistencia.tipo_usuario.nombre from tipo_usuario where asistencia.tipo_usuario.id_tipo_usuario = 1");
@@ -62,6 +62,7 @@
       $jornada = $valores1['jornada'];
       $semestre = $valores1['semestre'];
       $clave = $valores1['clave'];
+      $correo = $valores1['correo'];
       
       $carrera = $valores1['Carrera_id_carrera'];
       $tipo = $valores1['tipo_usuario_id_tipo_usuario'];
@@ -217,6 +218,13 @@
                       <label class="col-sm-3 col-form-label">Clave</label>
                       <div class="col-sm-9">
                         <input placeholder="Clave" class="form-control" type="text" name="clave" id="inputText" value="<?php echo $clave ?>">
+                      </div>
+                    </div>
+
+                    <div class="form-group row" align="Left">
+                      <label class="col-sm-3 col-form-label">Correo</label>
+                      <div class="col-sm-9">
+                        <input placeholder="Correo" class="form-control" type="text" name="correo" id="inputText" value="<?php echo $correo ?>">
                       </div>
                     </div>
 
