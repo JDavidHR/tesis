@@ -1,10 +1,10 @@
 <?php
 //condicion donde se rectifica que los campos no esten vacios y que esten definidos
-if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuario'])){
+if(isset($_POST['submit']) && !empty($_POST['correo']) && !empty($_POST['tipousuario'])){
 
         require_once '../Modelo/MySQL.php';//se llama la pagina mysql.php para hacer la respectiva conexion con la BD
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
-        $usuario = $_POST["doc"];
+        $usuario = $_POST["correo"];
         $tipousuario = $_POST['tipousuario']; 
 
         
@@ -13,8 +13,8 @@ if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuari
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
         if($tipousuario == 1){
             echo " estudiante: " . $tipousuario;
-            
-            $usuarios= $mysql->efectuarConsulta("select asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres, asistencia.estudiante.tipo_usuario_id_tipo_usuario, asistencia.estudiante.documento from estudiante where documento = ".$usuario." and estado = 1"); 
+            echo " correo: " . $usuario;
+            $usuarios= $mysql->efectuarConsulta("select asistencia.estudiante.id_estudiante, asistencia.estudiante.nombres, asistencia.estudiante.tipo_usuario_id_tipo_usuario, asistencia.estudiante.correo from estudiante where correo = '".$usuario."' and estado = 1"); 
                         //Cuento si la consulta esta vacia
                         if (!empty($usuarios)){
                             //consulto si existen filas en el objeto
@@ -27,11 +27,11 @@ if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuari
                                     $id_estudiante = $resultado["id_estudiante"];
                                     $nombre = $resultado["nombres"];
                                     $tipo_usuario = $resultado['tipo_usuario_id_tipo_usuario'];
-                                    $documento = $resultado['documento'];
+                                    $correo = $resultado['correo'];
                                 }
                                 $_SESSION['tipousuario'] = $tipo_usuario;
                                 $_SESSION['idEstudiante'] = $id_estudiante;
-                                $_SESSION['doc'] = $documento;
+                                $_SESSION['correo'] = $correo;
                                  //redirecciono al index
                                 header("Location: ../recuperar_password2.php");
                             }else{
@@ -48,7 +48,7 @@ if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuari
         }elseif($tipousuario == 2){ 
             echo " docente: " . $tipousuario;
 
-            $usuarios= $mysql->efectuarConsulta("select asistencia.docente.id_docente, asistencia.docente.nombres, asistencia.docente.tipo_usuario_id_tipo_usuario, asistencia.docente.documento from docente where documento = ".$usuario." and estado = 1"); 
+            $usuarios= $mysql->efectuarConsulta("select asistencia.docente.id_docente, asistencia.docente.nombres, asistencia.docente.tipo_usuario_id_tipo_usuario, asistencia.docente.correo from docente where correo = '".$usuario."' and estado = 1"); 
                         //Cuento si la consulta esta vacia
                         if (!empty($usuarios)){
                             //consulto si existen filas en el objeto
@@ -61,11 +61,11 @@ if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuari
                                     $id_docente = $resultado["id_docente"];
                                     $nombre = $resultado["nombres"];
                                     $tipo_usuario = $resultado['tipo_usuario_id_tipo_usuario'];
-                                    $documento = $resultado['documento'];
+                                    $correo = $resultado['correo'];
                                 }
                                 $_SESSION['tipousuario'] = $tipo_usuario;
                                 $_SESSION['idDocente'] = $id_docente;
-                                $_SESSION['doc'] = $documento;
+                                $_SESSION['correo'] = $correo;
                                  //redirecciono al index
                                 header("Location: ../recuperar_password2.php");
                             }else{
@@ -82,7 +82,7 @@ if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuari
         }elseif($tipousuario == 3){
             echo " administrador: " . $tipousuario;
 
-            $usuarios= $mysql->efectuarConsulta("select asistencia.administrador.id_administrador, asistencia.administrador.nombres, asistencia.administrador.tipo_usuario_id_tipo_usuario, asistencia.administrador.documento from administrador where documento = ".$usuario." and estado = 1"); 
+            $usuarios= $mysql->efectuarConsulta("select asistencia.administrador.id_administrador, asistencia.administrador.nombres, asistencia.administrador.tipo_usuario_id_tipo_usuario, asistencia.administrador.correo from administrador where correo = '".$usuario."' and estado = 1"); 
                         //Cuento si la consulta esta vacia
                         if (!empty($usuarios)){
                             //consulto si existen filas en el objeto
@@ -95,11 +95,11 @@ if(isset($_POST['submit']) && !empty($_POST['doc']) && !empty($_POST['tipousuari
                                     $id_administrador = $resultado["id_administrador"];
                                     $nombre = $resultado["nombres"];
                                     $tipo_usuario = $resultado['tipo_usuario_id_tipo_usuario'];
-                                    $documento = $resultado['documento'];
+                                    $correo = $resultado['correo'];
                                 }
                                 $_SESSION['tipousuario'] = $tipo_usuario;
                                 $_SESSION['idAdministrador'] = $id_administrador;
-                                $_SESSION['doc'] = $documento;
+                                $_SESSION['correo'] = $correo;
                                  //redirecciono al index
                                 header("Location: ../recuperar_password2.php");
                             }else{

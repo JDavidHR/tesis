@@ -6,9 +6,9 @@
         //declaracion de las variables donde se almacenan los datos de los respectivos campos llenados del formulario metodo post
         $password=$_POST["nueva_contrasena"];
         $tipousuario = $_SESSION['tipousuario'];
-        $documento = $_SESSION['doc'];
+        $correo = $_SESSION['correo'];
         echo "tipo usuario: " . $tipousuario;
-        echo " documento: " . $documento;
+        echo " correo: " . $correo;
         echo " password new: " .$password;
 
         $mysql = new MySQL;//nuevo mysql
@@ -18,7 +18,7 @@
         //$sql=$mysql->efectuarConsulta("UPDATE asistencia.aula SET nombre ='".$aula."' WHERE id_aula = ".$id."");
         //condicion donde si la consulta se hace correcto
         if($tipousuario == 1){
-            $sql=$mysql->efectuarConsulta("UPDATE asistencia.estudiante SET clave ='".$password."' WHERE documento = ".$documento."");
+            $sql=$mysql->efectuarConsulta("UPDATE asistencia.estudiante SET clave ='".$password."' WHERE correo = '".$correo."'");
             if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
             echo"<script type=\"text/javascript\">alert('Se actualizo correctamente'); window.location='../login.php';</script>";
@@ -27,7 +27,7 @@
             echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../login.php';</script>";
             }
         }elseif($tipousuario == 2){
-            $sql=$mysql->efectuarConsulta("UPDATE asistencia.docente SET clave ='".$password."' WHERE documento = ".$documento."");
+            $sql=$mysql->efectuarConsulta("UPDATE asistencia.docente SET clave ='".$password."' WHERE correo = '".$correo."'");
             if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
             echo"<script type=\"text/javascript\">alert('Se actualizo correctamente'); window.location='../login.php';</script>";
@@ -36,7 +36,7 @@
             echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../login.php';</script>";
             }
         }elseif($tipousuario == 3){
-            $sql=$mysql->efectuarConsulta("UPDATE asistencia.administrador SET clave ='".$password."' WHERE documento = ".$documento."");
+            $sql=$mysql->efectuarConsulta("UPDATE asistencia.administrador SET clave ='".$password."' WHERE correo = '".$correo."'");
             if($sql){
             //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
             echo"<script type=\"text/javascript\">alert('Se actualizo correctamente'); window.location='../login.php';</script>";

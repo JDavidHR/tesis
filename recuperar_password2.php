@@ -19,7 +19,7 @@
     $mysql->conectar();    
     //respectiva consulta para la seleccion de usuario
     $tipousuario = $_SESSION['tipousuario'];
-    $documento = $_SESSION['doc'];
+    $correo = $_SESSION['correo'];
     //echo "tipo usuario: " . $tipousuario;
     //echo " documento: " . $documento;
     //se desconecta de la base de datos

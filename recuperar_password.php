@@ -29,8 +29,8 @@
           <h2 class="text-center">Recuperar Contraseña</h2>
           <form class="login-form" action="Controlador/recuperar_password.php" method="POST">
             <div class="form-group">
-              <label for="exampleInputEmail1" class="text-uppercase">Documento</label>
-              <input type="text" class="form-control" placeholder="No. Documento" name="doc" required="">           
+              <label for="exampleInputEmail1" class="text-uppercase">Correo Electronico</label>
+              <input type="email" class="form-control" placeholder="E-mail" name="correo" required="">           
             </div>
             
 
