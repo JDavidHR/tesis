@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'plantilla.php';
-require 'Modelo/conexion.php';
+include '../plantilla.php';
+require '../Modelo/conexion.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR|MYSQLI_REPORT_STRICT);
 
