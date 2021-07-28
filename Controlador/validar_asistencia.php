@@ -23,7 +23,7 @@ if(isset($_POST['submit']) && isset($_POST['codigo_clase']) && isset($_POST['idm
     
     //echo "El id de la clase es: ".$idclase;
 
-    $sql = $mysql->efectuarConsulta("INSERT INTO asistencia.a_estudiante(fecha, asistio, estudiante_id_estudiante, clase_id_clase) VALUES ('".$fechaclase."','Si','".$id_estudiante."','".$idclase."')");
+    $sql = $mysql->efectuarConsulta("UPDATE asistencia.a_estudiante SET asistencia.a_estudiante.asistio = 'Si' WHERE asistencia.a_estudiante.clase_id_clase = ".$idclase." AND asistencia.a_estudiante.fecha = '".$fechaclase."' AND asistencia.a_estudiante.estudiante_id_estudiante = ".$id_estudiante."");
 
     //Se valida si la consulta arrojo algun valor
     if($consulta){

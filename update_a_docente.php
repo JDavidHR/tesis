@@ -66,10 +66,11 @@
     $fecha = $valores1['fecha'];
     $id_clase = $valores1['clase_id_clase'];
   }
-
+/*
   $listaE = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $clase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
+  */
 
-  $listaEA = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.a_estudiante.asistio, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante JOIN asistencia.a_estudiante ON asistencia.a_estudiante.estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $clase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
+  $listaEA = $mysql->efectuarConsulta("SELECT asistencia.clase.id_clase, asistencia.grupo.id_grupo, asistencia.grupo.nombre, asistencia.clase.Docente_id_docente, asistencia.estudiante.nombres, asistencia.estudiante.apellidos, asistencia.estudiante.documento, asistencia.a_estudiante.asistio, asistencia.clase.Grupo_id_grupo from grupo JOIN clase ON asistencia.grupo.id_grupo = asistencia.clase.Grupo_id_grupo JOIN estudiante ON asistencia.grupo.Estudiante_id_estudiante = asistencia.estudiante.id_estudiante JOIN asistencia.a_estudiante ON asistencia.a_estudiante.estudiante_id_estudiante = asistencia.estudiante.id_estudiante WHERE asistencia.clase.id_clase = ". $id_clase ." AND asistencia.clase.Docente_id_docente = ". $id_docente ."");
   
 
   //se desconecta de la base de datos
@@ -225,46 +226,6 @@
                   </form>
                 </div>
 
-
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
-                      <center>
-                        <h3>Listado de estudiantes que asistieron</h3>
-                        <div class="card-body col-md-6 col-md-offset-3">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                              <tr>
-                                <th scope="col">Numero de documentos</th>
-                                <th scope="col">Nombres de los estudiantes</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <?php
-                                while ($valores3 = mysqli_fetch_assoc($listaEA)) {
-                                ?>
-                                  <td><?php echo $valores3['documento'] ?></td>
-                                  <td><?php echo $valores3['nombres']." ".$valores3['apellidos'] ?></td>
-                              </tr>
-                            <?php
-                                }
-                            ?>
-                            </tbody>
-                          </table>
-                          </tbody>
-                          </table>
-                          <script>
-                            $(document).ready(function() {
-                              $('#example').DataTable();
-                            });
-                          </script>
-                        </div>
-                      </center>
-                    </div>
-                  </div>
-                </div>
-
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
@@ -281,7 +242,7 @@
                             <tbody>
                               <tr>
                                 <?php
-                                while ($valores3 = mysqli_fetch_assoc($listaE)) {
+                                while ($valores3 = mysqli_fetch_assoc($listaEA)) {
                                 ?>
                                   <td><?php echo $valores3['documento'] ?></td>
                                   <td><?php echo $valores3['nombres']." ".$valores3['apellidos'] ?></td>
