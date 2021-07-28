@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-07-2021 a las 00:46:56
+-- Tiempo de generación: 28-07-2021 a las 17:46:54
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -33,6 +33,7 @@ CREATE TABLE `administrador` (
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del administrador',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del administrador',
   `clave` varchar(45) NOT NULL COMMENT 'Clave del administrador',
+  `correo` varchar(255) NOT NULL COMMENT 'Correo del administrador',
   `estado` int(11) NOT NULL COMMENT 'Activo o inactiva',
   `tipo_usuario_id_tipo_usuario` int(11) NOT NULL COMMENT 'Tipo de usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -41,8 +42,9 @@ CREATE TABLE `administrador` (
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `clave`, `estado`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '123', 'Juan', 'Hoyos', '123', 1, 3);
+INSERT INTO `administrador` (`id_administrador`, `documento`, `nombres`, `apellidos`, `clave`, `correo`, `estado`, `tipo_usuario_id_tipo_usuario`) VALUES
+(1, '123', 'Juan', 'Hoyos', '123', 'prueba@hotmail.com', 1, 3),
+(5, '45', 'Flores', 'Vargas', '123', 'flores@hotmail.com', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -84,9 +86,7 @@ CREATE TABLE `a_docente` (
 --
 
 INSERT INTO `a_docente` (`ida_docente`, `clase_id_clase`, `fecha`, `estado`, `estado2`) VALUES
-(1, 6, '2021-07-20', 'Activa', 1),
-(2, 5, '2021-07-22', 'Inactiva', 1),
-(5, 3, '2021-07-31', 'Activa', 1);
+(1, 6, '2021-07-13', 'Activa', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,8 @@ CREATE TABLE `a_estudiante` (
 --
 
 INSERT INTO `a_estudiante` (`ida_estudiante`, `fecha`, `asistio`, `estudiante_id_estudiante`, `clase_id_clase`) VALUES
-(1, '2021-07-20', 'Si', 1, 6);
+(1, '2021-07-13', 'Si', 1, 6),
+(2, '2021-07-13', 'No', 2, 6);
 
 -- --------------------------------------------------------
 
@@ -198,6 +199,7 @@ CREATE TABLE `docente` (
   `nombres` varchar(45) NOT NULL COMMENT 'Nombres del docente\n\n',
   `apellidos` varchar(45) NOT NULL COMMENT 'Apellidos del docente',
   `clave` varchar(45) NOT NULL COMMENT 'Clave del docente',
+  `correo` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'Correo del docente',
   `tipo_usuario_id_tipo_usuario` int(11) NOT NULL COMMENT 'Tipo de usuario',
   `estado` int(11) NOT NULL COMMENT 'Activo o inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -206,9 +208,10 @@ CREATE TABLE `docente` (
 -- Volcado de datos para la tabla `docente`
 --
 
-INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `clave`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
-(1, '123', 'Gabriela', 'Agudelo', '123', 2, 1),
-(2, '456', 'Camila', 'Moreno', '456', 2, 1);
+INSERT INTO `docente` (`id_docente`, `documento`, `nombres`, `apellidos`, `clave`, `correo`, `tipo_usuario_id_tipo_usuario`, `estado`) VALUES
+(1, '123', 'Gabriela', 'Agudelo', '123', 'gabriela@hotmail.com', 2, 1),
+(2, '456', 'Camila', 'Moreno', '456', 'camila@hotmail.com', 2, 1),
+(6, '789', 'Martha', 'Valdes', '123', 'martha@hotmail.com', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -224,6 +227,7 @@ CREATE TABLE `estudiante` (
   `jornada` varchar(45) NOT NULL COMMENT 'Jornada del estudiante',
   `semestre` varchar(45) NOT NULL COMMENT 'Semestre en el que se encuentra',
   `clave` varchar(45) NOT NULL COMMENT 'Clave del estudiante',
+  `correo` varchar(255) NOT NULL COMMENT 'Correo el estudiante',
   `estado` int(11) NOT NULL COMMENT 'Activo o inactivo',
   `Carrera_id_carrera` int(11) NOT NULL COMMENT 'Id de la carrera que cursa',
   `tipo_usuario_id_tipo_usuario` int(11) NOT NULL COMMENT 'Id del tipo de usuario'
@@ -233,10 +237,10 @@ CREATE TABLE `estudiante` (
 -- Volcado de datos para la tabla `estudiante`
 --
 
-INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `clave`, `estado`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`) VALUES
-(1, '123', 'Diego', 'Rios', 'Diurna', 'Septimo', '456', 1, 1, 1),
-(2, '456', 'Emilio', 'Rivera', 'Diurna', 'Quinto', '456', 1, 2, 1),
-(3, '1010', 'Daniel', 'Andres', 'Diurna', 'Quinto', '123', 1, 1, 1);
+INSERT INTO `estudiante` (`id_estudiante`, `documento`, `nombres`, `apellidos`, `jornada`, `semestre`, `clave`, `correo`, `estado`, `Carrera_id_carrera`, `tipo_usuario_id_tipo_usuario`) VALUES
+(1, '123', 'Diego', 'Rios', 'Diurna', 'Septimo', '456', 'diego@hotmail.com', 1, 1, 1),
+(2, '456', 'Emilio', 'Rivera', 'Diurna', 'Quinto', '456', 'emilio@hotmail.com', 1, 2, 1),
+(3, '1010', 'Daniel', 'Andres', 'Diurna', 'Quinto', '123', 'daniel@hotmail.com', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -278,11 +282,7 @@ CREATE TABLE `links` (
 --
 
 INSERT INTO `links` (`id_links`, `links`, `fecha`, `clase_id_clase`) VALUES
-(1, 'https://www.youtube.com/watch?v=om3n2ni8luE\r\nhttps://www.youtube.com/watch?v=dy90tA3TT1c', '2021-07-20', 6),
-(2, 'Prueba de links', '2021-07-22', 5),
-(3, 'hi', '2021-07-23', 5),
-(4, 'hi2', '2021-07-31', 6),
-(5, 'hi2', '2021-07-31', 3);
+(1, 'Material nuevo de la clase', '2021-07-13', 6);
 
 -- --------------------------------------------------------
 
@@ -336,6 +336,7 @@ ALTER TABLE `administrador`
   ADD PRIMARY KEY (`id_administrador`,`tipo_usuario_id_tipo_usuario`),
   ADD UNIQUE KEY `documento_UNIQUE` (`documento`),
   ADD UNIQUE KEY `id_UNIQUE` (`id_administrador`),
+  ADD UNIQUE KEY `correo` (`correo`),
   ADD KEY `fk_administrador_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario`);
 
 --
@@ -359,6 +360,7 @@ ALTER TABLE `a_docente`
 ALTER TABLE `a_estudiante`
   ADD PRIMARY KEY (`ida_estudiante`,`estudiante_id_estudiante`,`clase_id_clase`),
   ADD UNIQUE KEY `ida_estudiante_UNIQUE` (`ida_estudiante`),
+  ADD UNIQUE KEY `ida_estudiante` (`ida_estudiante`,`fecha`,`asistio`,`estudiante_id_estudiante`,`clase_id_clase`),
   ADD KEY `fk_a_estudiante_estudiante1_idx` (`estudiante_id_estudiante`),
   ADD KEY `fk_a_estudiante_clase1_idx` (`clase_id_clase`);
 
@@ -397,6 +399,7 @@ ALTER TABLE `docente`
   ADD PRIMARY KEY (`id_docente`,`tipo_usuario_id_tipo_usuario`),
   ADD UNIQUE KEY `id_docente_UNIQUE` (`id_docente`),
   ADD UNIQUE KEY `documento_UNIQUE` (`documento`),
+  ADD UNIQUE KEY `correo` (`correo`),
   ADD KEY `fk_docente_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario`);
 
 --
@@ -406,6 +409,7 @@ ALTER TABLE `estudiante`
   ADD PRIMARY KEY (`id_estudiante`,`Carrera_id_carrera`,`tipo_usuario_id_tipo_usuario`),
   ADD UNIQUE KEY `documento_UNIQUE` (`documento`),
   ADD UNIQUE KEY `id_UNIQUE` (`id_estudiante`),
+  ADD UNIQUE KEY `correo` (`correo`),
   ADD KEY `fk_estudiante_Carrera1_idx` (`Carrera_id_carrera`),
   ADD KEY `fk_estudiante_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario`);
 
@@ -446,7 +450,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del administrador', AUTO_INCREMENT=4;
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del administrador', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `aula`
@@ -458,13 +462,13 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `a_docente`
 --
 ALTER TABLE `a_docente`
-  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente', AUTO_INCREMENT=6;
+  MODIFY `ida_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia/registro del docente', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `a_estudiante`
 --
 ALTER TABLE `a_estudiante`
-  MODIFY `ida_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia del estudiante', AUTO_INCREMENT=2;
+  MODIFY `ida_estudiante` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id de la asistencia del estudiante', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
@@ -488,7 +492,7 @@ ALTER TABLE `dias`
 -- AUTO_INCREMENT de la tabla `docente`
 --
 ALTER TABLE `docente`
-  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del docente', AUTO_INCREMENT=3;
+  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del docente', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -500,7 +504,7 @@ ALTER TABLE `estudiante`
 -- AUTO_INCREMENT de la tabla `links`
 --
 ALTER TABLE `links`
-  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal', AUTO_INCREMENT=6;
+  MODIFY `id_links` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave principal', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
