@@ -195,7 +195,8 @@
                   </script>
 
                   <a class="btn" style="background-color: #2962FF;color: white" href="registro_docente.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
-
+                  <a class="btn" style="background-color: #2EC82E;color: white" href='Reportes/gestion_docentes.php' role="button"><i class="mdi mdi-file-plus"></i> Generar PDF</a>
+                  
                   <br><br>
                   <div class="card">
                     <div class="card-body" align="center">

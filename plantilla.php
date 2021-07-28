@@ -8,7 +8,7 @@
 			//$this->Image('images/logo.png', 5, 5, 30 );
 			$this->SetFont('Arial','B',15);
 			$this->Cell(30);
-			$this->Cell(120,10, 'Materias Asignadas',0,0,'C');
+			$this->Cell(140,10, 'Reporte',0,0,'C');
 			$this->Ln(20);
 		}
 		
