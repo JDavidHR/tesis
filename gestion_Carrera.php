@@ -191,7 +191,7 @@
                     });
                   </script>
 
-                  <a class="btn" style="background-color: #2962FF;color: white" href="registro_usuario.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
+                  <a class="btn" style="background-color: #2962FF;color: white" href="registro_carreras.php" role="button"><i class="mdi mdi-account-plus"></i> Agregar Nuevo</a>
 
                   <br><br>
                   <div class="card">

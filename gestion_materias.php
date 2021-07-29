@@ -196,7 +196,7 @@
                   <br><br>
                   <div class="card">
                     <div class="card-body" align="center">
-                        <h2 style="color: #037537">Gestionar materias</h2>
+                        <h2 style="color: #037537">Materias desactivadas/eliminadas</h2>
                     </div>
                   </div>
                   <table id="example2" class="table table-striped table-bordered" style="width:100%">
