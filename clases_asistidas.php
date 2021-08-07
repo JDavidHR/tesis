@@ -37,7 +37,7 @@
   //se conecta a la base de datos
   $mysql->conectar();
   $id_estudiante = $_SESSION['idEstudiante'];
-  //$id = $_POST['materiaselect'];
+  
 
   $datosdocente = $mysql->efectuarConsulta("SELECT estudiante.id_estudiante, estudiante.nombres, estudiante.apellidos, estudiante.documento, estudiante.tipo_usuario_id_tipo_usuario, tipo_usuario.nombre from estudiante join tipo_usuario on tipo_usuario.id_tipo_usuario = estudiante.tipo_usuario_id_tipo_usuario where estudiante.id_estudiante = " . $id_estudiante . "");
   while ($valores1 = mysqli_fetch_assoc($datosdocente)) {

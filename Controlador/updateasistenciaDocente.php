@@ -12,9 +12,7 @@ if(isset($_POST['submit']) && !empty($_POST['idclaseimprimir']) && !empty($_POST
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        //echo "comentarios: " . $comentarios;
-        //echo "id_clase: " . $id_clase;
-        //echo "fechaclase: " . $fechaclase;
+
         $MostrarDatos = $mysql->efectuarConsulta("SELECT asistencia.a_docente.ida_docente, asistencia.a_docente.clase_id_clase, asistencia.clase.Materia_id_materia, asistencia.materia.nombre as nombremateria, asistencia.grupo.id_grupo, asistencia.grupo.nombre as nombregrupo, asistencia.a_docente.fecha, asistencia.clase.codigo, asistencia.links.id_links, asistencia.links.links, asistencia.a_docente.estado FROM a_docente JOIN asistencia.clase ON asistencia.a_docente.clase_id_clase = asistencia.clase.id_clase JOIN asistencia.materia ON asistencia.clase.Materia_id_materia = asistencia.materia.id_materia JOIN asistencia.grupo ON asistencia.clase.Grupo_id_grupo = asistencia.grupo.id_grupo JOIN asistencia.links ON asistencia.a_docente.clase_id_clase = asistencia.links.clase_id_clase WHERE asistencia.a_docente.estado = 'Activa' AND asistencia.a_docente.estado2 = 1 AND asistencia.a_docente.clase_id_clase = ".$id_clase." GROUP BY asistencia.materia.nombre");
 
           //se inicia el recorrido para mostrar los datos de la BD
@@ -25,7 +23,7 @@ if(isset($_POST['submit']) && !empty($_POST['idclaseimprimir']) && !empty($_POST
             $ida_docente = $valores1['ida_docente'];
           }
 
-          //echo $id_links." - ".$comentarios." - ".$fechaclase." - ".$id_clase;
+          
 
 
         $sql = $mysql->efectuarConsulta("UPDATE asistencia.links SET asistencia.links.links = '".$comentarios."', asistencia.links.fecha ='".$fechaclase."' WHERE asistencia.links.clase_id_clase = ".$id_clase." AND asistencia.links.id_links = ".$id_links."");

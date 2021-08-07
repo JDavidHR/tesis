@@ -5,7 +5,7 @@
     
     
     $id_carrera = $_GET['id_carrera'];
-    //echo "dato: " . $id_carrera;
+
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos

@@ -8,7 +8,7 @@ if(isset($_POST['submit']) && isset($_POST['codigo_clase']) && isset($_POST['idm
     $codigo = $_POST['codigo_clase'];//Encriptada
     $idmateria = $_POST['idmateria'];
     $fechaclase = $_POST['fechaclase'];
-    //$idclase = $_POST['idclaser'];
+    
 
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();

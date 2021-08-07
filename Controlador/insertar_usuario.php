@@ -14,8 +14,6 @@ if(isset($_POST['submit']) && !empty($_POST['inlineRadioOptions']) && !empty($_P
         $carrera=$_POST["carrera"];
         $jornada=$_POST["inlineRadioOptions"];
         
-        
-
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas

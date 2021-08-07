@@ -164,7 +164,7 @@
                         <select class="form-control " name="dia" required>
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                          //ciclo while 
                           while ($resultado = mysqli_fetch_assoc($selecciondia)) {
                           ?>
                             <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
@@ -203,7 +203,7 @@
                         <select class="form-control " name="nombre_docente" required>
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                          //ciclo while 
                           while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
                           ?>
                             <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
@@ -221,7 +221,7 @@
                         <select class="form-control " name="aula" required>
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                          //ciclo while 
                           while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
                           ?>
                             <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
@@ -239,7 +239,7 @@
                         <select class="form-control " name="materia" required>
                           <option value="0" disabled="">Seleccione:</option>
                           <?php
-                          //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                          //ciclo while 
                           while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
                           ?>
                             <!-- se imprimen los datos en un select segun el respectivo id o nombre -->

@@ -15,7 +15,7 @@
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
 
-        //$sql=$mysql->efectuarConsulta("UPDATE asistencia.aula SET nombre ='".$aula."' WHERE id_aula = ".$id."");
+        
         //condicion donde si la consulta se hace correcto
         if($tipousuario == 1){
             $sql=$mysql->efectuarConsulta("UPDATE asistencia.estudiante SET clave ='".$password."' WHERE correo = '".$correo."'");

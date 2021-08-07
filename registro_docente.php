@@ -189,7 +189,7 @@
                                                 <select class="form-control col-md-8 col-md-offset-1" name="tipousuario" required>
                                                     <option value="0" disabled="">Seleccione:</option>
         							                <?php 
-        							                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+        							                //ciclo while 
         							                  while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
         							                ?> 
         							                <!-- se imprimen los datos en un select segun el respectivo id o nombre -->

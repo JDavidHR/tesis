@@ -10,10 +10,6 @@
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        //echo "comentarios: " . $comentarios;
-        //echo "id_clase: " . $id_clase;
-        //echo "fechaclase: " . $fechaclase;
-
 
         $sql = $mysql->efectuarConsulta("UPDATE asistencia.a_docente SET estado2 = 0 WHERE ida_docente = ".$ida_docente."");
         //condicion donde si la consulta se hace correcto

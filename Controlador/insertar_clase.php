@@ -11,13 +11,7 @@
         $aula = $_POST["aula"];
         $materia = $_POST["materia"];
         $grupo = $_POST["grupo"];
-        //echo "dia: ".$dia;
-        //echo " hora: ".$hora;
-        //echo " codigo: ".$codigo;
-        //echo " docente: ".$docente;
-        //echo " aula: ".$aula;
-        //echo " materia: ".$materia;
-        //echo " grupo: ".$grupo;
+        
 
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php

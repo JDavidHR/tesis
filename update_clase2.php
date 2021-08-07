@@ -197,7 +197,7 @@
                                                 <option value="<?php echo $id_dia?>" selected="true"><?php echo $dia?></option>
                                                 <option disabled>Seleccione un dia si va a editar</option>
                                                 <?php
-                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                //ciclo while 
                                                 while ($resultado = mysqli_fetch_assoc($selecciondia)) {
                                                 ?>
                                                     <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
@@ -237,7 +237,7 @@
                                                 <option value="<?php echo $id_docente?>" selected="true"><?php echo $docente?></option>
                                                 <option disabled>Seleccione un docente si va a editar</option>
                                                 <?php
-                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                //ciclo while 
                                                 while ($resultado = mysqli_fetch_assoc($selecciondocente)) {
                                                 ?>
                                                   <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
@@ -256,7 +256,7 @@
                                                 <option value="<?php echo $aula?>" selected="true"><?php echo $aulanombre?></option>
                                                 <option disabled>Seleccione una aula si va a editar</option>
                                                 <?php
-                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                //ciclo while 
                                                 while ($resultado = mysqli_fetch_assoc($seleccionaula)) {
                                                 ?>
                                                     <!-- se imprimen los datos en un select segun el respectivo id o nombre -->
@@ -275,7 +275,7 @@
                                                 <option value="<?php echo $materia?>" selected="true"><?php echo $materianombre?></option>
                                                 <option disabled>Seleccione una materia si va a editar</option>
                                                 <?php
-                                                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                //ciclo while 
                                                 while ($resultado = mysqli_fetch_assoc($seleccionmateria)) {
                                                 ?>
                                                     <!-- se imprimen los datos en un select segun el respectivo id o nombre -->

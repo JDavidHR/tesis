@@ -5,7 +5,7 @@
     
     
     $id_materia = $_GET['id_materia'];
-    //echo "dato: " . $id_materia;
+    
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
@@ -14,7 +14,7 @@
     if($sql){
         //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
         echo"<script type=\"text/javascript\">alert('Se elimino correctamente'); window.location='../gestion_materias.php';</script>";
-        //echo $estudiante;
+        
     }else{
         //mensaje de salida en caso de que la consulta falle
         echo"<script type=\"text/javascript\">alert('Se produjo un error'); window.location='../index_administrador.php';</script>";

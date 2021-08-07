@@ -12,8 +12,7 @@ if(isset($_POST['submit']) && !empty($_POST['newcode']) && !empty($_POST['idclas
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        //echo "newcode: " . $newcode;
-        //echo "id materia: " . $id;
+ 
         $sql=$mysql->efectuarConsulta("UPDATE asistencia.clase SET codigo ='".$newcode."' WHERE Materia_id_materia = ".$id." and id_clase = ".$id_clase."");
         //condicion donde si la consulta se hace correcto
         if($sql){

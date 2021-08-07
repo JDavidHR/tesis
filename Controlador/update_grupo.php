@@ -11,7 +11,7 @@
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas
-        //$sql=$mysql->efectuarConsulta("insert into asistencia.estudiante(documento,nombres,apellidos,jornada,semestre,horario_id_horario,Carrera_id_carrera,tipo_usuario_id_tipo_usuario) VALUES ('".$documento."','".$nombre."','".$apellido."','".$jornada."','".$semestre."','".$horario."','".$carrera."','".$tipo."')");
+        
 
 
         $sql=$mysql->efectuarConsulta("UPDATE asistencia.grupo SET nombre ='".$nombre."' WHERE id_grupo = ".$id."");

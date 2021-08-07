@@ -37,7 +37,7 @@
             <div class="wrap-input100 validate-input" >                                            
               <select class="form-control " name="tipousuario" required>                                                
                 <?php 
-                //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                //ciclo while 
                   while ($resultado= mysqli_fetch_assoc($seleccionUsuario)){                         
                 ?> 
                 <!-- se imprimen los datos en un select segun el respectivo id o nombre -->

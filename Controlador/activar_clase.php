@@ -11,7 +11,7 @@
     $sql = $mysql->efectuarConsulta("UPDATE asistencia.clase SET estado = 1 WHERE id_clase = ".$id_clase."");
     //Se valida si la consulta arrojo algun valor
     if($sql){
-        //mensaje de salida (alert) cuanod la consulta es exitosa con su respectiva redireccion de pagina
+        //mensaje de salida (alert) cuando la consulta es exitosa con su respectiva redireccion de pagina
         echo"<script type=\"text/javascript\">alert('Se activo correctamente'); window.location='../gestion_clases.php';</script>";
         //echo $estudiante;
     }else{

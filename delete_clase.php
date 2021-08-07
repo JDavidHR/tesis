@@ -161,7 +161,7 @@
                                             <fieldset>
                                                 <select class="form-control col-md-6 col-md-offset-3" name="usuario" required>
                                                     <?php
-                                                    //ciclo while que nos sirve para traer cuales son los tipos de usuario (paciente, medico)
+                                                    //ciclo while 
                                                     while ($resultado = mysqli_fetch_assoc($seleccionclase)) {
                                                     ?>
                                                         <!-- se imprimen los datos en un select segun el respectivo id o nombre -->

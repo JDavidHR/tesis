@@ -10,9 +10,6 @@ if(isset($_POST['submit']) && !empty($_POST['documento_docente']) && !empty($_PO
         $pass=$_POST["contrasena"];
         $tipo=$_POST["tipousuario"];
 
-        
-        
-
         $mysql = new MySQL;//nuevo mysql
         $mysql->conectar();//funcion almacenada en mysql.php
         //consulta de la insercion de datos en la base de datos, donde hace las respectivas consultas

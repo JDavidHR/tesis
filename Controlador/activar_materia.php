@@ -5,7 +5,7 @@
     
     
     $id_materia = $_GET['id_materia'];
-    //echo "dato: " . $id_materia;
+ 
     $mysql = new MySQL(); //se declara un nuevo array
     $mysql->conectar();
     //ejecucion de la consulta a la base de datos
